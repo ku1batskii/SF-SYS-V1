@@ -1,0 +1,1997 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Безопасные системы - IT под контролем</title>
+  <meta name="description" content="SF-SYS берет под контроль IT-инфраструктуру бизнеса: рабочие места, серверы, 1С, телефонию, видеонаблюдение, доступы, регламенты и поддержку.">
+  <style>
+    :root {
+      --bg: #080b12;
+      --bg2: #0d1320;
+      --panel: rgba(255,255,255,.055);
+      --panel2: rgba(255,255,255,.085);
+      --line: rgba(255,255,255,.12);
+      --line2: rgba(255,255,255,.18);
+      --line-soft: rgba(255,255,255,.075);
+      --line-faint: rgba(255,255,255,.045);
+      --text: #f6f8fc;
+      --muted: rgba(246,248,252,.68);
+      --faint: rgba(246,248,252,.48);
+      --paper: #f5f7fb;
+      --ink: #111827;
+      --ink2: #4b5563;
+      --accent: #3b82f6;
+      --accent2: #22c55e;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+      --shadow: 0 22px 70px rgba(0,0,0,.35);
+      --radius: 8px;
+      --wrap: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(59,130,246,.22), transparent 34rem),
+        linear-gradient(180deg, #070a11 0%, #0b101a 42%, #f5f7fb 42%, #f5f7fb 100%);
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    .wrap { width: min(var(--wrap), calc(100% - 32px)); margin: 0 auto; }
+    .hidden { display: none !important; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--line);
+      background: rgba(8,11,18,.86);
+      backdrop-filter: blur(18px);
+    }
+    .nav-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-mark {
+      width: 38px; height: 38px; border-radius: 8px;
+      display: grid; place-items: center;
+      background: linear-gradient(135deg, #1f2937, #2563eb);
+      border: 1px solid rgba(255,255,255,.18);
+      font-weight: 800;
+    }
+    .brand-name { display: block; font-weight: 750; white-space: nowrap; }
+    .brand-meta { display: block; color: var(--faint); font-size: 12px; margin-top: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 18px; color: var(--muted); font-size: 14px; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-phone {
+      border: 1px solid rgba(255,255,255,.14);
+      padding: 0 14px;
+      min-height: 36px;
+      border-radius: 7px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      transition: border-color .16s ease, background .16s ease;
+      color: var(--text);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    .nav-phone:hover {
+      border-color: rgba(255,255,255,.28);
+      background: rgba(255,255,255,.04);
+    }
+    .nav-toggle {
+      display: none;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 7px;
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+    .nav-overlay {
+      position: fixed;
+      inset: 72px 0 auto 0;
+      z-index: 45;
+      display: none;
+      padding: 12px 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(8,11,18,.96);
+      backdrop-filter: blur(18px);
+    }
+    .nav-overlay.open { display: block; }
+    .nav-overlay .wrap { display: grid; gap: 8px; }
+    .nav-overlay a {
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      color: var(--muted);
+      border-bottom: 1px solid rgba(255,255,255,.055);
+      font-weight: 700;
+    }
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 8px;
+      min-height: 42px;
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      font-weight: 700;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 12px 30px rgba(59,130,246,.28); }
+    .btn-dark { background: #101827; color: #fff; border-color: rgba(255,255,255,.1); }
+    .btn-ghost { background: rgba(255,255,255,.06); color: var(--text); border-color: var(--line); }
+    .btn-light { background: #fff; color: #111827; border-color: rgba(17,24,39,.1); }
+    .btn-text { background: transparent; border: 0; color: var(--muted); padding: 0; min-height: auto; }
+    .hero { min-height: calc(100vh - 72px); display: flex; align-items: center; padding: 54px 0 64px; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(360px, .78fr); gap: 44px; align-items: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: #9cc2ff; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em;
+    }
+    .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); box-shadow: 0 0 16px var(--accent2); }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(46px, 7vw, 88px); line-height: .96; letter-spacing: 0; margin-top: 18px; }
+    h1 span, h2 span { color: #9cc2ff; }
+    .lead { color: var(--muted); font-size: 18px; line-height: 1.55; max-width: 720px; }
+    .hero .lead { margin-top: 22px; font-size: 20px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.055);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 11px;
+      font-size: 13px;
+    }
+    .hero .chips { margin-top: 22px; }
+    .dash {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035));
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .dash-head, .dash-row { display: flex; justify-content: space-between; gap: 18px; align-items: center; }
+    .dash-head { padding: 16px 18px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    .status { color: #86efac; font-weight: 800; }
+    .dash-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); }
+    .kpi { background: rgba(8,11,18,.82); padding: 18px; }
+    .kpi small { display: block; color: var(--faint); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+    .kpi strong { display: block; font-size: 30px; margin-top: 8px; }
+    .kpi.trust-kpi {
+      min-height: 124px;
+      display: grid;
+      align-content: start;
+      gap: 10px;
+      position: relative;
+    }
+    .kpi.trust-kpi::after {
+      content: "";
+      position: absolute;
+      right: 16px;
+      top: 18px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(134,239,172,.85);
+      box-shadow: 0 0 0 4px rgba(134,239,172,.08);
+    }
+    .kpi.trust-kpi strong {
+      font-size: 17px;
+      line-height: 1.22;
+      letter-spacing: 0;
+      margin-top: 0;
+      color: rgba(246,248,252,.92);
+      max-width: 220px;
+    }
+    .kpi.trust-kpi span {
+      color: rgba(246,248,252,.54);
+      font-size: 13px;
+      line-height: 1.45;
+      max-width: 260px;
+    }
+    .feed { padding: 16px 18px 18px; display: grid; gap: 10px; color: var(--muted); font-size: 13px; }
+    .feed-row { display: flex; gap: 10px; align-items: center; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); box-shadow: 0 0 12px currentColor; color: var(--accent2); }
+    .dash-foot {
+      padding: 14px 18px;
+      color: rgba(246,248,252,.46);
+      font-size: 11px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      line-height: 1.4;
+    }
+    .section { padding: 72px 0; background: var(--paper); color: var(--ink); }
+    .section.dark { background: #090d15; color: var(--text); }
+    .section.soft { background: #edf1f7; }
+    .section-head { display: flex; justify-content: space-between; gap: 28px; align-items: end; margin-bottom: 28px; }
+    .section-head h2 { font-size: clamp(30px, 4vw, 50px); line-height: 1.02; letter-spacing: 0; margin-top: 10px; }
+    .section-head .lead { max-width: 520px; color: var(--ink2); }
+    .dark .section-head .lead, .dark .lead { color: var(--muted); }
+    .pain-band { border-top: 1px solid #dde3ee; border-bottom: 1px solid #dde3ee; background: #fff; padding: 20px 0; }
+    .pain-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pain-list .chip { color: #374151; border-color: #d7deea; background: #f8fafc; }
+    .scan-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .mini-card, .choice-card, .service-card, .step-card, .rec-card {
+      border: 1px solid rgba(17,24,39,.075);
+      background: rgba(255,255,255,.88);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 1px 0 rgba(17,24,39,.035);
+    }
+    .mini-card h3, .service-card h3 { font-size: 18px; margin-bottom: 8px; }
+    .mini-card p, .service-card p, .choice-card p, .step-card p, .rec-card p { color: var(--ink2); line-height: 1.5; font-size: 14px; }
+    .what-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 7px;
+      margin-top: 18px;
+      max-width: 880px;
+    }
+    .what-list span {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(17,24,39,.085);
+      border-radius: 7px;
+      padding: 0 11px;
+      font-weight: 650;
+      font-size: 13px;
+      color: #243041;
+      box-shadow: 0 1px 0 rgba(17,24,39,.025);
+    }
+    .what-list span::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 2px;
+      background: rgba(31,41,55,.34);
+    }
+    .choice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .choice-card { display: grid; gap: 12px; align-content: start; background: #fff; }
+    .choice-card h3 { font-size: 24px; }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; counter-reset: steps; }
+    .step-card { counter-increment: steps; }
+    .step-card::before { content: counter(steps, decimal-leading-zero); color: var(--accent); font-weight: 850; font-size: 13px; }
+    .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .service-card { padding: 15px; min-height: 132px; display: grid; align-content: start; gap: 7px; }
+    .service-card .ico, .tab .ico { font-size: 22px; display: inline-flex; width: 32px; height: 32px; align-items: center; justify-content: center; border-radius: 8px; background: #eef4ff; color: #1d4ed8; margin-bottom: 10px; }
+    .service-more {
+      margin-top: 4px;
+      color: #1d4ed8;
+      font-size: 13px;
+      font-weight: 800;
+      justify-self: start;
+    }
+    .who-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .who-card {
+      border: 1px solid rgba(17,24,39,.065);
+      background: rgba(255,255,255,.86);
+      border-radius: 7px;
+      padding: 16px 16px 16px 22px;
+      display: grid;
+      gap: 9px;
+      box-shadow: 0 1px 0 rgba(17,24,39,.03), 0 12px 28px rgba(17,24,39,.035);
+      position: relative;
+    }
+    .who-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, rgba(37,99,235,.4), rgba(37,99,235,0));
+      border-radius: 2px 0 0 2px;
+    }
+    .who-card h3 { font-size: 18px; line-height: 1.18; color: #101827; }
+    .who-card p { color: rgba(75,85,99,.78); font-size: 13px; line-height: 1.42; }
+    .final-cta { background: #101827; color: #fff; border-radius: 8px; padding: 32px; display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+    .final-cta h2 { font-size: clamp(30px, 4vw, 48px); }
+    .approach-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 32px; align-items: start; }
+    .approach-steps { display: flex; flex-direction: column; gap: 10px; }
+    .approach-grid .step-card {
+      border-left: 2px solid rgba(37,99,235,.18);
+      padding-left: 18px;
+      padding-right: 16px;
+      background: rgba(255,255,255,.86);
+      border-radius: 0 7px 7px 0;
+    }
+    .view { display: none; }
+    .view.active { display: block; animation: fade .24s ease; }
+    @keyframes fade { from { opacity: .55; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .config-hero { padding: 28px 0 18px; background: #090d15; color: #fff; border-bottom: 1px solid var(--line); }
+    .mode-switch {
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,.05);
+      margin-top: 16px;
+    }
+    .mode-switch button {
+      border: 0;
+      border-radius: 6px;
+      color: var(--muted);
+      background: transparent;
+      min-height: 36px;
+      padding: 8px 12px;
+      font-weight: 750;
+    }
+    .mode-switch button.active { background: #fff; color: #111827; }
+    #configView .section.dark { padding: 36px 0 54px; }
+    .config-shell { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 12px; align-items: start; }
+    .panel {
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.045));
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 14px 42px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.045);
+    }
+    .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px; }
+    .tab {
+      border: 1px solid var(--line-faint);
+      border-radius: 8px;
+      min-height: 76px;
+      background: rgba(255,255,255,.032);
+      color: rgba(246,248,252,.56);
+      padding: 10px 12px 10px 14px;
+      text-align: left;
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr);
+      column-gap: 13px;
+      align-items: center;
+    }
+    .tab:hover { background: rgba(255,255,255,.052); color: rgba(246,248,252,.76); }
+    .tab.active { background: #fff; color: #111827; border-color: #fff; box-shadow: 0 10px 26px rgba(0,0,0,.2); }
+    .tab-ico-wrap { width: 28px; height: 28px; display: grid; place-items: center; align-self: center; }
+    .tab-text { min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 4px; align-self: center; }
+    .tab .ico { width: 28px; height: 28px; font-size: 15px; margin: 0; border-radius: 7px; background: rgba(238,244,255,.72); color: rgba(29,78,216,.72); transition: transform .14s ease, background .14s ease, color .14s ease; }
+    .tab:hover .ico { transform: scale(1.05); }
+    .tab strong { display: block; font-size: 13px; line-height: 1.2; min-width: 0; }
+    .tab small { display: block; color: inherit; opacity: .68; font-size: 11px; line-height: 1.2; min-width: 0; }
+    .cfg-head { display: flex; justify-content: space-between; gap: 14px; align-items: start; padding-bottom: 11px; border-bottom: 1px solid var(--line-soft); margin-bottom: 11px; }
+    .cfg-head h2 { font-size: 22px; margin-top: 3px; line-height: 1.15; }
+    .cfg-head .lead { line-height: 1.42; }
+    .estimate { text-align: right; min-width: 174px; }
+    .estimate small { color: var(--faint); text-transform: uppercase; letter-spacing: .06em; font-size: 10px; }
+    .estimate strong { display: block; font-size: 24px; margin-top: 2px; line-height: 1.05; }
+    .estimate span { color: #9cc2ff; font-size: 11px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .field { border: 1px solid var(--line-faint); background: rgba(255,255,255,.028); border-radius: 8px; padding: 9px 10px; box-shadow: inset 0 1px 0 rgba(255,255,255,.025); }
+    .field:hover { background: rgba(255,255,255,.038); border-color: var(--line-soft); }
+    .field.full { grid-column: 1 / -1; }
+    .field label { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); font-size: 12px; margin-bottom: 6px; line-height: 1.25; }
+    .field label strong { color: #fff; font-weight: 750; }
+    .advanced-fields {
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--line-soft);
+      margin-top: 2px;
+      padding-top: 8px;
+    }
+    .advanced-fields summary {
+      min-height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: rgba(246,248,252,.64);
+      font-size: 12px;
+      font-weight: 750;
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+    }
+    .advanced-fields summary::-webkit-details-marker { display: none; }
+    .advanced-fields summary::after {
+      content: "+";
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      background: rgba(255,255,255,.04);
+      color: rgba(246,248,252,.58);
+      font-weight: 700;
+    }
+    .advanced-fields[open] summary::after { content: "−"; }
+    .advanced-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding-top: 8px;
+    }
+    input[type="range"] { width: 100%; accent-color: var(--accent); }
+    select, input[type="text"], input[type="tel"], textarea {
+      width: 100%;
+      border: 1px solid var(--line-soft);
+      background: rgba(255,255,255,.045);
+      color: #fff;
+      border-radius: 8px;
+      padding: 9px 10px;
+      outline: none;
+    }
+    select option { color: #111827; }
+    textarea { resize: vertical; min-height: 88px; }
+    .seg { display: flex; flex-wrap: wrap; gap: 5px; }
+    .seg button, .option {
+      border: 1px solid var(--line-faint);
+      background: rgba(255,255,255,.035);
+      color: rgba(246,248,252,.66);
+      border-radius: 8px;
+      min-height: 32px;
+      padding: 6px 9px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .seg button:hover, .option:hover { background: rgba(255,255,255,.055); color: rgba(246,248,252,.86); }
+    .seg button.active, .option.active { background: rgba(255,255,255,.92); color: #111827; border-color: rgba(255,255,255,.92); box-shadow: 0 5px 14px rgba(0,0,0,.14); }
+    .included { margin-top: 11px; border-top: 1px solid var(--line-soft); padding-top: 11px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .included h3 { font-size: 14px; margin-bottom: 7px; }
+    .included ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; color: rgba(246,248,252,.62); font-size: 13px; line-height: 1.34; }
+    .included li::before { content: "✓"; color: rgba(134,239,172,.78); margin-right: 6px; }
+    .addbar { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .cart-side { position: sticky; top: 86px; }
+    .cart-title { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-bottom: 9px; }
+    .cart-title h3 { font-size: 16px; }
+    .cart-title .btn-text, .cart-title button { color: rgba(246,248,252,.42); }
+    .cart-list { display: grid; gap: 7px; max-height: 280px; overflow: auto; }
+    .cart-item { border: 1px solid var(--line-faint); border-radius: 8px; padding: 9px 10px; background: rgba(255,255,255,.03); display: grid; gap: 5px; }
+    .cart-item-head { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; }
+    .cart-item small, .muted { color: var(--faint); }
+    .cart-item button { border: 0; background: transparent; color: var(--faint); }
+    .totals { border-top: 1px solid var(--line-soft); margin-top: 10px; padding-top: 10px; display: grid; gap: 6px; color: rgba(246,248,252,.66); font-size: 13px; }
+    .total-row { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+    .total-row strong { color: #fff; }
+    .cart-note { color: var(--faint); font-size: 11px; line-height: 1.4; margin-top: 9px; }
+    .wizard { display: grid; gap: 16px; }
+    .progress { height: 6px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; }
+    .progress span { display: block; height: 100%; background: var(--accent); width: 0; transition: width .2s ease; }
+    .wizard-card { min-height: 360px; display: grid; align-content: start; gap: 15px; }
+    .wizard-card h2 { font-size: clamp(26px, 4vw, 42px); }
+    .options { display: flex; flex-wrap: wrap; gap: 7px; }
+    .option { text-align: left; }
+    .contact-grid-mini { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .result-next {
+      margin: 12px 0 10px;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,.075);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.032));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.045);
+    }
+    .result-next-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+    }
+    .result-next h3 { color: rgba(246,248,252,.94); font-size: 19px; line-height: 1.18; }
+    .result-next p { color: rgba(246,248,252,.62); font-size: 13px; line-height: 1.42; margin-top: 4px; }
+    .result-next .package-list { margin-top: 10px; }
+    .recommendations { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; margin-top: 8px; }
+    .rec-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 7px 12px;
+      align-items: center;
+      color: #fff;
+      background: transparent;
+      border: 0;
+      border-top: 1px solid rgba(255,255,255,.065);
+      border-radius: 0;
+      padding: 12px 0;
+      box-shadow: none;
+    }
+    .rec-card p { color: rgba(246,248,252,.58); font-size: 12.5px; line-height: 1.42; margin: 0; }
+    .rec-card h3 { margin: 0; font-size: 15px; line-height: 1.2; color: rgba(246,248,252,.88); }
+    .rec-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; grid-row: 1 / span 2; grid-column: 2; }
+    .rec-actions .btn { min-height: 32px; padding: 7px 10px; font-size: 12px; }
+    .floating-cart {
+      position: fixed;
+      left: 50%;
+      bottom: 12px;
+      transform: translate(-50%, 140%);
+      width: min(760px, calc(100% - 24px));
+      z-index: 80;
+      transition: transform .22s ease;
+      display: none;
+    }
+    .floating-cart.visible { display: block; transform: translate(-50%, 0); }
+    .float-inner {
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(8,11,18,.94);
+      backdrop-filter: blur(18px);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 8px 10px;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      align-items: center;
+    }
+    .float-inner strong { display: block; font-size: 13px; line-height: 1.2; }
+    .float-inner span { color: var(--muted); font-size: 12px; line-height: 1.25; }
+
+    /* Premium enterprise refinement layer */
+    body {
+      background:
+        radial-gradient(circle at 18% -8%, rgba(59,130,246,.18), transparent 32rem),
+        radial-gradient(circle at 82% 10%, rgba(34,197,94,.055), transparent 28rem),
+        linear-gradient(180deg, #070a11 0%, #0b101a 40%, #f5f7fb 40%, #f5f7fb 100%);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+    .nav {
+      border-bottom-color: rgba(255,255,255,.075);
+      background: rgba(7,10,17,.88);
+      box-shadow: 0 1px 0 rgba(255,255,255,.025);
+    }
+    .brand-mark {
+      background: linear-gradient(135deg, #111827, #1d4ed8);
+      border-color: rgba(255,255,255,.13);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.14);
+    }
+    .btn {
+      min-height: 40px;
+      border-radius: 7px;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, color .16s ease, box-shadow .16s ease, opacity .16s ease;
+    }
+    .btn:focus-visible,
+    .tab:focus-visible,
+    .seg button:focus-visible,
+    .option:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid rgba(156,194,255,.7);
+      outline-offset: 2px;
+    }
+    .btn-primary {
+      background: linear-gradient(180deg, #3b82f6, #2563eb);
+      box-shadow: 0 10px 24px rgba(37,99,235,.24), inset 0 1px 0 rgba(255,255,255,.18);
+    }
+    .btn-primary:hover { box-shadow: 0 14px 30px rgba(37,99,235,.28), inset 0 1px 0 rgba(255,255,255,.18); }
+    .btn-ghost {
+      background: rgba(255,255,255,.045);
+      border-color: rgba(255,255,255,.095);
+    }
+    .btn-dark {
+      background: linear-gradient(180deg, #111827, #0b1220);
+      border-color: rgba(17,24,39,.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    h1 {
+      font-size: clamp(44px, 6.4vw, 82px);
+      line-height: .98;
+      font-weight: 780;
+    }
+    .section-head h2 {
+      font-size: clamp(30px, 3.6vw, 46px);
+      line-height: 1.06;
+      font-weight: 760;
+    }
+    .lead {
+      color: rgba(75,85,99,.82);
+      line-height: 1.58;
+    }
+    .dark .lead,
+    .hero .lead {
+      color: rgba(246,248,252,.69);
+    }
+    .hero { padding: 50px 0 58px; }
+    .hero-grid { gap: 52px; }
+    .hero .lead { max-width: 670px; }
+    .hero-actions { margin-top: 26px; }
+    .chip {
+      border-color: rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+      color: rgba(246,248,252,.62);
+    }
+    .dash {
+      border-color: rgba(255,255,255,.105);
+      background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.032));
+      box-shadow: 0 24px 70px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.055);
+    }
+    .dash-head {
+      border-bottom-color: rgba(255,255,255,.075);
+      color: rgba(246,248,252,.58);
+    }
+    .dash-kpis { background: rgba(255,255,255,.055); }
+    .kpi { background: rgba(8,11,18,.7); padding: 16px; }
+    .kpi.trust-kpi {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012)),
+        rgba(8,11,18,.72);
+    }
+    .kpi.trust-kpi small { color: rgba(246,248,252,.42); }
+    .kpi strong { font-size: 28px; letter-spacing: -.02em; }
+    .feed { color: rgba(246,248,252,.58); }
+    .section { padding: 64px 0; }
+    .section.soft { background: #eef2f7; }
+    .section-head { margin-bottom: 24px; }
+    .pain-band {
+      border-color: rgba(17,24,39,.07);
+      background: rgba(255,255,255,.92);
+      padding: 16px 0;
+    }
+    .pain-list { gap: 7px; }
+    .pain-list .chip {
+      border-color: rgba(17,24,39,.08);
+      background: rgba(248,250,252,.82);
+      color: rgba(31,41,55,.76);
+      padding: 7px 10px;
+    }
+    .mini-card,
+    .choice-card,
+    .service-card,
+    .step-card {
+      border-color: rgba(17,24,39,.065);
+      background: rgba(255,255,255,.86);
+      box-shadow: 0 1px 0 rgba(17,24,39,.03), 0 12px 28px rgba(17,24,39,.035);
+    }
+    .choice-card {
+      padding: 20px;
+      box-shadow: 0 1px 0 rgba(17,24,39,.035), 0 18px 42px rgba(17,24,39,.055);
+    }
+    .choice-card h3,
+    .service-card h3,
+    .step-card h3 {
+      color: #101827;
+      letter-spacing: -.01em;
+      line-height: 1.18;
+    }
+    .choice-card p,
+    .service-card p,
+    .step-card p {
+      color: rgba(75,85,99,.78);
+    }
+    .step-card::before {
+      color: rgba(37,99,235,.72);
+    }
+    .service-card {
+      min-height: 124px;
+      background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.78));
+    }
+    .service-card .ico {
+      background: rgba(37,99,235,.075);
+      color: rgba(29,78,216,.74);
+    }
+    .final-cta {
+      background: linear-gradient(135deg, #0b1220, #111827);
+      border: 1px solid rgba(255,255,255,.075);
+      box-shadow: 0 18px 42px rgba(17,24,39,.16);
+    }
+    .config-hero {
+      padding: 26px 0 16px;
+      background:
+        radial-gradient(circle at 15% -30%, rgba(59,130,246,.18), transparent 30rem),
+        linear-gradient(180deg, #080c14, #090d15);
+      border-bottom-color: rgba(255,255,255,.075);
+    }
+    .mode-switch {
+      border-color: rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+    }
+    .mode-switch button {
+      color: rgba(246,248,252,.58);
+    }
+    .mode-switch button.active {
+      background: rgba(255,255,255,.92);
+      color: #111827;
+      box-shadow: 0 8px 20px rgba(0,0,0,.16);
+    }
+    #configView .section.dark {
+      background:
+        radial-gradient(circle at 82% 0%, rgba(59,130,246,.07), transparent 28rem),
+        #080c14;
+    }
+    .tabs { gap: 7px; }
+    .tab {
+      border-color: rgba(255,255,255,.045);
+      background: rgba(255,255,255,.026);
+      color: rgba(246,248,252,.52);
+    }
+    .tab:hover {
+      border-color: rgba(255,255,255,.075);
+      background: rgba(255,255,255,.045);
+    }
+    .tab.active {
+      background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(241,245,249,.96));
+      border-color: rgba(255,255,255,.95);
+      box-shadow: 0 12px 28px rgba(0,0,0,.2);
+    }
+    .tab .ico {
+      background: rgba(148,163,184,.12);
+      color: rgba(148,163,184,.9);
+    }
+    .tab.active .ico {
+      background: rgba(37,99,235,.1);
+      color: rgba(29,78,216,.82);
+    }
+    .panel {
+      border-color: rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.066), rgba(255,255,255,.038));
+      box-shadow: 0 18px 46px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .cart-side {
+      background: linear-gradient(180deg, rgba(255,255,255,.047), rgba(255,255,255,.028));
+      box-shadow: 0 12px 32px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.035);
+    }
+    .cfg-head h2 {
+      font-weight: 740;
+      letter-spacing: -.015em;
+    }
+    .estimate strong {
+      letter-spacing: -.025em;
+    }
+    .field {
+      border-color: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.024);
+    }
+    .field:hover {
+      background: rgba(255,255,255,.036);
+    }
+    .field label {
+      color: rgba(246,248,252,.54);
+    }
+    .field label strong {
+      color: rgba(246,248,252,.86);
+    }
+    input[type="range"] {
+      accent-color: #5b8cff;
+    }
+    .seg button,
+    .option {
+      border-color: rgba(255,255,255,.045);
+      background: rgba(255,255,255,.028);
+      color: rgba(246,248,252,.62);
+    }
+    .seg button.active,
+    .option.active {
+      background: rgba(255,255,255,.9);
+      border-color: rgba(255,255,255,.9);
+      box-shadow: 0 6px 16px rgba(0,0,0,.13);
+    }
+    .included {
+      border-top-color: rgba(255,255,255,.065);
+    }
+    .included h3 {
+      color: rgba(246,248,252,.86);
+      font-weight: 720;
+    }
+    .cart-item {
+      border-color: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.026);
+    }
+    .cart-item-head strong {
+      color: rgba(246,248,252,.86);
+    }
+    .wizard { gap: 12px; }
+    .progress {
+      height: 5px;
+      background: rgba(255,255,255,.055);
+    }
+    .progress span {
+      background: linear-gradient(90deg, #5b8cff, #3b82f6);
+    }
+    .wizard-card {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.072), rgba(255,255,255,.04));
+    }
+    .wizard-card h2 {
+      font-weight: 740;
+      letter-spacing: -.015em;
+    }
+    .option {
+      min-height: 36px;
+    }
+    .rec-card { box-shadow: none; }
+    .floating-cart {
+      width: min(720px, calc(100% - 24px));
+    }
+    .float-inner {
+      border-color: rgba(255,255,255,.13);
+      background: rgba(8,11,18,.92);
+      box-shadow: 0 18px 46px rgba(0,0,0,.36), inset 0 1px 0 rgba(255,255,255,.055);
+    }
+    .section:not(.dark) .section-head {
+      margin-bottom: 20px;
+    }
+    .section:not(.dark) .lead {
+      font-size: 17px;
+      line-height: 1.5;
+    }
+    .choice-grid,
+    .steps,
+    .services {
+      gap: 10px;
+    }
+    .choice-card,
+    .step-card,
+    .service-card {
+      border-radius: 7px;
+    }
+    .choice-card:hover,
+    .service-card:hover {
+      transform: translateY(-1px);
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+      border-color: rgba(37,99,235,.16);
+      box-shadow: 0 16px 34px rgba(17,24,39,.065);
+    }
+    .wizard-card .addbar {
+      margin-top: 4px;
+    }
+    .recommendations { gap: 0 16px; }
+    .rec-card { padding: 11px 0; }
+    .rec-card p {
+      font-size: 13px;
+      line-height: 1.42;
+    }
+    .top-packages {
+      display: grid;
+      grid-template-columns: minmax(0, .92fr) minmax(0, 1.15fr) minmax(0, .92fr);
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 26px;
+    }
+    .package-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .package-card {
+      border: 1px solid rgba(17,24,39,.065);
+      background: rgba(255,255,255,.88);
+      border-radius: 7px;
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      box-shadow: 0 1px 0 rgba(17,24,39,.03), 0 12px 28px rgba(17,24,39,.035);
+    }
+    .package-card.top-main {
+      min-height: 430px;
+      padding: 22px;
+      background: linear-gradient(180deg, #fff, rgba(239,246,255,.92));
+      border-color: rgba(37,99,235,.22);
+      box-shadow: 0 24px 60px rgba(37,99,235,.12), 0 1px 0 rgba(17,24,39,.04);
+    }
+    .package-card.top-side { min-height: 365px; }
+    .package-card.top-compact { min-height: 330px; }
+    .package-meta { display: flex; justify-content: space-between; align-items: center; gap: 10px; color: rgba(75,85,99,.72); font-size: 12px; font-weight: 800; }
+    .package-meta span { min-height: 26px; display: inline-flex; align-items: center; border-radius: 999px; padding: 0 9px; background: rgba(37,99,235,.08); color: rgba(30,64,175,.88); }
+    .package-meta strong { color: #101827; white-space: nowrap; }
+    .package-card h3 { font-size: 19px; line-height: 1.16; color: #101827; }
+    .package-card.top-main h3 { font-size: 26px; letter-spacing: 0; }
+    .package-card p { color: rgba(75,85,99,.78); font-size: 13px; line-height: 1.42; }
+    .package-pain { color: rgba(31,41,55,.82) !important; font-weight: 650; }
+    .package-why {
+      border-top: 1px solid rgba(17,24,39,.065);
+      padding-top: 10px;
+      color: rgba(31,41,55,.78);
+      font-size: 13px;
+      line-height: 1.42;
+      font-weight: 650;
+    }
+    .package-list { display: flex; flex-wrap: wrap; gap: 5px; }
+    .package-list span { min-height: 28px; display: inline-flex; align-items: center; border-radius: 6px; padding: 0 8px; background: rgba(37,99,235,.07); color: rgba(30,64,175,.88); font-size: 12px; font-weight: 700; }
+    .package-tune { color: rgba(30,64,175,.76); font-size: 12px; font-weight: 800; justify-self: start; }
+    .secondary-packages-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin: 8px 0 14px; }
+    .secondary-packages-head h3 { font-size: 24px; color: #101827; }
+    .result-packages { display: grid; grid-template-columns: 1.15fr .92fr .92fr; gap: 12px; margin: 18px 0; }
+    .result-package {
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      padding: 16px;
+      background: rgba(255,255,255,.045);
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+    .result-package.primary {
+      background: linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.055));
+      border-color: rgba(91,140,255,.34);
+      box-shadow: 0 18px 42px rgba(0,0,0,.2);
+    }
+    .result-package h3 { color: #fff; font-size: 22px; line-height: 1.16; }
+    .result-package p { color: rgba(246,248,252,.68); font-size: 13px; line-height: 1.42; }
+    .result-package .package-meta strong { color: rgba(246,248,252,.92); }
+    .result-zones { margin-top: 18px; opacity: .88; }
+    .result-next .package-list span {
+      background: rgba(91,140,255,.12);
+      color: rgba(210,225,255,.9);
+      border: 1px solid rgba(91,140,255,.12);
+    }
+    .cabinet-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 34px; align-items: center; }
+    .cabinet-grid h2 { font-size: clamp(34px, 4.5vw, 56px); line-height: 1.02; letter-spacing: 0; margin: 10px 0 16px; }
+    .cabinet-points { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
+    .cabinet-points span { min-height: 30px; display: inline-flex; align-items: center; border-radius: 6px; padding: 0 9px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.07); color: rgba(246,248,252,.72); font-size: 12px; font-weight: 750; }
+    .cabinet-visual {
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 9px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035));
+      box-shadow: 0 28px 80px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .cabinet-bar { display: flex; justify-content: space-between; gap: 16px; padding: 16px 18px; border-bottom: 1px solid rgba(255,255,255,.08); color: rgba(246,248,252,.58); font-size: 13px; }
+    .cabinet-bar strong { color: #86efac; }
+    .cabinet-modules { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,.06); }
+    .cabinet-modules div { min-height: 122px; padding: 18px; background: rgba(8,11,18,.72); display: grid; align-content: start; gap: 10px; }
+    .cabinet-modules small { color: rgba(246,248,252,.42); text-transform: uppercase; letter-spacing: .06em; font-size: 11px; }
+    .cabinet-modules strong { color: rgba(246,248,252,.9); font-size: 16px; line-height: 1.25; }
+    .compare-table {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr 1fr;
+      border: 1px solid rgba(17,24,39,.07);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(255,255,255,.78);
+    }
+    .compare-row { display: contents; }
+    .compare-cell {
+      min-height: 44px;
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(17,24,39,.06);
+      border-right: 1px solid rgba(17,24,39,.055);
+      color: rgba(75,85,99,.82);
+      font-size: 13px;
+      line-height: 1.35;
+      display: flex;
+      align-items: center;
+    }
+    .compare-cell.head {
+      color: #101827;
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .055em;
+      background: rgba(248,250,252,.82);
+    }
+    .compare-cell.criteria { color: #101827; font-weight: 750; }
+    .compare-cell.sf {
+      background: rgba(59,130,246,.06);
+      border-left: 2px solid var(--accent);
+      color: rgba(30,64,175,.92);
+      font-weight: 700;
+    }
+    .docs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .docs-col h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #fff;
+      font-weight: 720;
+    }
+    .docs-col ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .docs-col li {
+      padding-left: 18px;
+      position: relative;
+      color: rgba(246,248,252,.66);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .docs-col li::before {
+      content: "◆";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: rgba(91,140,255,.7);
+      font-size: 11px;
+    }
+    .docs-col li strong {
+      color: rgba(246,248,252,.92);
+      font-weight: 700;
+    }
+    @media (max-width: 1050px) {
+      .hero-grid, .config-shell, .cabinet-grid { grid-template-columns: 1fr; }
+      .cart-side { position: static; }
+      .approach-grid { grid-template-columns: 1fr; }
+      .scan-grid, .steps { grid-template-columns: repeat(2, 1fr); }
+      .services { grid-template-columns: repeat(2, 1fr); }
+      .who-grid { grid-template-columns: repeat(3, 1fr); }
+      .tabs { grid-template-columns: repeat(2, 1fr); }
+      .recommendations, .package-grid { grid-template-columns: repeat(3, 1fr); }
+      .top-packages { grid-template-columns: 1fr; align-items: stretch; }
+      .package-card.top-main, .package-card.top-side, .package-card.top-compact { min-height: auto; }
+      .what-list { max-width: 100%; }
+      .nav-links { display: none; }
+      .nav-toggle { display: inline-flex; }
+    }
+    @media (max-width: 680px) {
+      .wrap { width: min(100% - 24px, var(--wrap)); }
+      .nav-phone { min-height: 32px; padding: 0 10px; font-size: 12px; }
+      .brand-meta { display: none; }
+      .hero { padding-top: 38px; min-height: auto; }
+      .config-hero { padding: 22px 0 14px; }
+      .config-hero h1 { margin-top: 12px !important; }
+      #configView .section.dark { padding: 22px 0 76px; }
+      .hero-actions, .final-cta, .cfg-head { align-items: stretch; flex-direction: column; }
+      .hero-actions .btn, .final-cta .btn, .addbar .btn { width: 100%; }
+      .dash-kpis, .scan-grid, .choice-grid, .steps, .form-grid, .included, .contact-grid-mini, .recommendations, .package-grid, .who-grid, .result-packages, .cabinet-modules { grid-template-columns: 1fr; }
+      .top-packages { display: flex; flex-direction: column; gap: 10px; }
+      .package-card.top-main { order: -1; }
+      .package-card { padding: 15px; }
+      .package-card.top-main { padding: 18px; }
+      .package-card.top-main h3 { font-size: 23px; }
+      .secondary-packages-head { display: block; }
+      .cabinet-grid { gap: 22px; }
+      .cabinet-modules div { min-height: auto; }
+      .kpi.trust-kpi { min-height: auto; padding: 16px 18px; gap: 8px; }
+      .kpi.trust-kpi strong { font-size: 16px; }
+      .kpi.trust-kpi span { font-size: 12.5px; max-width: none; }
+      .compare-table { display: block; }
+      .compare-cell.head { display: none; }
+      .compare-row {
+        display: block;
+        border: 1px solid rgba(17,24,39,.075);
+        border-radius: 8px;
+        padding: 12px 14px;
+        background: #fff;
+        margin-bottom: 8px;
+        box-shadow: 0 1px 0 rgba(17,24,39,.03);
+      }
+      .compare-row .compare-cell.criteria {
+        font-weight: 700;
+        color: #101827;
+        font-size: 14px;
+        padding: 0 0 8px 0;
+        border-bottom: 1px solid rgba(17,24,39,.05);
+        margin-bottom: 8px;
+      }
+      .compare-row .compare-cell {
+        font-size: 13px;
+        color: rgba(75,85,99,.78);
+        padding: 4px 0;
+        display: grid;
+        grid-template-columns: 130px 1fr;
+        gap: 12px;
+        border: 0;
+        min-height: 0;
+      }
+      .compare-row .compare-cell::before {
+        content: attr(data-source);
+        color: rgba(75,85,99,.5);
+        font-weight: 700;
+      }
+      .compare-row .compare-cell.sf {
+        color: #101827;
+        font-weight: 600;
+        background: transparent;
+        border-left: 0;
+      }
+      .compare-row .compare-cell.criteria {
+        display: block;
+      }
+      .compare-row .compare-cell.criteria::before {
+        content: none;
+      }
+      .section { padding: 52px 0; }
+      .section + .section { padding-top: 36px; }
+      h1 { font-size: clamp(40px, 12vw, 58px); line-height: 1; }
+      .hero .lead { font-size: 18px; line-height: 1.5; }
+      .section-head h2 { font-size: clamp(28px, 9vw, 38px); line-height: 1.08; }
+      .choice-card, .step-card, .service-card { padding: 16px; }
+      .approach-grid .step-card { border-left: 2px solid rgba(37,99,235,.18); padding: 12px 14px; }
+      .docs-grid { grid-template-columns: 1fr; gap: 20px; }
+      .services {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding: 4px 0 6px;
+        margin: 0;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .services::-webkit-scrollbar { display: none; }
+      .service-card {
+        flex: 0 0 78%;
+        scroll-snap-align: start;
+        min-height: auto;
+      }
+      .section-head { display: block; }
+      .section-head .lead { margin-top: 12px; }
+      .tabs {
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding: 4px 0 8px;
+        margin: 0 0 8px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .tabs::-webkit-scrollbar { display: none; }
+      .tab { flex: 0 0 78%; scroll-snap-align: start; min-height: 64px; padding: 8px 10px 8px 12px; grid-template-columns: 26px minmax(0, 1fr); column-gap: 12px; }
+      .tab-ico-wrap { width: 26px; height: 26px; }
+      .tab .ico { width: 26px; height: 26px; font-size: 14px; margin: 0; }
+      .tab strong { font-size: 13px; }
+      .tab small { font-size: 10.5px; }
+      .panel { padding: 12px; position: relative; }
+      .cfg-head { gap: 10px; padding-bottom: 10px; margin-bottom: 10px; }
+      .cfg-head h2 { font-size: 21px; }
+      .field { padding: 8px 9px; }
+      .field label { margin-bottom: 5px; }
+      .seg button { min-height: 30px; padding: 6px 8px; }
+      .option { min-height: 40px; padding: 6px 8px; }
+      .cart-item button { width: 32px; height: 32px; display: grid; place-items: center; }
+      .included { margin-top: 10px; padding-top: 10px; gap: 8px; }
+      .advanced-grid { grid-template-columns: 1fr; gap: 7px; }
+      .advanced-fields summary { min-height: 38px; }
+      .result-next-head { grid-template-columns: 1fr; }
+      .recommendations { grid-template-columns: 1fr; }
+      .rec-card { grid-template-columns: 1fr; gap: 6px; }
+      .rec-actions { grid-column: auto; grid-row: auto; justify-content: stretch; }
+      .rec-actions .btn { flex: 1; }
+      .wizard-card { min-height: 320px; gap: 13px; }
+      .options { gap: 6px; }
+      .cart-list { max-height: 220px; }
+      .estimate {
+        position: sticky;
+        bottom: 0;
+        padding: 10px 12px;
+        margin: 12px -12px -12px -12px;
+        background: rgba(8,11,18,.94);
+        backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(255,255,255,.08);
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        z-index: 10;
+        text-align: left;
+      }
+      .estimate small { display: inline; margin-right: 6px; }
+      .estimate strong { font-size: 18px; }
+      .mode-switch { width: 100%; }
+      .mode-switch button { min-height: 34px; padding: 7px 9px; }
+      .pain-list .chip { min-height: 36px; padding: 8px 12px; }
+      .what-list { gap: 6px; margin-top: 16px; }
+      .what-list span { min-height: 36px; padding: 0 10px; font-size: 12.5px; }
+      .floating-cart { bottom: 8px; }
+      .float-inner { grid-template-columns: 1fr auto; padding: 8px; gap: 8px; }
+      .float-inner > div:nth-child(2) { text-align: right; }
+      .float-inner .btn { grid-column: 1 / -1; min-height: 34px; }
+      .float-inner strong { font-size: 12.5px; }
+      .float-inner span { font-size: 11.5px; }
+    }
+    @media (max-width: 380px) {
+      h1 { font-size: 36px; line-height: 1; }
+      .hero { padding-top: 28px; }
+    }
+    @media (min-width: 681px) and (max-width: 1050px) {
+      .floating-cart { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#" data-route="landing">
+        <span class="brand-mark">БС</span>
+        <span><span class="brand-name">Безопасные системы</span><span class="brand-meta">SF-SYS · контроль IT-инфраструктуры</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#config" data-route="config" data-mode="guided">Диагностика</a>
+        <a href="#packages">Пакеты</a>
+        <a href="#cabinet">Личный кабинет</a>
+        <a href="#approach">Подход</a>
+        <a href="#config" data-route="config" data-mode="full">Конфигуратор</a>
+        <a href="#services">9 зон</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+      <a class="nav-phone" href="#contact">Консультация эксперта</a>
+      <button class="nav-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
+    </div>
+    <div class="nav-overlay" id="mobileNav">
+      <div class="wrap">
+        <a href="#config" data-route="config" data-mode="guided">Диагностика</a>
+        <a href="#packages">Пакеты</a>
+        <a href="#cabinet">Личный кабинет</a>
+        <a href="#approach">Подход</a>
+        <a href="#config" data-route="config" data-mode="full">Конфигуратор</a>
+        <a href="#services">Направления</a>
+        <a href="#contact">Контакты</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div id="landingView" class="view active">
+      <section class="hero" id="main">
+        <div class="wrap hero-grid">
+          <div>
+            <span class="eyebrow">система контроля IT бизнеса</span>
+            <h1>IT под контролем.<br><span>Бизнес в фокусе.</span></h1>
+            <p class="lead">Пройдите короткую диагностику — покажем подходящий пакет управляемой IT-ответственности, зоны контроля и следующий шаг внедрения.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#config" data-route="config" data-mode="guided">Пройти диагностику</a>
+              <a class="btn btn-light" href="#packages">Смотреть готовые пакеты</a>
+              <a class="btn btn-ghost tertiary-cta" href="#config" data-route="config" data-mode="full">Конфигуратор для IT-специалиста</a>
+            </div>
+            <div class="chips">
+              <span class="chip">доступы</span><span class="chip">серверы</span><span class="chip">1С</span><span class="chip">телефония</span><span class="chip">почта</span><span class="chip">бэкапы</span>
+            </div>
+          </div>
+          <div class="dash" aria-label="Панель контроля инфраструктуры">
+            <div class="dash-head"><span>sf-sys / control layer</span><span class="status">Control ready</span></div>
+            <div class="dash-kpis">
+              <div class="kpi trust-kpi"><small>SLA reaction</small><strong>Регламентированная реакция</strong><span>Сроки, приоритеты и зона ответственности фиксируются в SLA.</span></div>
+              <div class="kpi trust-kpi"><small>Access map</small><strong>Карта доступов</strong><span>Понятно, кто, к чему и на каком основании имеет права.</span></div>
+              <div class="kpi trust-kpi"><small>Backup state</small><strong>Проверка восстановления</strong><span>Бэкапы не просто настроены, а проверяются по регламенту.</span></div>
+              <div class="kpi trust-kpi"><small>Monitoring</small><strong>Контроль состояния</strong><span>Критичные зоны находятся под наблюдением и понятной эскалацией.</span></div>
+            </div>
+            <div class="dash-foot">Пример панели контроля. Реальные данные клиента — в рабочем кабинете.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pain-band">
+        <div class="wrap pain-list">
+          <span class="chip">IT держится на одном человеке</span>
+          <span class="chip">Нет прозрачности по доступам</span>
+          <span class="chip">Инфраструктура не документирована</span>
+          <span class="chip">Почта и домен без ответственного</span>
+          <span class="chip">SSL и бэкапы вспоминают после сбоя</span>
+          <span class="chip">Сбой видит клиент, а не мы</span>
+          <span class="chip">Сайт, почта и серверы у разных подрядчиков</span>
+          <span class="chip">Домен оформлен непонятно на кого</span>
+        </div>
+      </section>
+
+      <section class="section soft" id="start">
+        <div class="wrap">
+          <div class="section-head">
+            <div><span class="eyebrow">диагностика</span><h2>Сначала поймём, какой пакет нужен</h2></div>
+            <p class="lead">Диагностика не заставляет выбирать услуги. Она быстро определяет ситуацию и рекомендует готовый пакет ответственности.</p>
+          </div>
+          <div class="choice-grid">
+            <article class="choice-card">
+              <h3>Холодный старт</h3>
+              <p>Если непонятно, что ломается и кто за что отвечает — начните с диагностики.</p>
+              <a class="btn btn-primary" href="#config" data-route="config" data-mode="guided">Пройти диагностику</a>
+            </article>
+            <article class="choice-card">
+              <h3>Уже ищете решение</h3>
+              <p>Посмотрите готовые пакеты: что берём под контроль, кому подходит и что входит.</p>
+              <a class="btn btn-dark" href="#packages">Смотреть пакеты</a>
+            </article>
+            <article class="choice-card">
+              <h3>Понимаете задачу</h3>
+              <p>Для IT-специалиста или горячего клиента остаётся точная настройка состава.</p>
+              <a class="btn btn-ghost" href="#config" data-route="config" data-mode="full">Открыть конфигуратор</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="packages">
+        <div class="wrap">
+          <div class="section-head">
+            <div><span class="eyebrow">готовые пакеты</span><h2>Готовые модели IT-ответственности</h2></div>
+            <p class="lead">Главный продукт SF-SYS — не отдельные услуги, а пакет, где понятны зона ответственности, SLA, регламент и следующий шаг внедрения.</p>
+          </div>
+          <div class="top-packages" id="topPackageGrid"></div>
+          <div class="secondary-packages-head">
+            <span class="eyebrow">дополнительные зоны</span>
+            <h3>Точечные пакеты ответственности</h3>
+          </div>
+          <div class="package-grid secondary-package-grid" id="packageGrid"></div>
+        </div>
+      </section>
+
+      <section class="section dark" id="cabinet">
+        <div class="wrap cabinet-grid">
+          <div>
+            <span class="eyebrow">личный кабинет</span>
+            <h2>Вся инфраструктура — <span>в личном кабинете</span></h2>
+            <p class="lead">Клиент видит состояние IT, статусы, документы, SLA, карту инфраструктуры и историю работ с любого устройства.</p>
+            <div class="cabinet-points">
+              <span>дашборды</span><span>аудит</span><span>карта инфраструктуры</span><span>SLA</span><span>заявки</span><span>бэкапы</span><span>мониторинг</span><span>документы</span><span>карта доступов</span>
+            </div>
+          </div>
+          <div class="cabinet-visual" aria-label="Иллюстрация личного кабинета">
+            <div class="cabinet-bar"><span>SF-SYS cabinet</span><strong>Control view</strong></div>
+            <div class="cabinet-modules">
+              <div><small>Infrastructure map</small><strong>Зоны ответственности</strong></div>
+              <div><small>SLA</small><strong>Реакция и восстановление</strong></div>
+              <div><small>Documents</small><strong>Договоры, акты, регламенты</strong></div>
+              <div><small>Access map</small><strong>Права и ответственные</strong></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section soft" id="services">
+        <div class="wrap">
+          <div class="section-head">
+            <div><span class="eyebrow">карта ответственности</span><h2>Что SF-SYS берёт под контроль</h2></div>
+            <p class="lead">9 зон показывают состав управляемого контура. Коммерческое решение собирается в пакет, а не в случайный набор услуг.</p>
+          </div>
+          <div class="services" id="landingServices"></div>
+        </div>
+      </section>
+
+      <section class="section" id="approach">
+        <div class="wrap">
+          <div class="approach-grid">
+            <div class="approach-head">
+              <span class="eyebrow">подход</span>
+              <h2>От хаоса к <span>контролю</span></h2>
+            </div>
+            <div class="approach-steps">
+              <article class="step-card"><h3>Фиксируем состояние</h3><p>Карта рабочих мест, серверов, доступов и подрядчиков.</p></article>
+              <article class="step-card"><h3>Выявляем риски</h3><p>Зоны зависимости: люди, пароли, бэкапы, 1С, телефония, камеры.</p></article>
+              <article class="step-card"><h3>Собираем схему</h3><p>Зоны, SLA, регламенты и предварительный бюджет.</p></article>
+              <article class="step-card"><h3>Поддерживаем</h3><p>Заявки, доступы, изменения и стабильность — под регламентом.</p></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="who">
+        <div class="wrap">
+          <div class="section-head">
+            <div><span class="eyebrow">для кого</span><h2>Когда IT — функция бизнеса, а не задача одного человека</h2></div>
+          </div>
+          <div class="who-grid">
+            <article class="who-card"><h3>Малый бизнес</h3><p>IT держится на одном человеке, а доступы и резервные копии не зафиксированы.</p><p>Получаете понятную схему поддержки, SLA и базовую карту инфраструктуры.</p><a class="btn btn-dark" href="#packages">Пакет офиса</a></article>
+            <article class="who-card"><h3>Средний бизнес</h3><p>Сервисов стало больше, но ответственность между сотрудниками и подрядчиками размыта.</p><p>Получаете управляемые зоны, регламенты, мониторинг и единый контур изменений.</p><a class="btn btn-dark" href="#packages">Пакет контроля</a></article>
+            <article class="who-card"><h3>E-commerce</h3><p>Сайт, почта, SSL и серверы критичны, но контролируются разными сторонами.</p><p>Получаете внешний контур под ответственностью с бэкапами и мониторингом.</p><a class="btn btn-dark" href="#packages">Пакет внешнего контура</a></article>
+            <article class="who-card"><h3>Переезд от подрядчика</h3><p>Нужно уйти от текущей схемы без потери доступов, данных и управляемости.</p><p>Получаете план миграции, аудит рисков и безопасную передачу контроля.</p><a class="btn btn-dark" href="#packages">Пакет перехода</a></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section soft">
+        <div class="wrap">
+          <div class="section-head">
+            <div><span class="eyebrow">не просто хостинг</span><h2>Чем SF-SYS отличается от хостинга и подрядчика</h2></div>
+          </div>
+          <div class="compare-table" aria-label="Сравнение подходов к контролю IT">
+            <div class="compare-cell head">Критерий</div><div class="compare-cell head">Хостер</div><div class="compare-cell head">Разовый подрядчик</div><div class="compare-cell head sf">SF-SYS</div>
+            <div class="compare-row"><div class="compare-cell criteria">SLA</div><div class="compare-cell" data-source="Хостер">На компонент</div><div class="compare-cell" data-source="Подрядчик">По задаче</div><div class="compare-cell sf" data-source="SF-SYS">На зону ответственности</div></div>
+            <div class="compare-row"><div class="compare-cell criteria">Карта инфраструктуры</div><div class="compare-cell" data-source="Хостер">Нет</div><div class="compare-cell" data-source="Подрядчик">Фрагментами</div><div class="compare-cell sf" data-source="SF-SYS">Единая карта</div></div>
+            <div class="compare-row"><div class="compare-cell criteria">Регламенты</div><div class="compare-cell" data-source="Хостер">Не ведёт</div><div class="compare-cell" data-source="Подрядчик">По договорённости</div><div class="compare-cell sf" data-source="SF-SYS">Фиксируются письменно</div></div>
+            <div class="compare-row"><div class="compare-cell criteria">Единая точка ответственности</div><div class="compare-cell" data-source="Хостер">Нет</div><div class="compare-cell" data-source="Подрядчик">Только за работу</div><div class="compare-cell sf" data-source="SF-SYS">Да</div></div>
+            <div class="compare-row"><div class="compare-cell criteria">Контроль резервных копий</div><div class="compare-cell" data-source="Хостер">Опция</div><div class="compare-cell" data-source="Подрядчик">Разовая настройка</div><div class="compare-cell sf" data-source="SF-SYS">Проверка по регламенту</div></div>
+            <div class="compare-row"><div class="compare-cell criteria">Документация</div><div class="compare-cell" data-source="Хостер">Техническая</div><div class="compare-cell" data-source="Подрядчик">Не всегда</div><div class="compare-cell sf" data-source="SF-SYS">Для управления бизнесом</div></div>
+            <div class="compare-row"><div class="compare-cell criteria">Что будет если уволится админ</div><div class="compare-cell" data-source="Хостер">Риск клиента</div><div class="compare-cell" data-source="Подрядчик">Зависит от передачи</div><div class="compare-cell sf" data-source="SF-SYS">Доступы и схема сохранены</div></div>
+            <div class="compare-row"><div class="compare-cell criteria">Ответственность за результат</div><div class="compare-cell" data-source="Хостер">За доступность услуги</div><div class="compare-cell" data-source="Подрядчик">За выполненную задачу</div><div class="compare-cell sf" data-source="SF-SYS">За управляемость зоны</div></div>
+            <div class="compare-row"><div class="compare-cell criteria">Контроль доступов</div><div class="compare-cell" data-source="Хостер">У клиента</div><div class="compare-cell" data-source="Подрядчик">Точечно</div><div class="compare-cell sf" data-source="SF-SYS">В регламенте и карте</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section dark" id="docs">
+        <div class="wrap">
+          <div class="section-head">
+            <div><span class="eyebrow">документация и юрлица</span><h2>Контроль на бумаге, а не на словах</h2></div>
+            <p class="lead">Карта инфраструктуры, SLA, регламент доступов, договор, акты и ЭДО. Это управляемая IT-функция, а не устные договорённости.</p>
+          </div>
+          <div class="docs-grid">
+            <div class="docs-col">
+              <h3>Документация</h3>
+              <ul>
+                <li><strong>Карта инфраструктуры</strong> — что и где работает, кто отвечает.</li>
+                <li><strong>SLA реакции</strong> — сроки реакции и восстановления, фиксируются в договоре.</li>
+                <li><strong>Регламент доступов</strong> — кто, к чему и как получает права.</li>
+              </ul>
+            </div>
+            <div class="docs-col">
+              <h3>Юрлицам</h3>
+              <ul>
+                <li><strong>Договор и оферта</strong> — официальное оформление обслуживания.</li>
+                <li><strong>Акты и счета</strong> — закрывающие документы в срок.</li>
+                <li><strong>ЭДО</strong> — Диадок, СБИС. Реквизиты по запросу.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap final-cta">
+          <div><span class="eyebrow">следующий шаг</span><h2>Получите пакет, с которого стоит начать</h2></div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" style="min-height: 48px; font-size: 16px; padding: 0 20px" href="#config" data-route="config" data-mode="guided">Пройти диагностику</a>
+            <a class="btn btn-light" href="#packages">Смотреть готовые пакеты</a>
+            <a class="btn btn-ghost" href="#config" data-route="config" data-mode="full">Конфигуратор для IT-специалиста</a>
+            <a class="btn btn-light" href="#contact">Бесплатная консультация</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="configView" class="view">
+      <section class="config-hero" id="config">
+        <div class="wrap">
+          <a class="btn btn-text" href="#" data-route="landing">← На главную</a>
+          <h1 style="font-size:clamp(38px,6vw,72px);margin-top:18px">Подберите пакет.<br><span>Уточните состав.</span></h1>
+          <p class="lead" style="margin-top:18px">Диагностика рекомендует пакет ответственности. Полный конфигуратор нужен тем, кто уже понимает техническую задачу.</p>
+          <div class="mode-switch" role="tablist" aria-label="Режим выбора">
+            <button id="guidedModeBtn" class="active" type="button" data-switch-mode="guided">Быстрая диагностика</button>
+            <button id="fullModeBtn" type="button" data-switch-mode="full">Точная настройка</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section dark">
+        <div class="wrap">
+          <div id="guidedMode"></div>
+          <div id="fullMode" class="hidden">
+            <div class="tabs" id="serviceTabs"></div>
+            <div class="config-shell">
+              <div class="panel">
+                <div class="cfg-head">
+                  <div><span class="eyebrow" id="activeServiceLabel"></span><h2 id="panelTitle"></h2><p class="lead" id="panelHint" style="font-size:15px;margin-top:8px"></p></div>
+                  <div class="estimate"><small>предварительно</small><strong id="monthlyEstimate"></strong><span id="termEstimate"></span></div>
+                </div>
+                <div id="panelFields" class="form-grid"></div>
+                <div class="included">
+                  <div><h3>Что входит</h3><ul id="includedList"></ul></div>
+                  <div><h3>Сводка</h3><ul id="specList"></ul></div>
+                </div>
+                <div class="addbar">
+                  <button class="btn btn-primary" id="addServiceBtn" type="button">Добавить в сборку</button>
+                  <a class="btn btn-ghost" href="#contact">Получить смету</a>
+                </div>
+              </div>
+              <aside class="panel cart-side" id="sideCart"></aside>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="section dark" id="contact">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">контакт</span><h2>Отправить на расчёт</h2></div>
+          <p class="lead">Это предварительная сборка, не финальная покупка. Финальная смета формируется после аудита инфраструктуры.</p>
+        </div>
+        <form class="panel" id="contactForm" style="max-width:760px">
+          <input type="hidden" name="source" id="leadSource" value="site">
+          <input type="hidden" name="package" id="leadPackage" value="">
+          <input type="hidden" name="monthly" id="leadMonthly" value="">
+          <input type="hidden" name="setup" id="leadSetup" value="">
+          <div class="contact-grid-mini">
+            <div><label class="muted">Имя</label><input required name="name" type="text" placeholder="Имя"></div>
+            <div><label class="muted">Телефон</label><input required name="phone" type="tel" placeholder="+7 ___ ___ __ __"></div>
+            <div><label class="muted">Компания</label><input name="company" type="text" placeholder="Название компании"></div>
+            <div><label class="muted">Комментарий</label><input name="comment" type="text" placeholder="Коротко о задаче"></div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:14px" type="submit">Отправить заявку</button>
+          <p class="cart-note" id="formResult">Нажимая кнопку, вы соглашаетесь на обработку данных. Оплата — после согласования сметы.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div class="floating-cart" id="floatingCart"></div>
+
+  <script>
+    const fmt = n => Math.round(n).toLocaleString("ru-RU") + " ₽";
+    const q = s => document.querySelector(s);
+    const qa = s => [...document.querySelectorAll(s)];
+    const pluralize = (n, forms) => {
+      const mod10 = n % 10, mod100 = n % 100;
+      if (mod10 === 1 && mod100 !== 11) return forms[0];
+      if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return forms[1];
+      return forms[2];
+    };
+
+    const CFG_SERVICES = [
+      { id:"office", icon:"☁", name:"Виртуальный офис", short:"Рабочие места и доступы", from:"от 33 000 ₽/мес", available:true, title:"Виртуальный офис под управлением", hint:"Рабочие места и облачные сервисы — под единым контролем доступа." },
+      { id:"servers", icon:"▦", name:"Аренда серверов", short:"VPS и dedicated", from:"от 8 900 ₽/мес", available:true, title:"Серверы под управлением", hint:"Ресурсы, размещение, защита, резервирование и масштабирование серверной среды." },
+      { id:"onec", icon:"◊", name:"1С в облаке", short:"Облачная 1С", from:"от 14 500 ₽/мес", available:true, title:"1С под контролем", hint:"1С — доступность, обновления, бэкапы и удалённый доступ." },
+      { id:"outsourcing", icon:"◈", name:"IT-аутсорсинг", short:"Заявки и SLA", from:"от 18 000 ₽/мес", available:true, title:"IT-поддержка под управлением", hint:"Заявки, доступы, SLA, документация и ответственность за рабочие места." },
+      { id:"voip", icon:"☎", name:"IP-телефония", short:"АТС и линии", from:"от 7 900 ₽/мес", available:true, title:"Телефония под контролем", hint:"Звонки, маршрутизация, записи и пропущенные обращения — под контролем." },
+      { id:"cctv", icon:"◉", name:"Видеонаблюдение", short:"Камеры и архив", from:"от 6 500 ₽/мес", available:true, title:"Видеонаблюдение под контролем", hint:"Камеры, архив, доступы, аналитика и стабильность наблюдения." },
+      { id:"domains", icon:"⌘", name:"Домены, почта и SSL", short:"DNS, почта, SSL", from:"от 5 900 ₽/мес", available:true, title:"Домены, почта и SSL под контролем", hint:"Внешний контур: DNS, почта, SSL и продления — под ответственностью." },
+      { id:"backupmon", icon:"⟳", name:"Бэкапы и мониторинг", short:"Бэкапы и алерты", from:"от 9 800 ₽/мес", available:true, title:"Бэкапы и мониторинг под контролем", hint:"Бэкапы, проверки восстановления, мониторинг и уведомления." },
+      { id:"security", icon:"⛨", name:"Безопасность и миграции", short:"Защита и переезд", from:"от 16 000 ₽/мес", available:true, title:"Безопасность и миграции под управлением", hint:"Аудит, защита, миграция без даунтайма, контроль доступа." }
+    ];
+
+    const CFG_CALCS = {
+      office: {
+        defaults:{ users:25, storage:500, package:"standard", telephony:"yes", cameras:"no", support:"standard" },
+        fields:[
+          {k:"users", t:"range", label:"Пользователи", min:1, max:150, step:1, unit:"чел"},
+          {k:"storage", t:"range", label:"Хранилище", min:100, max:5000, step:100, unit:"ГБ"},
+          {k:"package", t:"seg", label:"Офисный пакет", opts:[["base","База"],["standard","Стандарт"],["premium","Премиум"]]},
+          {k:"support", t:"seg", label:"Поддержка", opts:[["base","База"],["standard","Стандарт"],["critical","Критичная"]]},
+          {k:"telephony", t:"seg", label:"Телефония включена", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"cameras", t:"seg", label:"Камеры включены", opts:[["yes","Да"],["no","Нет"]]}
+        ],
+        calc:s=>{
+          const p={base:14000,standard:26000,premium:52000}[s.package];
+          const sup={base:0,standard:9000,critical:24000}[s.support];
+          const monthly=p+s.users*920+s.storage*10+(s.telephony==="yes"?s.users*220:0)+(s.cameras==="yes"?6500:0)+sup;
+          const setup=12000+Math.ceil(s.users/20)*3500+(s.cameras==="yes"?18000:0);
+          const days=4+Math.ceil(s.users/35)+(s.cameras==="yes"?2:0);
+          return result(monthly,setup,days,["Контроль рабочих мест и доступов", "Файловое хранение и резервирование", "Поддержка пользователей по SLA", s.telephony==="yes"&&"Телефония в управляемом контуре", s.cameras==="yes"&&"Камеры в управляемом контуре"], [`${s.users} пользователей`, `${s.storage} ГБ`, `Пакет: ${label(s.package)}`, `Поддержка: ${label(s.support)}`, `Телефония: ${yes(s.telephony)}`, `Камеры: ${yes(s.cameras)}`]);
+        }
+      },
+      servers: {
+        defaults:{ type:"vps", cpu:4, ram:16, storage:300, quantity:1, backups:"yes", protection:"yes", region:"msk" },
+        fields:[
+          {k:"type", t:"seg", label:"Тип", opts:[["vps","VPS"],["managed","Управляемый"],["dedicated","Dedicated"],["gpu","GPU"]]},
+          {k:"cpu", t:"range", label:"CPU", min:2, max:64, step:2, unit:"vCPU"},
+          {k:"ram", t:"range", label:"RAM", min:4, max:512, step:4, unit:"ГБ"},
+          {k:"storage", t:"range", label:"Диск", min:50, max:8000, step:50, unit:"ГБ"},
+          {k:"quantity", t:"range", label:"Количество", min:1, max:20, step:1, unit:"шт"},
+          {k:"region", t:"seg", label:"Регион", opts:[["msk","Москва"],["spb","СПб"],["eu","EU"]]},
+          {k:"backups", t:"seg", label:"Бэкапы", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"protection", t:"seg", label:"Защита", opts:[["yes","Да"],["no","Нет"]]}
+        ],
+        calc:s=>{
+          const base={vps:1900,managed:6200,dedicated:8900,gpu:26000}[s.type];
+          const mult={vps:1,managed:1.28,dedicated:1.55,gpu:2.2}[s.type];
+          const one=base+s.cpu*360*mult+s.ram*100*mult+s.storage*8*mult+(s.backups==="yes"?1900:0)+(s.protection==="yes"?2500:0)+(s.region==="eu"?4500:0);
+          const monthly=one*s.quantity;
+          const setup=(s.type==="vps"?4500:s.type==="managed"?12000:18000)*s.quantity;
+          const days=(s.type==="vps"?1:s.type==="managed"?3:s.type==="dedicated"?4:7)+(s.region==="eu"?3:0);
+          return result(monthly,setup,days,["Размещение серверной среды", "Резервирование и мониторинг ресурсов", s.protection==="yes"&&"Базовая защита сервера", s.type==="managed"&&"Администрирование и контроль SLA", "Масштабирование ресурсов"], [`Тип: ${label(s.type)}`, `${s.quantity} сервер(а)`, `${s.cpu} vCPU`, `${s.ram} ГБ RAM`, `${s.storage} ГБ`, `Регион: ${label(s.region)}`, `Бэкапы: ${yes(s.backups)}`]);
+        }
+      },
+      onec: {
+        defaults:{ config:"buh", users:8, db:30, mode:"thin", migration:"yes", support:"standard" },
+        fields:[
+          {k:"config", t:"seg", label:"Конфигурация", opts:[["buh","Бухгалтерия"],["unf","УНФ"],["zup","ЗУП"],["erp","ERP"]]},
+          {k:"users", t:"range", label:"Пользователи", min:1, max:150, step:1, unit:"лиц"},
+          {k:"db", t:"range", label:"Размер базы", min:5, max:500, step:5, unit:"ГБ"},
+          {k:"mode", t:"seg", label:"Режим", opts:[["thin","Тонкий клиент"],["web","Веб"],["rdp","RDP"]]},
+          {k:"migration", t:"seg", label:"Миграция", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"support", t:"seg", label:"Сопровождение", opts:[["base","База"],["standard","Стандарт"],["premium","Премиум"]]}
+        ],
+        calc:s=>{
+          const base={buh:5400,unf:7200,zup:6300,erp:18000}[s.config];
+          const support={base:4200,standard:9800,premium:18500}[s.support];
+          const monthly=base+s.users*850+s.db*36+(s.mode==="web"?1500:0)+(s.mode==="rdp"?3200:0)+support;
+          const setup=s.migration==="yes" ? 24000+Math.ceil(s.db/50)*6000 : 9000;
+          const days=5+(s.migration==="yes"?5:0)+(s.config==="erp"?5:0);
+          return result(monthly,setup,days,["Доступность 1С в облаке", "Резервирование и обновления", `Удалённый доступ: ${label(s.mode)}`, s.migration==="yes"&&"Миграция базы как разовая работа", `Сопровождение: ${label(s.support)}`], [`Конфигурация: ${label(s.config)}`, `${s.users} пользователей`, `${s.db} ГБ`, `Режим: ${label(s.mode)}`, `Миграция: ${yes(s.migration)}`]);
+        }
+      },
+      outsourcing: {
+        defaults:{ employees:25, workplaces:25, offices:1, sla:"standard", format:"remote", servers:"yes", onec:"yes", docs:"yes" },
+        fields:[
+          {k:"employees", t:"range", label:"Сотрудники", min:5, max:150, step:5, unit:"чел"},
+          {k:"workplaces", t:"range", label:"Рабочие места", min:5, max:150, step:5, unit:"мест"},
+          {k:"offices", t:"range", label:"Офисы", min:1, max:10, step:1, unit:"оф."},
+          {k:"sla", t:"seg", label:"SLA", opts:[["base","Base"],["standard","Standard"],["critical","Critical"]]},
+          {k:"format", t:"seg", label:"Формат", opts:[["remote","Remote"],["hybrid","Hybrid"],["onsite","On-site"]]},
+          {k:"servers", t:"seg", label:"Серверы", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"onec", t:"seg", label:"1С", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"docs", t:"seg", label:"Документация", opts:[["yes","Да"],["no","Нет"]]}
+        ],
+        calc:s=>{
+          const slaFee={base:12000,standard:28000,critical:62000}[s.sla];
+          const fmtFee={remote:0,hybrid:18000,onsite:52000}[s.format];
+          const officeMult=1+(s.offices-1)*.12;
+          const monthly=(slaFee+s.workplaces*1150+fmtFee+(s.servers==="yes"?14000:0)+(s.onec==="yes"?9000:0))*officeMult;
+          const setup=s.docs==="yes"?28000+Math.ceil(s.workplaces/25)*6000:12000;
+          const days=3+Math.ceil(s.workplaces/30)+s.offices;
+          return result(monthly,setup,days,["Поддержка рабочих мест по SLA", "Контроль доступов и заявок", "Карта инфраструктуры и регламент изменений", s.docs==="yes"&&"Документация и онбординг", s.servers==="yes"&&"Поддержка серверов", s.onec==="yes"&&"Поддержка 1С"], [`${s.employees} сотрудников`, `${s.workplaces} рабочих мест`, `${s.offices} офис(а)`, `SLA: ${label(s.sla)}`, `Формат: ${label(s.format)}`, `Документация: ${yes(s.docs)}`]);
+        }
+      },
+      voip: {
+        defaults:{ extensions:20, lines:4, recording:"yes", crm:"yes", ivr:"yes", tracking:"no", branches:1, migration:"no" },
+        fields:[
+          {k:"extensions", t:"range", label:"Внутренние номера", min:2, max:200, step:1, unit:"ном."},
+          {k:"lines", t:"range", label:"Внешние линии", min:1, max:60, step:1, unit:"лин."},
+          {k:"branches", t:"range", label:"Филиалы", min:1, max:20, step:1, unit:"фил."},
+          {k:"recording", t:"seg", label:"Запись", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"crm", t:"seg", label:"CRM", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"ivr", t:"seg", label:"IVR", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"tracking", t:"seg", label:"Calltracking", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"migration", t:"seg", label:"Перенос номеров", opts:[["yes","Да"],["no","Нет"]]}
+        ],
+        calc:s=>{
+          const monthly=5900+s.extensions*280+s.lines*650+(s.recording==="yes"?2200:0)+(s.crm==="yes"?3800:0)+(s.ivr==="yes"?2500:0)+(s.tracking==="yes"?4200:0)+(s.branches-1)*1700;
+          const setup=12000+s.branches*3500+(s.migration==="yes"?15000:0);
+          const days=3+Math.ceil(s.extensions/50)+s.branches+(s.migration==="yes"?4:0);
+          return result(monthly,setup,days,["Виртуальная АТС и маршрутизация", "Контроль пропущенных звонков", s.recording==="yes"&&"Запись разговоров", s.ivr==="yes"&&"Голосовое меню", s.crm==="yes"&&"CRM-интеграция"], [`${s.extensions} внутренних номеров`, `${s.lines} внешних линий`, `${s.branches} филиал(а)`, `Calltracking: ${yes(s.tracking)}`, `Перенос: ${yes(s.migration)}`]);
+        }
+      },
+      cctv: {
+        defaults:{ cameras:12, object:"office", archive:30, mobile:"yes", analytics:"motion", existing:"no", install:"yes", monitoring:"no" },
+        fields:[
+          {k:"cameras", t:"range", label:"Камеры", min:1, max:200, step:1, unit:"кам."},
+          {k:"object", t:"seg", label:"Объект", opts:[["office","Офис"],["retail","Ритейл"],["warehouse","Склад"],["production","Производство"],["territory","Территория"]]},
+          {k:"archive", t:"seg", label:"Архив", opts:[[7,"7 дней"],[14,"14 дней"],[30,"30 дней"],[90,"90 дней"]]},
+          {k:"analytics", t:"seg", label:"Аналитика", opts:[["none","Нет"],["motion","Движение"],["faces","Лица"],["numbers","Номера"],["zones","Зоны"]]},
+          {k:"mobile", t:"seg", label:"Мобильный доступ", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"existing", t:"seg", label:"Камеры уже есть", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"install", t:"seg", label:"Монтаж", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"monitoring", t:"seg", label:"Удалённый мониторинг", opts:[["yes","Да"],["no","Нет"]]}
+        ],
+        calc:s=>{
+          const archiveMult={7:.7,14:1,30:1.45,90:2.8}[s.archive];
+          const analytics={none:0,motion:120,faces:420,numbers:520,zones:260}[s.analytics];
+          const monthly=3900+s.cameras*(420*archiveMult+analytics)+(s.mobile==="yes"?800:0)+(s.monitoring==="yes"?s.cameras*260:0);
+          const setup=(s.install==="yes"?s.cameras*2800:7000)+(s.existing==="yes"?9000:0);
+          const days=2+Math.ceil(s.cameras/12)+(s.install==="yes"?3:0);
+          return result(monthly,setup,days,["Контроль камер и архива", s.mobile==="yes"&&"Доступ с телефона", "Права доступа на просмотр", s.analytics!=="none"&&"Видеоаналитика в контуре", s.monitoring==="yes"&&"Удалённый мониторинг", s.install==="yes"&&"Монтаж или подключение"], [`${s.cameras} камер`, `Объект: ${label(s.object)}`, `Архив ${s.archive} дней`, `Аналитика: ${label(s.analytics)}`, `Монтаж: ${yes(s.install)}`]);
+        }
+      },
+      domains: {
+        defaults:{ domains:2, mailboxes:20, ssl:"standard", dns:"managed", antispam:"yes", migration:"yes", support:"standard" },
+        fields:[
+          {k:"domains", t:"range", label:"Домены под контролем", min:1, max:30, step:1, unit:"шт"},
+          {k:"mailboxes", t:"range", label:"Почтовые ящики", min:1, max:300, step:1, unit:"ящ."},
+          {k:"ssl", t:"seg", label:"SSL-контроль", opts:[["none","Нет"],["standard","Стандарт"],["wildcard","Wildcard"]]},
+          {k:"dns", t:"seg", label:"DNS", opts:[["client","У клиента"],["managed","Под управлением"]]},
+          {k:"antispam", t:"seg", label:"Антиспам", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"migration", t:"seg", label:"Перенос", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"support", t:"seg", label:"Уровень контроля", opts:[["base","База"],["standard","Стандарт"],["premium","Расширенный"]]}
+        ],
+        calc:s=>{
+          const ssl={none:0,standard:1200,wildcard:4800}[s.ssl];
+          const support={base:1800,standard:4200,premium:9200}[s.support];
+          const monthly=2200+s.domains*650+s.mailboxes*180+ssl+(s.dns==="managed"?1600:0)+(s.antispam==="yes"?s.mailboxes*70:0)+support;
+          const setup=7000+s.domains*1200+(s.migration==="yes"?12000:0);
+          const days=2+Math.ceil(s.domains/5)+(s.migration==="yes"?3:0);
+          return result(monthly,setup,days,["Контроль доменов и продлений", "Почта в зоне ответственности", s.ssl!=="none"&&"SSL-сертификаты под контролем", s.dns==="managed"&&"DNS под управлением SF-SYS", s.antispam==="yes"&&"Антиспам и защита почты", s.migration==="yes"&&"Перенос как разовая работа"], [`${s.domains} домен(а)`, `${s.mailboxes} ящиков`, `SSL: ${label(s.ssl)}`, `DNS: ${label(s.dns)}`, `Контроль: ${label(s.support)}`]);
+        }
+      },
+      backupmon: {
+        defaults:{ assets:12, backup:"daily", retention:30, checks:"monthly", monitoring:"business", alerts:"yes", restore:"standard" },
+        fields:[
+          {k:"assets", t:"range", label:"Сервисы и узлы", min:1, max:120, step:1, unit:"ед."},
+          {k:"backup", t:"seg", label:"Частота бэкапов", opts:[["daily","Ежедневно"],["six","6 часов"],["hourly","1 час"]]},
+          {k:"retention", t:"seg", label:"Хранение", opts:[[14,"14 дней"],[30,"30 дней"],[90,"90 дней"],[180,"180 дней"]]},
+          {k:"monitoring", t:"seg", label:"Мониторинг", opts:[["base","База"],["business","Бизнес"],["critical","Критичный"]]},
+          {k:"checks", t:"seg", label:"Проверка восстановления", opts:[["quarter","Квартал"],["monthly","Месяц"],["weekly","Неделя"]]},
+          {k:"alerts", t:"seg", label:"Уведомления", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"restore", t:"seg", label:"Регламент восстановления", opts:[["base","База"],["standard","Стандарт"],["critical","Критичный"]]}
+        ],
+        calc:s=>{
+          const freq={daily:1,six:1.45,hourly:2.2}[s.backup];
+          const mon={base:2200,business:6200,critical:14500}[s.monitoring];
+          const restore={base:0,standard:4800,critical:11500}[s.restore];
+          const monthly=(s.assets*520*freq)+(s.retention*55)+mon+restore+(s.alerts==="yes"?1400:0);
+          const setup=9000+s.assets*900;
+          const days=3+Math.ceil(s.assets/20);
+          return result(monthly,setup,days,["Бэкапы критичных узлов", "Проверка восстановления по регламенту", "Мониторинг доступности", s.alerts==="yes"&&"Уведомления по регламенту", `Регламент восстановления: ${label(s.restore)}`], [`${s.assets} узлов`, `Бэкапы: ${label(s.backup)}`, `Хранение ${s.retention} дней`, `Мониторинг: ${label(s.monitoring)}`, `Проверка: ${label(s.checks)}`]);
+        }
+      },
+      security: {
+        defaults:{ workplaces:25, audit:"base", protection:"standard", migration:"planned", access:"yes", training:"no", response:"business" },
+        fields:[
+          {k:"workplaces", t:"range", label:"Рабочие места", min:5, max:200, step:5, unit:"мест"},
+          {k:"audit", t:"seg", label:"Аудит", opts:[["base","База"],["standard","Стандарт"],["deep","Глубокий"]]},
+          {k:"protection", t:"seg", label:"Защита", opts:[["base","База"],["standard","Стандарт"],["extended","Расширенная"]]},
+          {k:"migration", t:"seg", label:"Миграция", opts:[["none","Нет"],["planned","Плановая"],["urgent","Срочная"]]},
+          {k:"access", t:"seg", label:"Контроль доступов", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"training", t:"seg", label:"Инструктаж", opts:[["yes","Да"],["no","Нет"]]},
+          {k:"response", t:"seg", label:"Реакция", opts:[["base","База"],["business","Бизнес"],["critical","Критичная"]]}
+        ],
+        calc:s=>{
+          const audit={base:4500,standard:12000,deep:28000}[s.audit];
+          const prot={base:90,standard:220,extended:430}[s.protection];
+          const resp={base:2500,business:7800,critical:18000}[s.response];
+          const monthly=s.workplaces*prot+resp+(s.access==="yes"?4200:0)+(s.training==="yes"?1800:0);
+          const setup=audit+(s.migration==="planned"?22000:s.migration==="urgent"?48000:0)+s.workplaces*450;
+          const days=4+Math.ceil(s.workplaces/40)+(s.migration==="urgent"?2:0);
+          return result(monthly,setup,days,["Безопасность рабочих мест", "Аудит рисков и доступа", s.migration!=="none"&&"Миграция под контролем", s.access==="yes"&&"Контроль доступов", s.training==="yes"&&"Инструктаж сотрудников", `Реакция: ${label(s.response)}`], [`${s.workplaces} мест`, `Аудит: ${label(s.audit)}`, `Защита: ${label(s.protection)}`, `Миграция: ${label(s.migration)}`]);
+        }
+      }
+    };
+
+    function OfficePanel(){ activeId = "office"; renderConfigurator(); }
+    function ServersPanel(){ activeId = "servers"; renderConfigurator(); }
+    function OnecPanel(){ activeId = "onec"; renderConfigurator(); }
+    function OutsourcingPanel(){ activeId = "outsourcing"; renderConfigurator(); }
+    function VoipPanel(){ activeId = "voip"; renderConfigurator(); }
+    function CctvPanel(){ activeId = "cctv"; renderConfigurator(); }
+    function DomainsPanel(){ activeId = "domains"; renderConfigurator(); }
+    function BackupMonPanel(){ activeId = "backupmon"; renderConfigurator(); }
+    function SecurityPanel(){ activeId = "security"; renderConfigurator(); }
+    const PANEL_BY_ID = { office:OfficePanel, servers:ServersPanel, onec:OnecPanel, outsourcing:OutsourcingPanel, voip:VoipPanel, cctv:CctvPanel, domains:DomainsPanel, backupmon:BackupMonPanel, security:SecurityPanel };
+    const PANEL_HEADS = Object.fromEntries(CFG_SERVICES.map(s => [s.id, { title:s.title, hint:s.hint }]));
+
+    const LABELS = { base:"База", standard:"Стандарт", premium:"Премиум", critical:"Критичный", extended:"Расширенная", deep:"Глубокий", business:"Бизнес", yes:"Да", no:"Нет", vps:"VPS", managed:"Управляемый", dedicated:"Dedicated", gpu:"GPU", msk:"Москва", spb:"СПб", eu:"EU", buh:"Бухгалтерия", unf:"УНФ", zup:"ЗУП", erp:"ERP", thin:"Тонкий клиент", web:"Веб", rdp:"RDP", remote:"Remote", hybrid:"Hybrid", onsite:"On-site", office:"Офис", retail:"Ритейл", warehouse:"Склад", production:"Производство", territory:"Территория", none:"Нет", motion:"Движение", faces:"Лица", numbers:"Номера", zones:"Зоны", client:"У клиента", wildcard:"Wildcard", daily:"Ежедневно", six:"6 часов", hourly:"1 час", quarter:"Квартал", monthly:"Месяц", weekly:"Неделя", planned:"Плановая", urgent:"Срочная" };
+    function label(v){ return LABELS[v] || v; }
+    function yes(v){ return v==="yes" ? "да" : "нет"; }
+    function result(monthly, setup, days, included, specs){ return { monthly:Math.round(monthly), setup:Math.round(setup), days, term:`${days}-${days+3} раб. дней`, included:included.filter(Boolean), specs:specs.filter(Boolean) }; }
+
+    let mode = "guided";
+    let activeId = "office";
+    let drafts = Object.fromEntries(CFG_SERVICES.map(s => [s.id, structuredClone(CFG_CALCS[s.id].defaults)]));
+    let advancedOpen = Object.fromEntries(CFG_SERVICES.map(s => [s.id, false]));
+    let cart = [];
+    let wizardStep = 0;
+    let contactInView = false;
+    const initialAnswers = () => ({ size:null, blockers:[], exists:[], external: null, resilience:[], goals:[], speed:null, contractor:null, contact:{} });
+    let answers = initialAnswers();
+    const PACKAGES = [
+      { id:"max", rank:1, level:"top", name:"Максимальный контроль", badge:"Лучший выбор", price:"от 96 000 ₽/мес", bestFor:"Для бизнеса, где IT уже влияет на продажи, операции и управляемость.", pain:"IT разрослось, ответственность размазана, сбои становятся дорогими.", why:"Закрывает почти всю инфраструктуру одним управляемым контуром.", zones:["IT-аутсорсинг","рабочие места","доступы","серверы","1С","домены","почта","SSL","бэкапы","мониторинг","безопасность","документация","SLA","личный кабинет"], includes:["единая ответственность","личный кабинет","SLA и регламент","карта инфраструктуры","контроль изменений"], cta:"Обсудить пакет" },
+      { id:"office", rank:2, level:"top", name:"Офис и инфраструктура под контролем", badge:"Для SMB", price:"от 58 000 ₽/мес", bestFor:"Для офисов, где IT уже влияет на ежедневную работу команды.", pain:"Рабочие места, серверы и 1С есть, но контроль держится на людях.", why:"Даёт управляемую основу: поддержка, доступы, серверы, бэкапы и документация.", zones:["рабочие места","IT-поддержка","доступы","серверы","1С","бэкапы","документация","SLA"], includes:["поддержка пользователей","контроль доступов","бэкапы","регламент заявок","документация"], cta:"Обсудить пакет" },
+      { id:"basic", rank:3, level:"top", name:"Базовый контроль IT", badge:"Старт", price:"от 32 000 ₽/мес", bestFor:"Для малого бизнеса, где нужно убрать зависимость от одного администратора.", pain:"Нет прозрачной схемы доступов, заявок и базовой документации.", why:"Быстрый вход в управляемое обслуживание без тяжёлого внедрения.", zones:["рабочие места","доступы","поддержка","базовая документация","базовый SLA","диагностика"], includes:["диагностика инфраструктуры","регламент заявок","карта доступов","базовый SLA"], cta:"Начать с базового" },
+      { id:"domain", rank:4, level:"secondary", name:"Домен, почта и SSL под контролем", badge:"Внешний контур", price:"от 12 000 ₽/мес", bestFor:"Для компаний, где домен, почта и SSL завязаны на разных людей.", pain:"Критичные входные точки живут у подрядчиков или в личных аккаунтах.", why:"Берём внешний контур под ответственность и фиксируем доступы.", zones:["домены","почта","SSL","DNS","продления"], includes:["карта доступов","контроль продлений","DNS-регламент","антиспам"], cta:"Обсудить пакет" },
+      { id:"recovery", rank:5, level:"secondary", name:"Бэкапы и мониторинг", badge:"Устойчивость", price:"от 18 000 ₽/мес", bestFor:"Для бизнеса, где простой или потеря данных быстро становится дорогой.", pain:"Сбои замечают поздно, а восстановление не проверялось.", why:"Контролирует резервные копии, уведомления и готовность восстановления.", zones:["бэкапы","мониторинг","проверки","уведомления"], includes:["регламент восстановления","мониторинг состояния","проверки бэкапов","эскалация"], cta:"Обсудить пакет" },
+      { id:"security", rank:6, level:"secondary", name:"Безопасный переход", badge:"Миграция", price:"от 42 000 ₽/мес", bestFor:"Для перехода от подрядчика, переезда в облако или восстановления контроля.", pain:"Есть риск потерять доступы, данные или управляемость при смене схемы.", why:"Проводит аудит, защищает доступы и переводит IT в контролируемый контур.", zones:["аудит","безопасность","миграции","доступы","SLA"], includes:["аудит рисков","план миграции","контроль доступов","регламент реакции"], cta:"Обсудить переход" },
+      { id:"cloud", rank:7, level:"secondary", name:"Переезд в управляемое облако", badge:"Облако", price:"от 46 000 ₽/мес", bestFor:"Для компаний, которым нужны серверы, 1С и понятное резервирование.", pain:"Серверы и 1С работают, но нет прозрачности по ресурсам и восстановлению.", why:"Переводит серверную среду и 1С в управляемый облачный контур.", zones:["серверы","1С","бэкапы","мониторинг"], includes:["облачные ресурсы","удалённый доступ","резервирование","контроль ресурсов"], cta:"Обсудить переезд" },
+      { id:"cctv", rank:8, level:"secondary", name:"Видеонаблюдение под контролем", badge:"Объект", price:"от 16 000 ₽/мес", bestFor:"Для офисов, складов и точек, где важны архив, доступы и стабильность камер.", pain:"Камеры есть, но архив, доступ и ответственность не закреплены.", why:"Фиксирует права, архив, мониторинг и регламент работы наблюдения.", zones:["камеры","архив","доступы","мониторинг"], includes:["права доступа","архив событий","удалённый доступ","документация"], cta:"Обсудить наблюдение" },
+      { id:"voip", rank:9, level:"secondary", name:"Телефония под контролем", badge:"Коммуникации", price:"от 14 000 ₽/мес", bestFor:"Для компаний, где звонки влияют на продажи и качество обслуживания.", pain:"Теряются обращения, записи и маршрутизация не находятся под контролем.", why:"Берёт телефонию, записи, маршрутизацию и пропущенные звонки в единый контур.", zones:["АТС","линии","записи","маршрутизация"], includes:["виртуальная АТС","запись разговоров","контроль пропущенных","CRM-интеграция"], cta:"Обсудить телефонию" }
+    ];
+
+    function route(to, nextMode) {
+      const isConfig = to === "config" || location.hash === "#config" || /config/i.test(location.pathname);
+      q("#landingView").classList.toggle("active", !isConfig);
+      q("#configView").classList.toggle("active", isConfig);
+      if (nextMode) setMode(nextMode);
+      if (isConfig) setTimeout(() => q("#config").scrollIntoView({block:"start"}), 0);
+    }
+    function setMode(m) {
+      mode = m;
+      q("#guidedMode").classList.toggle("hidden", m !== "guided");
+      q("#fullMode").classList.toggle("hidden", m !== "full");
+      q("#guidedModeBtn").classList.toggle("active", m === "guided");
+      q("#fullModeBtn").classList.toggle("active", m === "full");
+      if (m === "guided") renderWizard(); else renderConfigurator();
+    }
+    function renderLandingServices() {
+      q("#landingServices").innerHTML = CFG_SERVICES.map(s => `<article class="service-card"><span class="ico">${s.icon}</span><h3>${s.name}</h3><p>${s.hint}</p><a class="service-more" href="#config" data-service-more="${s.id}">Уточнить состав →</a></article>`).join("");
+    }
+    function renderPackages() {
+      const top = q("#topPackageGrid");
+      const secondary = q("#packageGrid");
+      const card = (p, extra="") => `<article class="package-card ${extra}" data-package-card="${p.id}"><div class="package-meta"><span>${p.badge}</span><strong>${p.price}</strong></div><h3>${p.name}</h3><p>${p.bestFor}</p><p class="package-pain">${p.pain}</p><div class="package-list">${p.zones.slice(0, extra ? 10 : 6).map(z=>`<span>${z}</span>`).join("")}</div><div class="package-why">${p.why}</div><a class="btn ${extra ? "btn-primary" : "btn-dark"}" href="#contact" data-package="${p.name}">${p.cta}</a><a class="package-tune" href="#config" data-route="config" data-mode="full">Уточнить состав</a></article>`;
+      if (top) {
+        const topTwo = PACKAGES.find(p => p.rank === 2);
+        const topOne = PACKAGES.find(p => p.rank === 1);
+        const topThree = PACKAGES.find(p => p.rank === 3);
+        top.innerHTML = [card(topTwo, "top-side"), card(topOne, "top-main"), card(topThree, "top-side top-compact")].join("");
+      }
+      if (secondary) secondary.innerHTML = PACKAGES.filter(p => p.level !== "top").map(p => card(p)).join("");
+    }
+    function renderTabs() {
+      q("#serviceTabs").innerHTML = CFG_SERVICES.map(s => `<button class="tab ${s.id===activeId?"active":""}" type="button" data-service="${s.id}"><span class="tab-ico-wrap"><span class="ico">${s.icon}</span></span><span class="tab-text"><strong>${s.name}</strong><small>${s.short}</small></span></button>`).join("");
+      qa("[data-service]").forEach(b => b.onclick = () => { activeId = b.dataset.service; renderConfigurator(); });
+    }
+    function renderFields() {
+      const def = CFG_CALCS[activeId];
+      const s = drafts[activeId];
+      const control = f => {
+        if (f.t === "range") return `<div class="field"><label><span>${f.label}</span><strong>${s[f.k]} ${f.unit}</strong></label><input type="range" min="${f.min}" max="${f.max}" step="${f.step}" value="${s[f.k]}" data-field="${f.k}"></div>`;
+        return `<div class="field ${f.opts.length>3?"full":""}"><label><span>${f.label}</span><strong>${label(s[f.k])}</strong></label><div class="seg">${f.opts.map(o => `<button type="button" class="${String(s[f.k])===String(o[0])?"active":""}" data-field="${f.k}" data-value="${o[0]}">${o[1]}</button>`).join("")}</div></div>`;
+      };
+      const primary = def.fields.slice(0, 4);
+      const advanced = def.fields.slice(4);
+      q("#panelFields").innerHTML = primary.map(control).join("") + (advanced.length ? `<details class="advanced-fields" ${advancedOpen[activeId] ? "open" : ""}><summary>Расширенные параметры <span class="muted">${advanced.length} ${pluralize(advanced.length, ["настройка","настройки","настроек"])} при необходимости</span></summary><div class="advanced-grid">${advanced.map(control).join("")}</div></details>` : "");
+      const details = q(".advanced-fields");
+      if (details) details.ontoggle = () => { advancedOpen[activeId] = details.open; };
+      qa("[data-field]").forEach(el => {
+        if (el.tagName === "INPUT") el.oninput = () => { drafts[activeId][el.dataset.field] = Number(el.value); renderConfigurator(false); };
+        else el.onclick = () => { const v = el.dataset.value; drafts[activeId][el.dataset.field] = isNaN(Number(v)) || v==="" ? v : Number(v); renderConfigurator(false); };
+      });
+    }
+    function renderConfigurator(redrawTabs=true) {
+      if (redrawTabs) renderTabs();
+      const svc = CFG_SERVICES.find(s => s.id === activeId);
+      const live = CFG_CALCS[activeId].calc(drafts[activeId]);
+      q("#activeServiceLabel").textContent = svc.name;
+      q("#panelTitle").textContent = "Параметры зоны: " + svc.name;
+      q("#panelHint").textContent = svc.hint;
+      q("#monthlyEstimate").textContent = fmt(live.monthly) + "/мес";
+      q("#termEstimate").textContent = "срок запуска: " + live.term;
+      renderFields();
+      q("#includedList").innerHTML = live.included.map(x => `<li>${x}</li>`).join("");
+      q("#specList").innerHTML = [`Ориентировочная абонентка: ${fmt(live.monthly)}/мес`, `Разовые работы: ${fmt(live.setup)}`, `Срок внедрения: ${live.term}`, ...live.specs].map(x => `<li>${x}</li>`).join("");
+      q("#addServiceBtn").textContent = cart.some(i => i.serviceId === activeId) ? "Обновить в сборке" : "Добавить в сборку";
+      q("#addServiceBtn").onclick = () => addService(activeId);
+      renderCart();
+    }
+    function addService(id) {
+      const svc = CFG_SERVICES.find(s => s.id === id);
+      const live = CFG_CALCS[id].calc(drafts[id]);
+      const item = { id:id+"-"+Date.now(), serviceId:id, serviceName:svc.name, icon:svc.icon, ...live };
+      cart = cart.some(i => i.serviceId === id) ? cart.map(i => i.serviceId===id ? item : i) : [...cart, item];
+      renderCart();
+      renderConfigurator(false);
+    }
+    function renderCart() {
+      const monthly = cart.reduce((a,i)=>a+i.monthly,0);
+      const setup = cart.reduce((a,i)=>a+i.setup,0);
+      const days = cart.length ? Math.max(...cart.map(i=>i.days)) : 0;
+      const leadMonthly = q("#leadMonthly"), leadSetup = q("#leadSetup");
+      if (leadMonthly) leadMonthly.value = monthly;
+      if (leadSetup) leadSetup.value = setup;
+      const list = cart.length ? cart.map(i => `<div class="cart-item"><div class="cart-item-head"><strong>${i.icon} ${i.serviceName}</strong><button data-remove="${i.id}">×</button></div><small>${i.specs.slice(0,3).join(" · ")}</small><div class="total-row"><span>${fmt(i.monthly)}/мес</span><span>${fmt(i.setup)} разово</span></div></div>`).join("") : `<p class="muted">Конфигурация пока пуста. Соберите её в табах слева или начните с диагностики.</p>`;
+      const html = `<div class="cart-title"><h3>Ваша конфигурация</h3><button class="btn btn-text" id="clearCart" type="button">Очистить</button></div><div class="cart-list">${list}</div><div class="totals"><div class="total-row"><span>Ориентировочная абонентка</span><strong>${fmt(monthly)}/мес</strong></div><div class="total-row"><span>Разовые работы</span><strong>${fmt(setup)}</strong></div><div class="total-row"><span>Срок запуска</span><strong>${days ? `${days}-${days+3} раб. дней` : "-"}</strong></div></div><a class="btn btn-primary" style="width:100%;margin-top:14px" href="#contact">Получить смету</a><p class="cart-note">Финальная смета — после аудита. Разовые работы и переносы показаны отдельно от абонентки.</p>`;
+      q("#sideCart").innerHTML = html;
+      const float = q("#floatingCart");
+      float.classList.toggle("visible", cart.length > 0 && !contactInView);
+      float.innerHTML = `<div class="float-inner"><div><strong>Под контролем: ${cart.length} ${cart.length === 1 ? "зона" : cart.length < 5 ? "зоны" : "зон"}</strong><span>${cart.map(i=>i.serviceName).slice(0,3).join(" · ")}</span></div><div><strong>${fmt(monthly)}/мес</strong><span>предварительно · разово ${fmt(setup)}</span></div><a class="btn btn-primary" href="#contact">Отправить</a></div>`;
+      qa("[data-remove]").forEach(b => b.onclick = () => { cart = cart.filter(i=>i.id!==b.dataset.remove); renderCart(); renderConfigurator(false); });
+      const clear = q("#clearCart"); if (clear) clear.onclick = () => { cart=[]; renderCart(); renderConfigurator(false); };
+    }
+
+    const steps = [
+      { key:"size", title:"Размер компании", multi:false, opts:["1-5","6-20","21-50","51-150","150+"] },
+      { key:"blockers", title:"Что мешает или уже ломалось", multi:true, opts:["IT держится на одном человеке","Постоянные поломки","Нет контроля доступов","Медленно работает 1С","Нужны серверы / облако","Теряются звонки","Нужно видеонаблюдение","Падал сайт","Терялась почта","Истекал SSL","Не было бэкапа","Были вирусы","Переезд был хаотичным","Не знаю, хочу разобраться"] },
+      { key:"exists", title:"Какие сервисы у вас уже есть?", multi:true, opts:["1С","Серверы","IP-телефония","Видеонаблюдение","Офисные рабочие места","Ничего системно не собрано"] },
+      { key:"external", title:"Кто отвечает за домен, почту и SSL?", multi:false, opts:["Мы сами","Текущий подрядчик","Не знаем","У нас нет корпоративной почты"] },
+      { key:"goals", title:"Что нужно получить?", multi:true, opts:["Стабильность","Контроль","Поддержку","Переезд в облако","Контроль звонков","Контроль объекта","Комплексное обслуживание"] },
+      { key:"speed", title:"Что критично, если IT упадёт?", multi:false, opts:["Можно планово","Важно в рабочее время","Нужна быстрая реакция","Есть критичные процессы"] },
+      { key:"contractor", title:"Есть текущий подрядчик или администратор?", multi:false, opts:["Да, но нет прозрачности","Да, но не справляется","Нет","Есть внутренний сотрудник","Не знаю"] },
+      { key:"contact", title:"Контакты", contact:true }
+    ];
+    function renderWizard() {
+      const total = steps.length;
+      if (wizardStep >= total) return renderRecommendations();
+      const st = steps[wizardStep];
+      const value = answers[st.key];
+      let body = "";
+      if (st.contact) {
+        body = `<div class="contact-grid-mini"><input id="waName" type="text" placeholder="Имя" value="${answers.contact.name||""}"><input id="waPhone" type="tel" placeholder="Телефон" value="${answers.contact.phone||""}"><input id="waCompany" type="text" placeholder="Компания" value="${answers.contact.company||""}"><input id="waComment" type="text" placeholder="Комментарий" value="${answers.contact.comment||""}"></div>`;
+      } else {
+        body = `<div class="options">${st.opts.map(o => `<button type="button" class="option ${st.multi ? value.includes(o) ? "active" : "" : value===o ? "active" : ""}" data-answer="${o}">${o}</button>`).join("")}</div>`;
+      }
+      q("#guidedMode").innerHTML = `<div class="wizard"><div class="progress"><span style="width:${(wizardStep)/(total)*100}%"></span></div><div class="panel wizard-card"><span class="eyebrow">шаг ${wizardStep+1} из ${total}</span><h2>${st.title}</h2>${body}<div class="addbar"><button class="btn btn-ghost" id="waBack" type="button">Назад</button><button class="btn btn-primary" id="waNext" type="button">${wizardStep===total-1?"Показать результат":"Дальше"}</button></div></div></div>`;
+      qa("[data-answer]").forEach(b => b.onclick = () => {
+        const val = b.dataset.answer;
+        if (st.multi) answers[st.key] = answers[st.key].includes(val) ? answers[st.key].filter(x=>x!==val) : [...answers[st.key], val];
+        else answers[st.key] = val;
+        renderWizard();
+      });
+      q("#waBack").onclick = () => { wizardStep = Math.max(0, wizardStep-1); renderWizard(); };
+      q("#waNext").onclick = () => {
+        if (st.contact) answers.contact = { name:q("#waName").value, phone:q("#waPhone").value, company:q("#waCompany").value, comment:q("#waComment").value };
+        wizardStep += 1; renderWizard();
+      };
+    }
+    function scoreRecommendations() {
+      const pool = [...answers.blockers, ...answers.exists, answers.external, ...(answers.resilience||[]), ...answers.goals, answers.contractor, answers.speed].join(" | ").toLowerCase();
+      const scores = { outsourcing:0, office:0, servers:0, onec:0, voip:0, cctv:0, domains:0, backupmon:0, security:0 };
+      if (/одном человеке|доступ|рабочие места|поддерж|прозрачности|не справляется|внутренний/.test(pool)) scores.outsourcing += 5;
+      if (/сервер|облак|ничего системно|переезд/.test(pool)) { scores.office += 4; scores.servers += 4; }
+      if (/1с|медленно/.test(pool)) scores.onec += 5;
+      if (/звон|телефони/.test(pool)) scores.voip += 5;
+      if (/видео|объект|наблюд/.test(pool)) scores.cctv += 5;
+      if (/домен|почт|ssl|dns|сайт/.test(pool)) scores.domains += 5;
+      if (/не знаем|нет корпоративной почты/i.test(pool)) scores.domains += 5;
+      if (/бэкап|восстанов|монитор|сбой|падал|файлы/.test(pool)) scores.backupmon += 5;
+      if (/вирус|безопас|миграц|переезд|уязв|хаотич/.test(pool)) scores.security += 5;
+      if (/не знаю|комплекс|стабильность|контроль/.test(pool)) { scores.outsourcing += 3; scores.office += 3; }
+      return Object.entries(scores).sort((a,b)=>b[1]-a[1]).filter(x=>x[1]>0).slice(0,4).map(x=>x[0]);
+    }
+    function recommendPackages(recs) {
+      const set = new Set(recs);
+      const scores = { max:2, office:1, basic:1, domain:0, recovery:0, security:0, cloud:0, cctv:0, voip:0 };
+      if (recs.length >= 4) scores.max += 7;
+      if (set.has("outsourcing") || set.has("office")) { scores.basic += 5; scores.office += 4; scores.max += 2; }
+      if (set.has("servers") || set.has("onec")) { scores.cloud += 6; scores.office += 4; scores.max += 3; }
+      if (set.has("domains")) { scores.domain += 7; scores.max += 2; }
+      if (set.has("backupmon")) { scores.recovery += 7; scores.max += 2; }
+      if (set.has("security")) { scores.security += 7; scores.max += 2; }
+      if (set.has("cctv")) scores.cctv += 6;
+      if (set.has("voip")) scores.voip += 6;
+      const sorted = PACKAGES.map(p => ({ p, score:scores[p.id] || 0 })).sort((a,b)=>b.score-a.score || a.p.rank-b.p.rank).map(x=>x.p);
+      const picked = [];
+      sorted.forEach(p => { if (!picked.some(x=>x.id===p.id) && picked.length < 3) picked.push(p); });
+      ["max","office","basic"].forEach(id => { const p = PACKAGES.find(x=>x.id===id); if (p && !picked.some(x=>x.id===id) && picked.length < 3) picked.push(p); });
+      return picked.slice(0,3);
+    }
+    function recommendPackage(recs) { return recommendPackages(recs)[0]; }
+    function renderRecommendations() {
+      let recs = scoreRecommendations();
+      if (!recs.length) recs = ["outsourcing","office","servers"];
+      const packs = recommendPackages(recs);
+      const pack = packs[0];
+      const reasons = {
+        outsourcing:["Убирает зависимость от отдельных людей.", "Закрывает поддержку, доступы, SLA и документацию."],
+        office:["Собирает рабочие места и облачные сервисы в управляемую схему.", "Закрывает хранение, доступы, резервирование и поддержку."],
+        servers:["Даёт контролируемые ресурсы под сервисы бизнеса.", "Закрывает размещение, защиту, бэкапы и масштабирование."],
+        onec:["Подходит при медленной или критичной 1С.", "Закрывает облачную 1С, обновления, доступ и резервирование."],
+        voip:["Подходит, если теряются звонки или нужен контроль коммуникаций.", "Закрывает АТС, записи, IVR, CRM и маршрутизацию."],
+        cctv:["Подходит для контроля объекта и архива событий.", "Закрывает камеры, архив, доступ, аналитику и мониторинг."],
+        domains:["Подходит, если домен, почта или SSL завязаны на разных людей.", "Закрывает DNS, почту, SSL, продления и доступы."],
+        backupmon:["Подходит, если сбои замечают поздно или восстановление не проверялось.", "Закрывает бэкапы, мониторинг, проверки и уведомления."],
+        security:["Подходит при переезде, вирусах или риске потери доступов.", "Закрывает аудит, защиту, миграцию и регламент реакции."]
+      };
+      q("#guidedMode").innerHTML = `<div class="panel"><span class="eyebrow">результат диагностики</span><h2 style="font-size:clamp(26px,3.8vw,42px);margin-top:10px">Рекомендуем начать с готового пакета</h2><div class="result-packages">${packs.map((p,i)=>`<article class="result-package ${i===0?"primary":""}"><div class="package-meta"><span>${i===0?"лучший старт":"альтернатива"}</span><strong>${p.price}</strong></div><h3>${p.name}</h3><p>${p.bestFor}</p><p class="package-pain">${p.pain}</p><div class="package-list">${p.zones.slice(0,8).map(z=>`<span>${z}</span>`).join("")}</div>${i===0?`<a class="btn btn-primary" href="#contact" data-package="${p.name}">Обсудить рекомендуемый пакет</a>`:`<a class="btn btn-ghost" href="#contact" data-package="${p.name}">Обсудить пакет</a>`}</article>`).join("")}</div><div class="addbar"><a class="btn btn-dark" href="#packages">Смотреть все пакеты</a><button class="btn btn-ghost" data-switch-mode="full" type="button">Конфигуратор для IT-специалиста</button><button class="btn btn-text" id="restartWizard" type="button">Пройти заново</button></div><div class="result-zones"><span class="eyebrow">зоны контроля в рекомендации</span><div class="recommendations">${recs.map(id=>{const s=CFG_SERVICES.find(x=>x.id===id);return `<article class="rec-card"><div><h3>${s.icon} ${s.name}</h3><p>${reasons[id][0]} ${reasons[id][1]}</p></div><div class="rec-actions"><button class="btn btn-ghost" data-config-rec="${id}" type="button">Уточнить состав</button></div></article>`}).join("")}</div></div></div>`;
+      qa("[data-config-rec]").forEach(b => b.onclick = () => { activeId = b.dataset.configRec; setMode("full"); });
+      q("#restartWizard").onclick = () => { wizardStep=0; answers=initialAnswers(); renderWizard(); };
+      qa("[data-switch-mode]").forEach(b => b.onclick = () => setMode(b.dataset.switchMode));
+    }
+
+    document.addEventListener("click", e => {
+      const r = e.target.closest("[data-route]");
+      if (r) {
+        e.preventDefault();
+        const source = q("#leadSource");
+        if (source && r.dataset.mode) source.value = r.dataset.mode;
+        history.pushState(null,"", r.dataset.route==="config" ? "#config" : "#");
+        route(r.dataset.route, r.dataset.mode);
+        q("#mobileNav")?.classList.remove("open");
+        q(".nav-toggle")?.setAttribute("aria-expanded", "false");
+      }
+      const m = e.target.closest("[data-switch-mode]");
+      if (m) setMode(m.dataset.switchMode);
+      const navToggle = e.target.closest(".nav-toggle");
+      if (navToggle) {
+        const menu = q("#mobileNav");
+        const next = !menu.classList.contains("open");
+        menu.classList.toggle("open", next);
+        navToggle.setAttribute("aria-expanded", String(next));
+      }
+      const mobileLink = e.target.closest("#mobileNav a");
+      if (mobileLink && !mobileLink.matches("[data-route]")) {
+        q("#mobileNav")?.classList.remove("open");
+        q(".nav-toggle")?.setAttribute("aria-expanded", "false");
+      }
+      const more = e.target.closest("[data-service-more]");
+      if (more) {
+        e.preventDefault();
+        activeId = more.dataset.serviceMore;
+        history.pushState(null, "", "#config");
+        route("config");
+        setMode("full");
+        renderConfigurator();
+        setTimeout(() => {
+          document.querySelector("#config")?.scrollIntoView({ block: "start" });
+        }, 0);
+        document.querySelector("#mobileNav")?.classList.remove("open");
+        document.querySelector(".nav-toggle")?.setAttribute("aria-expanded", "false");
+      }
+      const pkg = e.target.closest("[data-package]");
+      if (pkg) {
+        const leadPackage = q("#leadPackage"), source = q("#leadSource");
+        if (leadPackage) leadPackage.value = pkg.dataset.package;
+        if (source) source.value = "package";
+      }
+    });
+    window.addEventListener("popstate", () => route(location.hash==="#config" ? "config" : "landing"));
+    q("#contactForm").addEventListener("submit", e => { e.preventDefault(); q("#formResult").textContent = "Заявка зафиксирована. Специалист свяжется с вами для аудита и финальной сметы."; });
+    const contactSection = q("#contact");
+    if (contactSection && "IntersectionObserver" in window) {
+      new IntersectionObserver(entries => {
+        contactInView = entries.some(entry => entry.isIntersecting);
+        renderCart();
+      }, { threshold:.12 }).observe(contactSection);
+    }
+
+    renderLandingServices();
+    renderPackages();
+    renderConfigurator();
+    setMode("guided");
+    route(location.hash==="#config" || /config/i.test(location.pathname) ? "config" : "landing");
+
+    window.CFG_SERVICES = CFG_SERVICES;
+    window.CFG_CALCS = CFG_CALCS;
+    window.PANEL_BY_ID = PANEL_BY_ID;
+    window.PANEL_HEADS = PANEL_HEADS;
+    window.OutsourcingPanel = OutsourcingPanel;
+    window.VoipPanel = VoipPanel;
+    window.CctvPanel = CctvPanel;
+    window.DomainsPanel = DomainsPanel;
+    window.BackupMonPanel = BackupMonPanel;
+    window.SecurityPanel = SecurityPanel;
+  </script>
+</body>
+</html>
