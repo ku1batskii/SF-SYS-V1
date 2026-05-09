@@ -223,6 +223,30 @@
     .pain-band { border-top: 1px solid #dde3ee; border-bottom: 1px solid #dde3ee; background: #fff; padding: 20px 0; }
     .pain-list { display: flex; flex-wrap: wrap; gap: 10px; }
     .pain-list .chip { color: #374151; border-color: #d7deea; background: #f8fafc; }
+    .pain-story-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .pain-story-card {
+      border: 1px solid rgba(17,24,39,.065);
+      background: rgba(255,255,255,.88);
+      border-radius: 7px;
+      padding: 18px;
+      box-shadow: 0 1px 0 rgba(17,24,39,.03), 0 12px 28px rgba(17,24,39,.035);
+      display: grid;
+      gap: 9px;
+    }
+    .pain-story-card h3 {
+      color: #101827;
+      font-size: 18px;
+      line-height: 1.18;
+    }
+    .pain-story-card p {
+      color: rgba(75,85,99,.78);
+      font-size: 14px;
+      line-height: 1.48;
+    }
     .scan-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
     .mini-card, .choice-card, .service-card, .step-card, .rec-card {
       border: 1px solid rgba(17,24,39,.075);
@@ -494,6 +518,26 @@
     }
     .consent input { width: 16px; height: 16px; margin-top: 1px; accent-color: var(--accent); }
     .contact-grid-mini { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-next-steps {
+      margin-top: 16px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 14px;
+      color: rgba(246,248,252,.66);
+    }
+    .form-next-steps strong {
+      color: rgba(246,248,252,.9);
+      font-size: 14px;
+    }
+    .form-next-steps ol {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 6px;
+    }
+    .form-next-steps li {
+      font-size: 13px;
+      line-height: 1.42;
+    }
     .result-next {
       margin: 12px 0 10px;
       padding: 12px;
@@ -958,6 +1002,13 @@
     .top-pick-hint { display: none; }
     .secondary-packages-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin: 8px 0 14px; }
     .secondary-packages-head h3 { font-size: 24px; color: #101827; }
+    .secondary-packages-lead {
+      max-width: 760px;
+      margin: -4px 0 14px;
+      color: rgba(75,85,99,.76);
+      font-size: 14px;
+      line-height: 1.48;
+    }
     .result-packages { display: grid; grid-template-columns: 1.15fr .92fr .92fr; gap: 12px; margin: 18px 0; }
     .result-package {
       border: 1px solid rgba(255,255,255,.1);
@@ -979,6 +1030,36 @@
       color: rgba(246,248,252,.66);
       font-size: 14px;
       line-height: 1.48;
+    }
+    .detected-risks {
+      margin-top: 14px;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 8px;
+      background: rgba(255,255,255,.035);
+      display: grid;
+      gap: 8px;
+    }
+    .detected-risks strong {
+      color: rgba(246,248,252,.88);
+      font-size: 13px;
+    }
+    .risk-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .risk-list span {
+      min-height: 28px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 6px;
+      padding: 0 8px;
+      background: rgba(245,158,11,.11);
+      color: rgba(254,215,170,.92);
+      border: 1px solid rgba(245,158,11,.16);
+      font-size: 12px;
+      font-weight: 750;
     }
     .result-package:not(.primary) {
       opacity: .82;
@@ -1051,6 +1132,42 @@
     .cabinet-modules small { color: rgba(246,248,252,.42); text-transform: uppercase; letter-spacing: .06em; font-size: 11px; }
     .cabinet-modules strong { color: rgba(246,248,252,.9); font-size: 16px; line-height: 1.25; }
     .cabinet-modules span { color: rgba(246,248,252,.48); font-size: 12px; line-height: 1.35; }
+    .cabinet-proof-note {
+      margin: 0;
+      padding: 12px 18px 14px;
+      border-top: 1px solid rgba(255,255,255,.07);
+      color: rgba(246,248,252,.5);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .cabinet-process {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .cabinet-process article {
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.045);
+      border-radius: 8px;
+      padding: 14px;
+      display: grid;
+      gap: 7px;
+    }
+    .cabinet-process strong {
+      color: rgba(156,194,255,.82);
+      font-size: 12px;
+      letter-spacing: .06em;
+    }
+    .cabinet-process h3 {
+      color: rgba(246,248,252,.92);
+      font-size: 15px;
+    }
+    .cabinet-process p {
+      color: rgba(246,248,252,.58);
+      font-size: 13px;
+      line-height: 1.42;
+    }
     .services-mobile-hint { display: none; }
     .compare-table {
       display: grid;
@@ -1086,6 +1203,54 @@
       border-left: 2px solid var(--accent);
       color: rgba(30,64,175,.92);
       font-weight: 700;
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .faq-item {
+      border: 1px solid rgba(17,24,39,.075);
+      background: rgba(255,255,255,.88);
+      border-radius: 8px;
+      padding: 0;
+      box-shadow: 0 1px 0 rgba(17,24,39,.03), 0 12px 28px rgba(17,24,39,.035);
+      overflow: hidden;
+    }
+    .faq-item summary {
+      min-height: 58px;
+      padding: 16px 18px;
+      cursor: pointer;
+      list-style: none;
+      color: #101827;
+      font-size: 15px;
+      line-height: 1.28;
+      font-weight: 780;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: "+";
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      background: rgba(37,99,235,.08);
+      color: rgba(30,64,175,.9);
+      font-weight: 800;
+    }
+    .faq-item[open] summary::after { content: "−"; }
+    .faq-item p {
+      border-top: 1px solid rgba(17,24,39,.06);
+      padding: 14px 18px 16px;
+      color: rgba(75,85,99,.8);
+      font-size: 14px;
+      line-height: 1.5;
     }
     .docs-grid {
       display: grid;
@@ -1123,6 +1288,75 @@
     .docs-col li strong {
       color: rgba(246,248,252,.92);
       font-weight: 700;
+    }
+    .docs-trust-note {
+      margin-top: 18px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 8px;
+      background: rgba(255,255,255,.04);
+      color: rgba(246,248,252,.62);
+      font-size: 13px;
+      line-height: 1.45;
+      padding: 13px 15px;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .about-grid-inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .about-card {
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.045);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .about-card h3 {
+      color: #fff;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .about-card h4 {
+      color: rgba(246,248,252,.92);
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+    .about-card p {
+      color: rgba(246,248,252,.66);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .legal-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 9px;
+    }
+    .legal-list li {
+      color: rgba(246,248,252,.66);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .legal-list strong {
+      color: rgba(246,248,252,.92);
+    }
+    .todo {
+      display: inline-block;
+      border: 1px solid rgba(250,204,21,.38);
+      background: rgba(250,204,21,.12);
+      color: rgba(254,240,138,.95);
+      border-radius: 6px;
+      padding: 2px 6px;
+      font-weight: 700;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
     }
     @media (max-width: 1050px) {
       .hero-grid, .config-shell, .cabinet-grid { grid-template-columns: 1fr; }
@@ -1170,7 +1404,9 @@
       .package-card.top-main h3 { font-size: 23px; }
       .package-extra { padding: 10px 0; gap: 6px; }
       .secondary-packages-head { display: block; }
+      .secondary-packages-lead { margin-top: -2px; }
       .cabinet-grid { gap: 22px; }
+      .cabinet-process { grid-template-columns: 1fr; }
       .cabinet-note { font-size: 12.5px; }
       .cabinet-status { display: grid; gap: 5px; padding: 10px 14px; }
       .cabinet-modules div { min-height: auto; padding: 13px 14px; gap: 6px; }
@@ -1178,6 +1414,7 @@
       .cabinet-modules span { font-size: 12px; }
       .result-package { padding: 14px; }
       .result-package:not(.primary) { opacity: .9; }
+      .risk-list span { min-height: 30px; }
       .result-routes .btn { width: 100%; }
       .services-mobile-hint {
         display: block;
@@ -1244,7 +1481,15 @@
       .section-head h2 { font-size: clamp(28px, 9vw, 38px); line-height: 1.08; }
       .choice-card, .step-card, .service-card { padding: 16px; }
       .approach-grid .step-card { border-left: 2px solid rgba(37,99,235,.18); padding: 12px 14px; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .faq-item summary { min-height: 54px; padding: 14px 16px; }
+      .faq-item p { padding: 12px 16px 14px; }
       .docs-grid { grid-template-columns: 1fr; gap: 20px; }
+      .about-grid,
+      .about-grid-inner { grid-template-columns: 1fr; }
+      .about-card { padding: 16px; }
+      .pain-story-grid { grid-template-columns: 1fr; }
+      .pain-story-card { padding: 16px; }
       .services {
         display: flex;
         gap: 10px;
@@ -1349,6 +1594,7 @@
         <a href="#approach">Подход</a>
         <a href="#config" data-route="config" data-mode="full">Конфигуратор</a>
         <a href="#services">9 зон</a>
+        <a href="#about">О компании</a>
         <a href="#contact">Контакты</a>
       </nav>
       <a class="nav-phone" href="#contact">Консультация эксперта</a>
@@ -1362,6 +1608,7 @@
         <a href="#approach">Подход</a>
         <a href="#config" data-route="config" data-mode="full">Конфигуратор</a>
         <a href="#services">Направления</a>
+        <a href="#about">О компании</a>
         <a href="#contact">Контакты</a>
       </div>
     </div>
@@ -1374,7 +1621,7 @@
           <div>
             <span class="eyebrow">система контроля IT бизнеса</span>
             <h1>IT под контролем.<br><span>Бизнес в фокусе.</span></h1>
-            <p class="lead">Пройдите короткую диагностику — покажем подходящий пакет управляемой IT-ответственности, зоны контроля и следующий шаг внедрения.</p>
+            <p class="lead">Берём под единую ответственность рабочие места, серверы, 1С, доступы и бэкапы. Зона ответственности, регламенты обслуживания и личный кабинет фиксируются в договоре — не на словах.</p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="#config" data-route="config" data-mode="guided">Пройти диагностику</a>
               <a class="btn btn-light" href="#packages">Смотреть пакеты</a>
@@ -1383,7 +1630,7 @@
           <div class="dash" aria-label="Панель контроля инфраструктуры">
             <div class="dash-head"><span>sf-sys / control layer</span><span class="status">Control ready</span></div>
             <div class="dash-kpis">
-              <div class="kpi trust-kpi"><small>SLA reaction</small><strong>Регламентированная реакция</strong><span>Сроки, приоритеты и зона ответственности фиксируются в SLA.</span></div>
+              <div class="kpi trust-kpi"><small>Reaction rules</small><strong>Регламентированная реакция</strong><span>Сроки, приоритеты и зона ответственности фиксируются в договоре и регламентах обслуживания.</span></div>
               <div class="kpi trust-kpi"><small>Access map</small><strong>Карта доступов</strong><span>Понятно, кто, к чему и на каком основании имеет права.</span></div>
               <div class="kpi trust-kpi"><small>Backup state</small><strong>Проверка восстановления</strong><span>Бэкапы не просто настроены, а проверяются по регламенту.</span></div>
               <div class="kpi trust-kpi"><small>Monitoring</small><strong>Контроль состояния</strong><span>Критичные зоны находятся под наблюдением и понятной эскалацией.</span></div>
@@ -1406,17 +1653,47 @@
         </div>
       </section>
 
+      <section class="section soft pain-stories">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">так это выглядит на практике</span>
+              <h2>Почему «всё работает» — это иллюзия контроля</h2>
+            </div>
+            <p class="lead">Проблемы с IT обычно видны не каждый день. Они проявляются, когда человек заболел, подрядчик пропал или доступы оказались не у компании.</p>
+          </div>
+
+          <div class="pain-story-grid">
+            <article class="pain-story-card">
+              <h3>Сисадмин заболел — никто не знает, где пароли</h3>
+              <p>Доступы хранились в голове одного человека. На неделю отсутствия бизнес становится слепым: сервер не перезапустить, домен не продлить, заявку в банк не отправить.</p>
+            </article>
+
+            <article class="pain-story-card">
+              <h3>Домен оформлен на бывшего сотрудника</h3>
+              <p>Когда-то регистрировали на личную почту разработчика, а он давно уволился. Платежи идут, продление под угрозой, восстановление прав — отдельный квест.</p>
+            </article>
+
+            <article class="pain-story-card">
+              <h3>Бэкапы есть, но никто не проверял восстановление</h3>
+              <p>Скрипт вроде работает, файлы вроде копируются. Но в момент сбоя выясняется, что архив битый или пароль к нему — у уволившегося подрядчика.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="packages">
         <div class="wrap">
           <div class="section-head">
             <div><span class="eyebrow">готовые пакеты</span><h2>Готовые модели IT-ответственности</h2></div>
-            <p class="lead">Главный продукт SF-SYS — не отдельные услуги, а пакет, где понятны зона ответственности, SLA, регламент и следующий шаг внедрения.</p>
+            <p class="lead">Главный продукт SF-SYS — не отдельные услуги, а пакет, где понятны зона ответственности, регламент обслуживания и следующий шаг внедрения.</p>
           </div>
           <div class="top-packages" id="topPackageGrid"></div>
           <div class="secondary-packages-head">
-            <span class="eyebrow">дополнительные зоны</span>
-            <h3>Точечные пакеты ответственности</h3>
+            <span class="eyebrow">если нужен точечный контур</span>
+            <h3>Модули к основному пакету</h3>
           </div>
+          <p class="secondary-packages-lead">Эти модули не продаются как случайный набор услуг. Обычно они подключаются к основному пакету, если нужно усилить отдельную зону ответственности: домены, бэкапы, переход, облако, телефонию или видеонаблюдение.</p>
           <div class="package-grid secondary-package-grid" id="packageGrid"></div>
         </div>
       </section>
@@ -1426,24 +1703,42 @@
           <div>
             <span class="eyebrow">личный кабинет</span>
             <h2>Вся инфраструктура — <span>в личном кабинете</span></h2>
-            <p class="lead">Клиент видит состояние IT, статусы, документы, SLA, карту инфраструктуры и историю работ с любого устройства.</p>
-            <p class="cabinet-note">Кабинет не заменяет поддержку — он показывает, что происходит с инфраструктурой и кто отвечает за каждую зону.</p>
+            <p class="lead">Клиент видит состояние IT, документы, сроки реакции, карту доступов и историю работ с любого устройства — после подключения реального контура.</p>
+            <p class="cabinet-note">Кабинет снижает зависимость от отдельных людей: видно, какие зоны зафиксированы, где лежат документы и кто отвечает за каждую часть инфраструктуры.</p>
             <div class="cabinet-points">
-              <span>дашборды</span><span>аудит</span><span>карта инфраструктуры</span><span>SLA</span><span>заявки</span><span>бэкапы</span><span>мониторинг</span><span>документы</span><span>карта доступов</span>
+              <span>дашборды</span><span>аудит</span><span>карта инфраструктуры</span><span>регламенты</span><span>заявки</span><span>бэкапы</span><span>мониторинг</span><span>документы</span><span>карта доступов</span>
             </div>
           </div>
           <div class="cabinet-visual" aria-label="Иллюстрация личного кабинета">
             <div class="cabinet-bar"><span>SF-SYS cabinet</span><strong>Control view</strong></div>
             <div class="cabinet-status"><strong>Контур контроля: активен</strong><span>Данные клиента отображаются после подключения</span></div>
             <div class="cabinet-modules">
-              <div><small>Infrastructure</small><strong>Статус инфраструктуры</strong><span>Контур, зоны и ответственные.</span></div>
-              <div><small>SLA</small><strong>SLA и реакции</strong><span>Приоритеты, сроки и эскалация.</span></div>
-              <div><small>Documents</small><strong>Документы и регламенты</strong><span>Договоры, акты, инструкции.</span></div>
-              <div><small>Access map</small><strong>Карта доступов</strong><span>Права, роли и владельцы.</span></div>
-              <div><small>Backups</small><strong>Бэкапы и проверки</strong><span>Регламент восстановления.</span></div>
-              <div><small>History</small><strong>История работ</strong><span>Что сделано и кем принято.</span></div>
+              <div><small>Infrastructure</small><strong>Статус инфраструктуры</strong><span>Отображается после подключения контура.</span></div>
+              <div><small>Rules</small><strong>Сроки реакции и регламенты</strong><span>Приоритеты, порядок реакции и ответственные.</span></div>
+              <div><small>Documents</small><strong>Документы и регламенты</strong><span>Договор, акты и рабочие инструкции.</span></div>
+              <div><small>Access map</small><strong>Карта доступов</strong><span>Права, роли и владельцы зон.</span></div>
+              <div><small>Backups</small><strong>Бэкапы и проверки</strong><span>Проверки восстановления по регламенту.</span></div>
+              <div><small>History</small><strong>История работ</strong><span>История работ и согласований.</span></div>
             </div>
+            <p class="cabinet-proof-note">Пример интерфейса. Реальные данные, статусы и документы отображаются после подключения клиента.</p>
           </div>
+        </div>
+        <div class="wrap cabinet-process">
+          <article>
+            <strong>01</strong>
+            <h3>Подключаем контур</h3>
+            <p>Фиксируем рабочие места, сервисы, доступы и ответственных.</p>
+          </article>
+          <article>
+            <strong>02</strong>
+            <h3>Документируем</h3>
+            <p>Собираем карту инфраструктуры, регламенты и правила доступа.</p>
+          </article>
+          <article>
+            <strong>03</strong>
+            <h3>Показываем в кабинете</h3>
+            <p>Статусы, документы, сроки реакции и история работ становятся видимыми клиенту.</p>
+          </article>
         </div>
       </section>
 
@@ -1468,7 +1763,7 @@
             <div class="approach-steps">
               <article class="step-card"><h3>Фиксируем состояние</h3><p>Карта рабочих мест, серверов, доступов и подрядчиков.</p></article>
               <article class="step-card"><h3>Выявляем риски</h3><p>Зоны зависимости: люди, пароли, бэкапы, 1С, телефония, камеры.</p></article>
-              <article class="step-card"><h3>Собираем схему</h3><p>Зоны, SLA, регламенты и предварительный бюджет.</p></article>
+              <article class="step-card"><h3>Собираем схему</h3><p>Зоны, регламенты обслуживания и предварительный бюджет.</p></article>
               <article class="step-card"><h3>Поддерживаем</h3><p>Заявки, доступы, изменения и стабильность — под регламентом.</p></article>
             </div>
           </div>
@@ -1481,7 +1776,7 @@
             <div><span class="eyebrow">для кого</span><h2>Когда IT — функция бизнеса, а не задача одного человека</h2></div>
           </div>
           <div class="who-grid">
-            <article class="who-card"><h3>Малый бизнес</h3><p>IT держится на одном человеке, а доступы и резервные копии не зафиксированы.</p><p>Получаете понятную схему поддержки, SLA и базовую карту инфраструктуры.</p><a class="btn btn-dark" href="#packages">Пакет офиса</a></article>
+            <article class="who-card"><h3>Малый бизнес</h3><p>IT держится на одном человеке, а доступы и резервные копии не зафиксированы.</p><p>Получаете понятную схему поддержки, регламент реакции и базовую карту инфраструктуры.</p><a class="btn btn-dark" href="#packages">Пакет офиса</a></article>
             <article class="who-card"><h3>Средний бизнес</h3><p>Сервисов стало больше, но ответственность между сотрудниками и подрядчиками размыта.</p><p>Получаете управляемые зоны, регламенты, мониторинг и единый контур изменений.</p><a class="btn btn-dark" href="#packages">Пакет контроля</a></article>
             <article class="who-card"><h3>E-commerce</h3><p>Сайт, почта, SSL и серверы критичны, но контролируются разными сторонами.</p><p>Получаете внешний контур под ответственностью с бэкапами и мониторингом.</p><a class="btn btn-dark" href="#packages">Пакет внешнего контура</a></article>
             <article class="who-card"><h3>Переезд от подрядчика</h3><p>Нужно уйти от текущей схемы без потери доступов, данных и управляемости.</p><p>Получаете план миграции, аудит рисков и безопасную передачу контроля.</p><a class="btn btn-dark" href="#packages">Пакет перехода</a></article>
@@ -1496,7 +1791,7 @@
           </div>
           <div class="compare-table" aria-label="Сравнение подходов к контролю IT">
             <div class="compare-cell head">Критерий</div><div class="compare-cell head">Хостер</div><div class="compare-cell head">Разовый подрядчик</div><div class="compare-cell head sf">SF-SYS</div>
-            <div class="compare-row"><div class="compare-cell criteria">SLA</div><div class="compare-cell" data-source="Хостер">На компонент</div><div class="compare-cell" data-source="Подрядчик">По задаче</div><div class="compare-cell sf" data-source="SF-SYS">На зону ответственности</div></div>
+            <div class="compare-row"><div class="compare-cell criteria">Сроки реакции</div><div class="compare-cell" data-source="Хостер">На компонент</div><div class="compare-cell" data-source="Подрядчик">По задаче</div><div class="compare-cell sf" data-source="SF-SYS">По согласованному регламенту</div></div>
             <div class="compare-row"><div class="compare-cell criteria">Карта инфраструктуры</div><div class="compare-cell" data-source="Хостер">Нет</div><div class="compare-cell" data-source="Подрядчик">Фрагментами</div><div class="compare-cell sf" data-source="SF-SYS">Единая карта</div></div>
             <div class="compare-row"><div class="compare-cell criteria">Регламенты</div><div class="compare-cell" data-source="Хостер">Не ведёт</div><div class="compare-cell" data-source="Подрядчик">По договорённости</div><div class="compare-cell sf" data-source="SF-SYS">Фиксируются письменно</div></div>
             <div class="compare-row"><div class="compare-cell criteria">Единая точка ответственности</div><div class="compare-cell" data-source="Хостер">Нет</div><div class="compare-cell" data-source="Подрядчик">Только за работу</div><div class="compare-cell sf" data-source="SF-SYS">Да</div></div>
@@ -1509,18 +1804,67 @@
         </div>
       </section>
 
+      <section class="section" id="faq">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">частые вопросы</span>
+              <h2>Что обычно уточняют перед стартом</h2>
+            </div>
+            <p class="lead">Ответы на вопросы, которые возникают перед передачей IT под управляемую ответственность.</p>
+          </div>
+
+          <div class="faq-grid">
+            <details class="faq-item" open>
+              <summary>У нас уже есть свой IT-специалист. Зачем SF-SYS?</summary>
+              <p>Мы не обязательно заменяем вашего специалиста. Часто мы дополняем его: фиксируем карту инфраструктуры, регламенты, доступы, резервное копирование и зоны ответственности. Так IT перестаёт держаться только на одном человеке.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Можно начать не с максимального пакета?</summary>
+              <p>Да. Диагностика показывает, с какого пакета безопаснее начать. Часто стартуют с базового контроля или отдельного контура, а затем расширяют ответственность по мере роста инфраструктуры.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Почему нельзя просто заказать одну услугу?</summary>
+              <p>Разовая услуга решает точечную задачу, но не создаёт управляемость. SF-SYS работает пакетами, потому что бизнесу важна не отдельная настройка, а понятная зона ответственности: кто отвечает, где документы, как реагируем и что контролируем дальше.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Безопасно ли передавать доступы?</summary>
+              <p>Доступы не должны передаваться хаотично. Мы фиксируем владельцев, роли, правила выдачи и возврата доступов. Передача доступа должна проходить по регламенту и отражаться в карте инфраструктуры.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Как фиксируются сроки реакции и ответственность?</summary>
+              <p>Формат реакции, приоритеты, зона ответственности и порядок эскалации фиксируются в договоре и регламентах обслуживания. Конкретные сроки зависят от выбранного пакета и согласуются до старта работ.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Что будет, если мы меняем подрядчика?</summary>
+              <p>Сначала проводится аудит текущего состояния: доступы, домены, серверы, почта, 1С, бэкапы и документы. Затем готовится план передачи контроля, чтобы не потерять доступы, данные и управляемость.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Что происходит после заявки?</summary>
+              <p>Мы уточняем инфраструктуру, определяем подходящий пакет, согласуем зону ответственности и готовим предварительную смету. Работы начинаются только после согласования состава, сроков и условий.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
       <section class="section dark" id="docs">
         <div class="wrap">
           <div class="section-head">
             <div><span class="eyebrow">документация и юрлица</span><h2>Контроль на бумаге, а не на словах</h2></div>
-            <p class="lead">Карта инфраструктуры, SLA, регламент доступов, договор, акты и ЭДО. Это управляемая IT-функция, а не устные договорённости.</p>
+            <p class="lead">Карта инфраструктуры, сроки реакции, регламент доступов, договор, акты и ЭДО. Это управляемая IT-функция, а не устные договорённости.</p>
           </div>
           <div class="docs-grid">
             <div class="docs-col">
               <h3>Документация</h3>
               <ul>
                 <li><strong>Карта инфраструктуры</strong> — что и где работает, кто отвечает.</li>
-                <li><strong>SLA реакции</strong> — сроки реакции и восстановления, фиксируются в договоре.</li>
+                <li><strong>Сроки реакции</strong> — порядок реакции и восстановления фиксируется в договоре и регламентах обслуживания.</li>
                 <li><strong>Регламент доступов</strong> — кто, к чему и как получает права.</li>
               </ul>
             </div>
@@ -1532,6 +1876,56 @@
                 <li><strong>ЭДО</strong> — Диадок, СБИС. Реквизиты по запросу.</li>
               </ul>
             </div>
+          </div>
+          <p class="docs-trust-note">Реквизиты, договор и формат ЭДО уточняются перед стартом обслуживания и фиксируются в договоре.</p>
+        </div>
+      </section>
+
+      <section class="section dark" id="about">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">кто стоит за SF-SYS</span>
+              <h2>О компании</h2>
+            </div>
+            <p class="lead">Структура доверия: кто мы, как фиксируем ответственность и какие реквизиты нужно заполнить перед публикацией.</p>
+          </div>
+
+          <div class="about-grid">
+            <article class="about-card">
+              <h3>Кто мы</h3>
+              <p>SF-SYS — команда, которая собирает IT-инфраструктуру бизнеса в одну управляемую зону ответственности. Мы не продаём отдельные услуги: мы берём на себя контроль над рабочими местами, серверами, 1С, телефонией, доступами и резервными копиями — как одну функцию.</p>
+              <p>Главный принцип — фиксировать всё письменно: карта инфраструктуры, регламенты доступов, регламенты обслуживания, договор. Чтобы при увольнении сотрудника, смене подрядчика или сбое не приходилось искать пароли и вспоминать, кто за что отвечал.</p>
+            </article>
+
+            <article class="about-card">
+              <h3>Команда</h3>
+              <p class="todo">Информация о команде будет добавлена после утверждения состава.</p>
+              <!-- Командный блок будет заполнен только реальными участниками, без стоковых фото и выдуманных имён. -->
+              <div class="team-grid" hidden>
+                <!-- Заполнить реальными участниками команды после утверждения состава. -->
+              </div>
+            </article>
+
+            <article class="about-card">
+              <h3>Реквизиты и документы</h3>
+              <div class="about-grid about-grid-inner">
+                <div>
+                  <h4>Реквизиты компании</h4>
+                  <ul class="legal-list">
+                    <li><strong>Юридическое лицо:</strong> <span class="todo">Реквизиты предоставляются по запросу</span></li>
+                    <li><strong>ИНН:</strong> <span class="todo">Указывается в договоре перед стартом обслуживания</span></li>
+                    <li><strong>ОГРН/ОГРНИП:</strong> <span class="todo">Указывается в договоре перед стартом обслуживания</span></li>
+                    <li><strong>Юридический адрес:</strong> <span class="todo">Юридические данные указываются в договоре</span></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>Документы и ЭДО</h4>
+                  <p>Работа ведётся по договору обслуживания. Закрывающие документы (акты, счета, счета-фактуры) — в срок. Электронный документооборот — Диадок, СБИС. Реквизиты для договора отправляем по запросу.</p>
+                  <p class="todo">Юридические данные и контакт ответственного лица уточняются перед стартом обслуживания.</p>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -1592,8 +1986,8 @@
     <section class="section dark" id="contact">
       <div class="wrap">
         <div class="section-head">
-          <div><span class="eyebrow">контакт</span><h2>Отправить на расчёт</h2></div>
-          <p class="lead">Это предварительная сборка, не финальная покупка. Финальная смета формируется после аудита инфраструктуры.</p>
+          <div><span class="eyebrow">контакт</span><h2>Получить предварительный расчёт</h2></div>
+          <p class="lead">Опишите задачу — мы уточним инфраструктуру, предложим подходящий пакет и подготовим предварительную смету. Оплата и запуск — только после согласования состава работ.</p>
         </div>
         <form class="panel" id="contactForm" style="max-width:760px">
           <input type="hidden" name="source" id="leadSource" value="site">
@@ -1607,8 +2001,16 @@
             <div><label class="muted">Комментарий</label><input name="comment" type="text" placeholder="Коротко о задаче"></div>
           </div>
           <label class="consent"><input required type="checkbox" name="consent"> <span>Согласен на обработку персональных данных</span></label>
-          <button class="btn btn-primary" style="margin-top:14px" type="submit">Отправить заявку</button>
-          <p class="cart-note" id="formResult">Нажимая кнопку, вы соглашаетесь на обработку данных. Оплата — после согласования сметы.</p>
+          <button class="btn btn-primary" style="margin-top:14px" type="submit">Получить расчёт</button>
+          <p class="cart-note" id="formResult">Финальная стоимость формируется после короткого аудита. Мы не начинаем работы без согласования пакета, сроков и зоны ответственности.</p>
+          <div class="form-next-steps">
+            <strong>Что будет после заявки</strong>
+            <ol>
+              <li>Уточним текущую инфраструктуру и ответственных.</li>
+              <li>Подтвердим подходящий пакет или предложим корректировку.</li>
+              <li>Подготовим предварительную смету и список первых действий.</li>
+            </ol>
+          </div>
         </form>
       </div>
     </section>
@@ -1631,7 +2033,7 @@
       { id:"office", icon:"☁", name:"Виртуальный офис", short:"Рабочие места и доступы", from:"от 33 000 ₽/мес", available:true, title:"Виртуальный офис под управлением", hint:"Рабочие места и облачные сервисы — под единым контролем доступа." },
       { id:"servers", icon:"▦", name:"Аренда серверов", short:"VPS и dedicated", from:"от 8 900 ₽/мес", available:true, title:"Серверы под управлением", hint:"Ресурсы, размещение, защита, резервирование и масштабирование серверной среды." },
       { id:"onec", icon:"◊", name:"1С в облаке", short:"Облачная 1С", from:"от 14 500 ₽/мес", available:true, title:"1С под контролем", hint:"1С — доступность, обновления, бэкапы и удалённый доступ." },
-      { id:"outsourcing", icon:"◈", name:"IT-аутсорсинг", short:"Заявки и SLA", from:"от 18 000 ₽/мес", available:true, title:"IT-поддержка под управлением", hint:"Заявки, доступы, SLA, документация и ответственность за рабочие места." },
+      { id:"outsourcing", icon:"◈", name:"IT-аутсорсинг", short:"Заявки и регламент", from:"от 18 000 ₽/мес", available:true, title:"IT-поддержка под управлением", hint:"Заявки, доступы, регламенты, документация и ответственность за рабочие места." },
       { id:"voip", icon:"☎", name:"IP-телефония", short:"АТС и линии", from:"от 7 900 ₽/мес", available:true, title:"Телефония под контролем", hint:"Звонки, маршрутизация, записи и пропущенные обращения — под контролем." },
       { id:"cctv", icon:"◉", name:"Видеонаблюдение", short:"Камеры и архив", from:"от 6 500 ₽/мес", available:true, title:"Видеонаблюдение под контролем", hint:"Камеры, архив, доступы, аналитика и стабильность наблюдения." },
       { id:"domains", icon:"⌘", name:"Домены, почта и SSL", short:"DNS, почта, SSL", from:"от 5 900 ₽/мес", available:true, title:"Домены, почта и SSL под контролем", hint:"Внешний контур: DNS, почта, SSL и продления — под ответственностью." },
@@ -1656,7 +2058,7 @@
           const monthly=p+s.users*920+s.storage*10+(s.telephony==="yes"?s.users*220:0)+(s.cameras==="yes"?6500:0)+sup;
           const setup=12000+Math.ceil(s.users/20)*3500+(s.cameras==="yes"?18000:0);
           const days=4+Math.ceil(s.users/35)+(s.cameras==="yes"?2:0);
-          return result(monthly,setup,days,["Контроль рабочих мест и доступов", "Файловое хранение и резервирование", "Поддержка пользователей по SLA", s.telephony==="yes"&&"Телефония в управляемом контуре", s.cameras==="yes"&&"Камеры в управляемом контуре"], [`${s.users} пользователей`, `${s.storage} ГБ`, `Пакет: ${label(s.package)}`, `Поддержка: ${label(s.support)}`, `Телефония: ${yes(s.telephony)}`, `Камеры: ${yes(s.cameras)}`]);
+          return result(monthly,setup,days,["Контроль рабочих мест и доступов", "Файловое хранение и резервирование", "Поддержка пользователей по согласованному регламенту", s.telephony==="yes"&&"Телефония в управляемом контуре", s.cameras==="yes"&&"Камеры в управляемом контуре"], [`${s.users} пользователей`, `${s.storage} ГБ`, `Пакет: ${label(s.package)}`, `Поддержка: ${label(s.support)}`, `Телефония: ${yes(s.telephony)}`, `Камеры: ${yes(s.cameras)}`]);
         }
       },
       servers: {
@@ -1678,7 +2080,7 @@
           const monthly=one*s.quantity;
           const setup=(s.type==="vps"?4500:s.type==="managed"?12000:18000)*s.quantity;
           const days=(s.type==="vps"?1:s.type==="managed"?3:s.type==="dedicated"?4:7)+(s.region==="eu"?3:0);
-          return result(monthly,setup,days,["Размещение серверной среды", "Резервирование и мониторинг ресурсов", s.protection==="yes"&&"Базовая защита сервера", s.type==="managed"&&"Администрирование и контроль SLA", "Масштабирование ресурсов"], [`Тип: ${label(s.type)}`, `${s.quantity} сервер(а)`, `${s.cpu} vCPU`, `${s.ram} ГБ RAM`, `${s.storage} ГБ`, `Регион: ${label(s.region)}`, `Бэкапы: ${yes(s.backups)}`]);
+          return result(monthly,setup,days,["Размещение серверной среды", "Резервирование и мониторинг ресурсов", s.protection==="yes"&&"Базовая защита сервера", s.type==="managed"&&"Администрирование и регламентный контроль", "Масштабирование ресурсов"], [`Тип: ${label(s.type)}`, `${s.quantity} сервер(а)`, `${s.cpu} vCPU`, `${s.ram} ГБ RAM`, `${s.storage} ГБ`, `Регион: ${label(s.region)}`, `Бэкапы: ${yes(s.backups)}`]);
         }
       },
       onec: {
@@ -1706,7 +2108,7 @@
           {k:"employees", t:"range", label:"Сотрудники", min:5, max:150, step:5, unit:"чел"},
           {k:"workplaces", t:"range", label:"Рабочие места", min:5, max:150, step:5, unit:"мест"},
           {k:"offices", t:"range", label:"Офисы", min:1, max:10, step:1, unit:"оф."},
-          {k:"sla", t:"seg", label:"SLA", opts:[["base","Base"],["standard","Standard"],["critical","Critical"]]},
+          {k:"sla", t:"seg", label:"Регламент", opts:[["base","Base"],["standard","Standard"],["critical","Critical"]]},
           {k:"format", t:"seg", label:"Формат", opts:[["remote","Remote"],["hybrid","Hybrid"],["onsite","On-site"]]},
           {k:"servers", t:"seg", label:"Серверы", opts:[["yes","Да"],["no","Нет"]]},
           {k:"onec", t:"seg", label:"1С", opts:[["yes","Да"],["no","Нет"]]},
@@ -1719,7 +2121,7 @@
           const monthly=(slaFee+s.workplaces*1150+fmtFee+(s.servers==="yes"?14000:0)+(s.onec==="yes"?9000:0))*officeMult;
           const setup=s.docs==="yes"?28000+Math.ceil(s.workplaces/25)*6000:12000;
           const days=3+Math.ceil(s.workplaces/30)+s.offices;
-          return result(monthly,setup,days,["Поддержка рабочих мест по SLA", "Контроль доступов и заявок", "Карта инфраструктуры и регламент изменений", s.docs==="yes"&&"Документация и онбординг", s.servers==="yes"&&"Поддержка серверов", s.onec==="yes"&&"Поддержка 1С"], [`${s.employees} сотрудников`, `${s.workplaces} рабочих мест`, `${s.offices} офис(а)`, `SLA: ${label(s.sla)}`, `Формат: ${label(s.format)}`, `Документация: ${yes(s.docs)}`]);
+          return result(monthly,setup,days,["Поддержка рабочих мест по согласованному регламенту", "Контроль доступов и заявок", "Карта инфраструктуры и регламент изменений", s.docs==="yes"&&"Документация и онбординг", s.servers==="yes"&&"Поддержка серверов", s.onec==="yes"&&"Поддержка 1С"], [`${s.employees} сотрудников`, `${s.workplaces} рабочих мест`, `${s.offices} офис(а)`, `Регламент: ${label(s.sla)}`, `Формат: ${label(s.format)}`, `Документация: ${yes(s.docs)}`]);
         }
       },
       voip: {
@@ -1853,12 +2255,12 @@
     const initialAnswers = () => ({ size:null, blockers:[], exists:[], owner:null, speed:null });
     let answers = initialAnswers();
     const PACKAGES = [
-      { id:"max", rank:1, level:"top", name:"Максимальный контроль", badge:"Рекомендуем", price:"от 96 000 ₽/мес", priceContext:"вся IT-функция бизнеса", bestFor:"Для бизнеса, где IT уже влияет на продажи, операции и управляемость.", pain:"IT разрослось, ответственность размазана, сбои становятся дорогими.", why:"Закрывает почти всю инфраструктуру одним управляемым контуром.", zones:["IT-аутсорсинг","рабочие места","доступы","серверы","1С","домены","почта","SSL","бэкапы","мониторинг","безопасность","документация","SLA","личный кабинет"], includes:["единая ответственность","личный кабинет","SLA и регламент","карта инфраструктуры","контроль изменений"], topExtras:["Безопасность и доступы под управлением","Расширенная документация и SLA","Полный мониторинг и реагирование"], cta:"Обсудить пакет" },
-      { id:"office", rank:2, level:"top", name:"Офис и инфраструктура под контролем", badge:"Для SMB", price:"от 58 000 ₽/мес", priceContext:"офис и инфраструктура", bestFor:"Для офисов, где IT уже влияет на ежедневную работу команды.", pain:"Рабочие места, серверы и 1С есть, но контроль держится на людях.", why:"Даёт управляемую основу: поддержка, доступы, серверы, бэкапы и документация.", zones:["рабочие места","IT-поддержка","доступы","серверы","1С","бэкапы","документация","SLA"], includes:["поддержка пользователей","контроль доступов","бэкапы","регламент заявок","документация"], cta:"Обсудить пакет" },
-      { id:"basic", rank:3, level:"top", name:"Базовый контроль IT", badge:"Старт", price:"от 32 000 ₽/мес", priceContext:"стартовый контроль", bestFor:"Для малого бизнеса, где нужно убрать зависимость от одного администратора.", pain:"Нет прозрачной схемы доступов, заявок и базовой документации.", why:"Быстрый вход в управляемое обслуживание без тяжёлого внедрения.", zones:["рабочие места","доступы","поддержка","базовая документация","базовый SLA","диагностика"], includes:["диагностика инфраструктуры","регламент заявок","карта доступов","базовый SLA"], cta:"Начать с базового" },
+      { id:"max", rank:1, level:"top", name:"Максимальный контроль", badge:"Рекомендуем", price:"от 96 000 ₽/мес", priceContext:"вся IT-функция бизнеса", bestFor:"Для бизнеса, где IT уже влияет на продажи, операции и управляемость.", pain:"IT разрослось, ответственность размазана, сбои становятся дорогими.", why:"Закрывает почти всю инфраструктуру одним управляемым контуром.", zones:["IT-аутсорсинг","рабочие места","доступы","серверы","1С","домены","почта","SSL","бэкапы","мониторинг","безопасность","документация","регламенты","личный кабинет"], includes:["единая ответственность","личный кабинет","регламенты обслуживания","карта инфраструктуры","контроль изменений"], topExtras:["Безопасность и доступы под управлением","Расширенная документация и регламенты","Полный мониторинг и реагирование"], cta:"Обсудить пакет" },
+      { id:"office", rank:2, level:"top", name:"Офис и инфраструктура под контролем", badge:"Для SMB", price:"от 58 000 ₽/мес", priceContext:"офис и инфраструктура", bestFor:"Для офисов, где IT уже влияет на ежедневную работу команды.", pain:"Рабочие места, серверы и 1С есть, но контроль держится на людях.", why:"Даёт управляемую основу: поддержка, доступы, серверы, бэкапы и документация.", zones:["рабочие места","IT-поддержка","доступы","серверы","1С","бэкапы","документация","регламенты"], includes:["поддержка пользователей","контроль доступов","бэкапы","регламент заявок","документация"], cta:"Обсудить пакет" },
+      { id:"basic", rank:3, level:"top", name:"Базовый контроль IT", badge:"Старт", price:"от 32 000 ₽/мес", priceContext:"стартовый контроль", bestFor:"Для малого бизнеса, где нужно убрать зависимость от одного администратора.", pain:"Нет прозрачной схемы доступов, заявок и базовой документации.", why:"Быстрый вход в управляемое обслуживание без тяжёлого внедрения.", zones:["рабочие места","доступы","поддержка","базовая документация","базовый регламент","диагностика"], includes:["диагностика инфраструктуры","регламент заявок","карта доступов","базовый регламент"], cta:"Начать с базового" },
       { id:"domain", rank:4, level:"secondary", name:"Домен, почта и SSL под контролем", badge:"Внешний контур", price:"от 12 000 ₽/мес", bestFor:"Для компаний, где домен, почта и SSL завязаны на разных людей.", pain:"Критичные входные точки живут у подрядчиков или в личных аккаунтах.", why:"Берём внешний контур под ответственность и фиксируем доступы.", zones:["домены","почта","SSL","DNS","продления"], includes:["карта доступов","контроль продлений","DNS-регламент","антиспам"], cta:"Обсудить пакет" },
       { id:"recovery", rank:5, level:"secondary", name:"Бэкапы и мониторинг", badge:"Устойчивость", price:"от 18 000 ₽/мес", bestFor:"Для бизнеса, где простой или потеря данных быстро становится дорогой.", pain:"Сбои замечают поздно, а восстановление не проверялось.", why:"Контролирует резервные копии, уведомления и готовность восстановления.", zones:["бэкапы","мониторинг","проверки","уведомления"], includes:["регламент восстановления","мониторинг состояния","проверки бэкапов","эскалация"], cta:"Обсудить пакет" },
-      { id:"security", rank:6, level:"secondary", name:"Безопасный переход", badge:"Миграция", price:"от 42 000 ₽/мес", bestFor:"Для перехода от подрядчика, переезда в облако или восстановления контроля.", pain:"Есть риск потерять доступы, данные или управляемость при смене схемы.", why:"Проводит аудит, защищает доступы и переводит IT в контролируемый контур.", zones:["аудит","безопасность","миграции","доступы","SLA"], includes:["аудит рисков","план миграции","контроль доступов","регламент реакции"], cta:"Обсудить переход" },
+      { id:"security", rank:6, level:"secondary", name:"Безопасный переход", badge:"Миграция", price:"от 42 000 ₽/мес", bestFor:"Для перехода от подрядчика, переезда в облако или восстановления контроля.", pain:"Есть риск потерять доступы, данные или управляемость при смене схемы.", why:"Проводит аудит, защищает доступы и переводит IT в контролируемый контур.", zones:["аудит","безопасность","миграции","доступы","регламенты"], includes:["аудит рисков","план миграции","контроль доступов","регламент реакции"], cta:"Обсудить переход" },
       { id:"cloud", rank:7, level:"secondary", name:"Переезд в управляемое облако", badge:"Облако", price:"от 46 000 ₽/мес", bestFor:"Для компаний, которым нужны серверы, 1С и понятное резервирование.", pain:"Серверы и 1С работают, но нет прозрачности по ресурсам и восстановлению.", why:"Переводит серверную среду и 1С в управляемый облачный контур.", zones:["серверы","1С","бэкапы","мониторинг"], includes:["облачные ресурсы","удалённый доступ","резервирование","контроль ресурсов"], cta:"Обсудить переезд" },
       { id:"cctv", rank:8, level:"secondary", name:"Видеонаблюдение под контролем", badge:"Объект", price:"от 16 000 ₽/мес", bestFor:"Для офисов, складов и точек, где важны архив, доступы и стабильность камер.", pain:"Камеры есть, но архив, доступ и ответственность не закреплены.", why:"Фиксирует права, архив, мониторинг и регламент работы наблюдения.", zones:["камеры","архив","доступы","мониторинг"], includes:["права доступа","архив событий","удалённый доступ","документация"], cta:"Обсудить наблюдение" },
       { id:"voip", rank:9, level:"secondary", name:"Телефония под контролем", badge:"Коммуникации", price:"от 14 000 ₽/мес", bestFor:"Для компаний, где звонки влияют на продажи и качество обслуживания.", pain:"Теряются обращения, записи и маршрутизация не находятся под контролем.", why:"Берёт телефонию, записи, маршрутизацию и пропущенные звонки в единый контур.", zones:["АТС","линии","записи","маршрутизация"], includes:["виртуальная АТС","запись разговоров","контроль пропущенных","CRM-интеграция"], cta:"Обсудить телефонию" }
@@ -1888,7 +2290,8 @@
       const extraBlock = p => p.topExtras && p.topExtras.length ? `<div class="package-extra"><strong>Что включено сверх Top-2</strong>${p.topExtras.map(x => `<span>${x}</span>`).join("")}</div>` : "";
       const card = (p, extra="") => {
         const isTop = p.level === "top";
-        return `<article class="package-card ${extra}" data-package-card="${p.id}"><div class="package-meta"><span>${p.badge}</span><strong>${p.price}</strong></div>${p.priceContext ? `<div class="price-context">${p.priceContext}</div>` : ""}<h3>${p.name}</h3><p>${p.bestFor}</p>${isTop ? `<p class="package-pain">${p.pain}</p>` : ""}<div class="package-list">${p.zones.slice(0, extra ? 10 : 6).map(z=>`<span>${z}</span>`).join("")}</div>${extraBlock(p)}${isTop ? `<div class="package-why">${p.why}</div>` : ""}<a class="btn ${extra ? "btn-primary" : "btn-dark"}" href="#contact" data-package="${p.name}">${p.cta}</a></article>`;
+        const cta = isTop ? p.cta : "Обсудить как часть пакета";
+        return `<article class="package-card ${extra}" data-package-card="${p.id}"><div class="package-meta"><span>${p.badge}</span><strong>${p.price}</strong></div>${p.priceContext ? `<div class="price-context">${p.priceContext}</div>` : ""}<h3>${p.name}</h3><p>${p.bestFor}</p>${isTop ? `<p class="package-pain">${p.pain}</p>` : ""}<div class="package-list">${p.zones.slice(0, extra ? 10 : 6).map(z=>`<span>${z}</span>`).join("")}</div>${extraBlock(p)}${isTop ? `<div class="package-why">${p.why}</div>` : ""}<a class="btn ${extra ? "btn-primary" : "btn-dark"}" href="#contact" data-package="${p.name}">${cta}</a></article>`;
       };
       if (top) {
         const topTwo = PACKAGES.find(p => p.rank === 2);
@@ -2018,12 +2421,27 @@
       return picked.slice(0,3);
     }
     function recommendPackage(recs) { return recommendPackages(recs)[0]; }
+    function getDetectedRisks() {
+      const blockers = answers.blockers || [];
+      const exists = answers.exists || [];
+      const owner = answers.owner || "";
+      const speed = answers.speed || "";
+      const risks = [];
+      if (blockers.includes("IT держится на одном человеке")) risks.push("Зависимость от одного человека");
+      if (blockers.includes("Нет контроля доступов") || owner === "Не знаем") risks.push("Непрозрачные доступы");
+      if (blockers.includes("Почта, домен или SSL не под контролем")) risks.push("Риск внешнего контура: домен, почта, SSL");
+      if (blockers.includes("Сбои и бэкапы тревожат") || /быстрая|критич/i.test(speed)) risks.push("Риск простоя и непроверенного восстановления");
+      if (exists.includes("Ничего системно не собрано")) risks.push("Нет единой карты инфраструктуры");
+      if (owner === "Несколько разных подрядчиков") risks.push("Ответственность разделена между подрядчиками");
+      return risks.length ? risks.slice(0, 5) : ["Нужна первичная карта инфраструктуры"];
+    }
     function renderRecommendations() {
       let recs = scoreRecommendations();
       if (!recs.length) recs = ["outsourcing","office","servers"];
       const packs = recommendPackages(recs);
+      const risks = getDetectedRisks();
       const reasons = {
-        outsourcing:["Убирает зависимость от отдельных людей.", "Закрывает поддержку, доступы, SLA и документацию."],
+        outsourcing:["Убирает зависимость от отдельных людей.", "Закрывает поддержку, доступы, регламенты и документацию."],
         office:["Собирает рабочие места и облачные сервисы в управляемую схему.", "Закрывает хранение, доступы, резервирование и поддержку."],
         servers:["Даёт контролируемые ресурсы под сервисы бизнеса.", "Закрывает размещение, защиту, бэкапы и масштабирование."],
         onec:["Подходит при медленной или критичной 1С.", "Закрывает облачную 1С, обновления, доступ и резервирование."],
@@ -2033,7 +2451,7 @@
         backupmon:["Подходит, если сбои замечают поздно или восстановление не проверялось.", "Закрывает бэкапы, мониторинг, проверки и уведомления."],
         security:["Подходит при переезде, вирусах или риске потери доступов.", "Закрывает аудит, защиту, миграцию и регламент реакции."]
       };
-      q("#guidedMode").innerHTML = `<div class="panel"><span class="eyebrow">результат диагностики</span><h2 style="font-size:clamp(26px,3.8vw,42px);margin-top:10px">Рекомендуем начать с готового пакета</h2><p class="result-intro">На основе ответов мы подобрали основной пакет и две альтернативы. Это не финальная смета — состав уточняется после короткого аудита.</p><div class="result-packages">${packs.map((p,i)=>`<article class="result-package ${i===0?"primary":""}"><div class="package-meta"><span>${i===0?"Основная рекомендация":"Альтернатива"}</span><strong>${p.price}</strong></div><h3>${p.name}</h3><p>${p.bestFor}</p><p class="package-pain">${p.pain}</p><div class="package-list">${p.zones.slice(0,8).map(z=>`<span>${z}</span>`).join("")}</div>${i===0?`<a class="btn btn-primary" href="#contact" data-package="${p.name}">Обсудить рекомендуемый пакет</a>`:`<a class="btn btn-ghost" href="#contact" data-package="${p.name}">Обсудить пакет</a>`}</article>`).join("")}</div><div class="addbar result-routes"><a class="btn btn-ghost" href="#packages">Смотреть все пакеты</a><button class="btn btn-text" id="restartWizard" type="button">Пройти заново</button></div><div class="result-zones"><details><summary>Какие зоны контроля повлияли на рекомендацию</summary><div class="recommendations">${recs.map(id=>{const s=CFG_SERVICES.find(x=>x.id===id);return `<article class="rec-card"><div><h3>${s.icon} ${s.name}</h3><p>${reasons[id][0]} ${reasons[id][1]}</p></div></article>`}).join("")}</div></details></div></div>`;
+      q("#guidedMode").innerHTML = `<div class="panel"><span class="eyebrow">результат диагностики</span><h2 style="font-size:clamp(26px,3.8vw,42px);margin-top:10px">Рекомендуем начать с готового пакета</h2><p class="result-intro">На основе ответов мы подобрали основной пакет и две альтернативы. Это не финальная смета — состав уточняется после короткого аудита.</p><div class="detected-risks"><strong>Что видно по ответам</strong><div class="risk-list">${risks.map(r=>`<span>${r}</span>`).join("")}</div></div><div class="result-packages">${packs.map((p,i)=>`<article class="result-package ${i===0?"primary":""}"><div class="package-meta"><span>${i===0?"Основная рекомендация":"Альтернатива"}</span><strong>${p.price}</strong></div><h3>${p.name}</h3><p>${p.bestFor}</p><p class="package-pain">${p.pain}</p><div class="package-list">${p.zones.slice(0,8).map(z=>`<span>${z}</span>`).join("")}</div>${i===0?`<a class="btn btn-primary" href="#contact" data-package="${p.name}">Обсудить рекомендуемый пакет</a>`:`<a class="btn btn-ghost" href="#contact" data-package="${p.name}">Обсудить пакет</a>`}</article>`).join("")}</div><div class="addbar result-routes"><a class="btn btn-ghost" href="#packages">Смотреть все пакеты</a><button class="btn btn-text" id="restartWizard" type="button">Пройти заново</button></div><div class="result-zones"><details><summary>Какие зоны контроля повлияли на рекомендацию</summary><div class="recommendations">${recs.map(id=>{const s=CFG_SERVICES.find(x=>x.id===id);return `<article class="rec-card"><div><h3>${s.icon} ${s.name}</h3><p>${reasons[id][0]} ${reasons[id][1]}</p></div></article>`}).join("")}</div></details></div></div>`;
       q("#restartWizard").onclick = () => { wizardStep=0; answers=initialAnswers(); renderWizard(); };
     }
 
