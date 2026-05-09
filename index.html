@@ -336,6 +336,16 @@
       font-weight: 750;
     }
     .mode-switch button.active { background: #fff; color: #111827; }
+    .mode-switch.demoted { display: none; }
+    .config-warning {
+      margin-top: 14px;
+      max-width: 760px;
+      color: rgba(246,248,252,.62);
+      font-size: 13px;
+      line-height: 1.45;
+      border-left: 2px solid rgba(91,140,255,.55);
+      padding: 8px 0 8px 12px;
+    }
     #configView .section.dark { padding: 36px 0 54px; }
     .config-shell { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 12px; align-items: start; }
     .panel {
@@ -468,6 +478,21 @@
     .wizard-card h2 { font-size: clamp(26px, 4vw, 42px); }
     .options { display: flex; flex-wrap: wrap; gap: 7px; }
     .option { text-align: left; }
+    .wizard-card #waBack:disabled {
+      opacity: .38;
+      cursor: default;
+      pointer-events: none;
+    }
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 12px;
+      color: rgba(246,248,252,.68);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .consent input { width: 16px; height: 16px; margin-top: 1px; accent-color: var(--accent); }
     .contact-grid-mini { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .result-next {
       margin: 12px 0 10px;
@@ -847,8 +872,8 @@
     }
     .top-packages {
       display: grid;
-      grid-template-columns: minmax(0, .92fr) minmax(0, 1.15fr) minmax(0, .92fr);
-      gap: 14px;
+      grid-template-columns: minmax(0, .92fr) minmax(0, 1.18fr) minmax(0, .92fr);
+      gap: 18px;
       align-items: center;
       margin-bottom: 26px;
     }
@@ -863,19 +888,33 @@
       box-shadow: 0 1px 0 rgba(17,24,39,.03), 0 12px 28px rgba(17,24,39,.035);
     }
     .package-card.top-main {
-      min-height: 430px;
-      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      min-height: 480px;
+      padding: 24px;
       background: linear-gradient(180deg, #fff, rgba(239,246,255,.92));
-      border-color: rgba(37,99,235,.22);
-      box-shadow: 0 24px 60px rgba(37,99,235,.12), 0 1px 0 rgba(17,24,39,.04);
+      border-color: rgba(37,99,235,.32);
+      box-shadow: 0 28px 60px rgba(37,99,235,.16), 0 1px 0 rgba(17,24,39,.04);
     }
-    .package-card.top-side { min-height: 365px; }
-    .package-card.top-compact { min-height: 330px; }
+    .package-card.top-main::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: linear-gradient(90deg, #5b8cff, #3b82f6);
+    }
+    .package-card.top-side { min-height: 380px; }
+    .package-card.top-compact { min-height: 340px; }
     .package-meta { display: flex; justify-content: space-between; align-items: center; gap: 10px; color: rgba(75,85,99,.72); font-size: 12px; font-weight: 800; }
     .package-meta span { min-height: 26px; display: inline-flex; align-items: center; border-radius: 999px; padding: 0 9px; background: rgba(37,99,235,.08); color: rgba(30,64,175,.88); }
     .package-meta strong { color: #101827; white-space: nowrap; }
     .package-card h3 { font-size: 19px; line-height: 1.16; color: #101827; }
-    .package-card.top-main h3 { font-size: 26px; letter-spacing: 0; }
+    .package-card.top-main h3 { font-size: 28px; letter-spacing: 0; }
+    .package-card.top-main .package-meta span {
+      background: rgba(37,99,235,.12);
+      border: 1px solid rgba(37,99,235,.22);
+      color: rgba(30,64,175,.95);
+    }
     .package-card p { color: rgba(75,85,99,.78); font-size: 13px; line-height: 1.42; }
     .package-pain { color: rgba(31,41,55,.82) !important; font-weight: 650; }
     .package-why {
@@ -889,6 +928,34 @@
     .package-list { display: flex; flex-wrap: wrap; gap: 5px; }
     .package-list span { min-height: 28px; display: inline-flex; align-items: center; border-radius: 6px; padding: 0 8px; background: rgba(37,99,235,.07); color: rgba(30,64,175,.88); font-size: 12px; font-weight: 700; }
     .package-tune { color: rgba(30,64,175,.76); font-size: 12px; font-weight: 800; justify-self: start; }
+    .price-context { color: rgba(75,85,99,.62); font-size: 12px; font-weight: 700; margin-top: -4px; }
+    .package-extra {
+      border-top: 1px solid rgba(37,99,235,.14);
+      border-bottom: 1px solid rgba(37,99,235,.08);
+      padding: 12px 0;
+      display: grid;
+      gap: 7px;
+      color: rgba(31,41,55,.78);
+      font-size: 12.5px;
+      line-height: 1.35;
+    }
+    .package-extra strong {
+      color: #101827;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .045em;
+    }
+    .package-extra span {
+      display: flex;
+      gap: 7px;
+      align-items: flex-start;
+    }
+    .package-extra span::before {
+      content: "✓";
+      color: #22c55e;
+      font-weight: 800;
+    }
+    .top-pick-hint { display: none; }
     .secondary-packages-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin: 8px 0 14px; }
     .secondary-packages-head h3 { font-size: 24px; color: #101827; }
     .result-packages { display: grid; grid-template-columns: 1.15fr .92fr .92fr; gap: 12px; margin: 18px 0; }
@@ -906,10 +973,42 @@
       border-color: rgba(91,140,255,.34);
       box-shadow: 0 18px 42px rgba(0,0,0,.2);
     }
+    .result-intro {
+      max-width: 760px;
+      margin-top: 10px;
+      color: rgba(246,248,252,.66);
+      font-size: 14px;
+      line-height: 1.48;
+    }
+    .result-package:not(.primary) {
+      opacity: .82;
+      box-shadow: none;
+    }
     .result-package h3 { color: #fff; font-size: 22px; line-height: 1.16; }
     .result-package p { color: rgba(246,248,252,.68); font-size: 13px; line-height: 1.42; }
     .result-package .package-meta strong { color: rgba(246,248,252,.92); }
+    .result-package.primary .package-meta span {
+      background: rgba(91,140,255,.16);
+      color: rgba(220,232,255,.95);
+      border: 1px solid rgba(91,140,255,.22);
+    }
+    .result-routes {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 12px;
+      margin-top: 6px;
+    }
     .result-zones { margin-top: 18px; opacity: .88; }
+    .result-zones details {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 12px;
+    }
+    .result-zones summary {
+      cursor: pointer;
+      color: rgba(246,248,252,.84);
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .result-zones .recommendations { margin-top: 12px; }
     .result-next .package-list span {
       background: rgba(91,140,255,.12);
       color: rgba(210,225,255,.9);
@@ -919,6 +1018,13 @@
     .cabinet-grid h2 { font-size: clamp(34px, 4.5vw, 56px); line-height: 1.02; letter-spacing: 0; margin: 10px 0 16px; }
     .cabinet-points { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
     .cabinet-points span { min-height: 30px; display: inline-flex; align-items: center; border-radius: 6px; padding: 0 9px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.07); color: rgba(246,248,252,.72); font-size: 12px; font-weight: 750; }
+    .cabinet-note {
+      margin-top: 14px;
+      color: rgba(246,248,252,.58);
+      font-size: 13px;
+      line-height: 1.45;
+      max-width: 620px;
+    }
     .cabinet-visual {
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 9px;
@@ -928,10 +1034,24 @@
     }
     .cabinet-bar { display: flex; justify-content: space-between; gap: 16px; padding: 16px 18px; border-bottom: 1px solid rgba(255,255,255,.08); color: rgba(246,248,252,.58); font-size: 13px; }
     .cabinet-bar strong { color: #86efac; }
+    .cabinet-status {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 10px 18px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      background: rgba(255,255,255,.035);
+      color: rgba(246,248,252,.54);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .cabinet-status strong { color: rgba(246,248,252,.84); }
     .cabinet-modules { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,.06); }
-    .cabinet-modules div { min-height: 122px; padding: 18px; background: rgba(8,11,18,.72); display: grid; align-content: start; gap: 10px; }
+    .cabinet-modules div { min-height: 104px; padding: 16px 18px; background: rgba(8,11,18,.72); display: grid; align-content: start; gap: 8px; }
     .cabinet-modules small { color: rgba(246,248,252,.42); text-transform: uppercase; letter-spacing: .06em; font-size: 11px; }
     .cabinet-modules strong { color: rgba(246,248,252,.9); font-size: 16px; line-height: 1.25; }
+    .cabinet-modules span { color: rgba(246,248,252,.48); font-size: 12px; line-height: 1.35; }
+    .services-mobile-hint { display: none; }
     .compare-table {
       display: grid;
       grid-template-columns: 1.1fr 1fr 1fr 1fr;
@@ -1023,7 +1143,10 @@
       .wrap { width: min(100% - 24px, var(--wrap)); }
       .nav-phone { min-height: 32px; padding: 0 10px; font-size: 12px; }
       .brand-meta { display: none; }
-      .hero { padding-top: 38px; min-height: auto; }
+      .hero { padding-top: 30px; min-height: auto; }
+      .hero-grid { gap: 28px; }
+      .hero .lead { font-size: 17px; margin-top: 16px; }
+      .dash { max-height: 560px; }
       .config-hero { padding: 22px 0 14px; }
       .config-hero h1 { margin-top: 12px !important; }
       #configView .section.dark { padding: 22px 0 76px; }
@@ -1031,13 +1154,40 @@
       .hero-actions .btn, .final-cta .btn, .addbar .btn { width: 100%; }
       .dash-kpis, .scan-grid, .choice-grid, .steps, .form-grid, .included, .contact-grid-mini, .recommendations, .package-grid, .who-grid, .result-packages, .cabinet-modules { grid-template-columns: 1fr; }
       .top-packages { display: flex; flex-direction: column; gap: 10px; }
+      .top-pick-hint {
+        display: block;
+        order: -2;
+        color: rgba(30,64,175,.82);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .055em;
+        margin: 2px 0 -2px;
+      }
       .package-card.top-main { order: -1; }
       .package-card { padding: 15px; }
-      .package-card.top-main { padding: 18px; }
+      .package-card.top-main { padding: 18px; min-height: auto; }
       .package-card.top-main h3 { font-size: 23px; }
+      .package-extra { padding: 10px 0; gap: 6px; }
       .secondary-packages-head { display: block; }
       .cabinet-grid { gap: 22px; }
-      .cabinet-modules div { min-height: auto; }
+      .cabinet-note { font-size: 12.5px; }
+      .cabinet-status { display: grid; gap: 5px; padding: 10px 14px; }
+      .cabinet-modules div { min-height: auto; padding: 13px 14px; gap: 6px; }
+      .cabinet-modules strong { font-size: 14px; }
+      .cabinet-modules span { font-size: 12px; }
+      .result-package { padding: 14px; }
+      .result-package:not(.primary) { opacity: .9; }
+      .result-routes .btn { width: 100%; }
+      .services-mobile-hint {
+        display: block;
+        color: rgba(75,85,99,.58);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .055em;
+        margin: -8px 0 10px;
+      }
       .kpi.trust-kpi { min-height: auto; padding: 16px 18px; gap: 8px; }
       .kpi.trust-kpi strong { font-size: 16px; }
       .kpi.trust-kpi span { font-size: 12.5px; max-width: none; }
@@ -1227,11 +1377,7 @@
             <p class="lead">Пройдите короткую диагностику — покажем подходящий пакет управляемой IT-ответственности, зоны контроля и следующий шаг внедрения.</p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="#config" data-route="config" data-mode="guided">Пройти диагностику</a>
-              <a class="btn btn-light" href="#packages">Смотреть готовые пакеты</a>
-              <a class="btn btn-ghost tertiary-cta" href="#config" data-route="config" data-mode="full">Конфигуратор для IT-специалиста</a>
-            </div>
-            <div class="chips">
-              <span class="chip">доступы</span><span class="chip">серверы</span><span class="chip">1С</span><span class="chip">телефония</span><span class="chip">почта</span><span class="chip">бэкапы</span>
+              <a class="btn btn-light" href="#packages">Смотреть пакеты</a>
             </div>
           </div>
           <div class="dash" aria-label="Панель контроля инфраструктуры">
@@ -1260,32 +1406,6 @@
         </div>
       </section>
 
-      <section class="section soft" id="start">
-        <div class="wrap">
-          <div class="section-head">
-            <div><span class="eyebrow">диагностика</span><h2>Сначала поймём, какой пакет нужен</h2></div>
-            <p class="lead">Диагностика не заставляет выбирать услуги. Она быстро определяет ситуацию и рекомендует готовый пакет ответственности.</p>
-          </div>
-          <div class="choice-grid">
-            <article class="choice-card">
-              <h3>Холодный старт</h3>
-              <p>Если непонятно, что ломается и кто за что отвечает — начните с диагностики.</p>
-              <a class="btn btn-primary" href="#config" data-route="config" data-mode="guided">Пройти диагностику</a>
-            </article>
-            <article class="choice-card">
-              <h3>Уже ищете решение</h3>
-              <p>Посмотрите готовые пакеты: что берём под контроль, кому подходит и что входит.</p>
-              <a class="btn btn-dark" href="#packages">Смотреть пакеты</a>
-            </article>
-            <article class="choice-card">
-              <h3>Понимаете задачу</h3>
-              <p>Для IT-специалиста или горячего клиента остаётся точная настройка состава.</p>
-              <a class="btn btn-ghost" href="#config" data-route="config" data-mode="full">Открыть конфигуратор</a>
-            </article>
-          </div>
-        </div>
-      </section>
-
       <section class="section" id="packages">
         <div class="wrap">
           <div class="section-head">
@@ -1307,17 +1427,21 @@
             <span class="eyebrow">личный кабинет</span>
             <h2>Вся инфраструктура — <span>в личном кабинете</span></h2>
             <p class="lead">Клиент видит состояние IT, статусы, документы, SLA, карту инфраструктуры и историю работ с любого устройства.</p>
+            <p class="cabinet-note">Кабинет не заменяет поддержку — он показывает, что происходит с инфраструктурой и кто отвечает за каждую зону.</p>
             <div class="cabinet-points">
               <span>дашборды</span><span>аудит</span><span>карта инфраструктуры</span><span>SLA</span><span>заявки</span><span>бэкапы</span><span>мониторинг</span><span>документы</span><span>карта доступов</span>
             </div>
           </div>
           <div class="cabinet-visual" aria-label="Иллюстрация личного кабинета">
             <div class="cabinet-bar"><span>SF-SYS cabinet</span><strong>Control view</strong></div>
+            <div class="cabinet-status"><strong>Контур контроля: активен</strong><span>Данные клиента отображаются после подключения</span></div>
             <div class="cabinet-modules">
-              <div><small>Infrastructure map</small><strong>Зоны ответственности</strong></div>
-              <div><small>SLA</small><strong>Реакция и восстановление</strong></div>
-              <div><small>Documents</small><strong>Договоры, акты, регламенты</strong></div>
-              <div><small>Access map</small><strong>Права и ответственные</strong></div>
+              <div><small>Infrastructure</small><strong>Статус инфраструктуры</strong><span>Контур, зоны и ответственные.</span></div>
+              <div><small>SLA</small><strong>SLA и реакции</strong><span>Приоритеты, сроки и эскалация.</span></div>
+              <div><small>Documents</small><strong>Документы и регламенты</strong><span>Договоры, акты, инструкции.</span></div>
+              <div><small>Access map</small><strong>Карта доступов</strong><span>Права, роли и владельцы.</span></div>
+              <div><small>Backups</small><strong>Бэкапы и проверки</strong><span>Регламент восстановления.</span></div>
+              <div><small>History</small><strong>История работ</strong><span>Что сделано и кем принято.</span></div>
             </div>
           </div>
         </div>
@@ -1329,6 +1453,7 @@
             <div><span class="eyebrow">карта ответственности</span><h2>Что SF-SYS берёт под контроль</h2></div>
             <p class="lead">9 зон показывают состав управляемого контура. Коммерческое решение собирается в пакет, а не в случайный набор услуг.</p>
           </div>
+          <div class="services-mobile-hint">листайте зоны →</div>
           <div class="services" id="landingServices"></div>
         </div>
       </section>
@@ -1413,11 +1538,9 @@
 
       <section class="section">
         <div class="wrap final-cta">
-          <div><span class="eyebrow">следующий шаг</span><h2>Получите пакет, с которого стоит начать</h2></div>
+          <div><span class="eyebrow">следующий шаг</span><h2>Готовы взять IT под контроль?</h2></div>
           <div class="hero-actions">
             <a class="btn btn-primary" style="min-height: 48px; font-size: 16px; padding: 0 20px" href="#config" data-route="config" data-mode="guided">Пройти диагностику</a>
-            <a class="btn btn-light" href="#packages">Смотреть готовые пакеты</a>
-            <a class="btn btn-ghost" href="#config" data-route="config" data-mode="full">Конфигуратор для IT-специалиста</a>
             <a class="btn btn-light" href="#contact">Бесплатная консультация</a>
           </div>
         </div>
@@ -1430,7 +1553,8 @@
           <a class="btn btn-text" href="#" data-route="landing">← На главную</a>
           <h1 style="font-size:clamp(38px,6vw,72px);margin-top:18px">Подберите пакет.<br><span>Уточните состав.</span></h1>
           <p class="lead" style="margin-top:18px">Диагностика рекомендует пакет ответственности. Полный конфигуратор нужен тем, кто уже понимает техническую задачу.</p>
-          <div class="mode-switch" role="tablist" aria-label="Режим выбора">
+          <p class="config-warning">Этот режим — для IT-специалистов или горячих клиентов. Не уверены — начните с диагностики.</p>
+          <div class="mode-switch demoted" role="tablist" aria-label="Режим выбора">
             <button id="guidedModeBtn" class="active" type="button" data-switch-mode="guided">Быстрая диагностика</button>
             <button id="fullModeBtn" type="button" data-switch-mode="full">Точная настройка</button>
           </div>
@@ -1454,7 +1578,7 @@
                   <div><h3>Сводка</h3><ul id="specList"></ul></div>
                 </div>
                 <div class="addbar">
-                  <button class="btn btn-primary" id="addServiceBtn" type="button">Добавить в сборку</button>
+                  <button class="btn btn-primary" id="addServiceBtn" type="button">Зафиксировать зону</button>
                   <a class="btn btn-ghost" href="#contact">Получить смету</a>
                 </div>
               </div>
@@ -1482,6 +1606,7 @@
             <div><label class="muted">Компания</label><input name="company" type="text" placeholder="Название компании"></div>
             <div><label class="muted">Комментарий</label><input name="comment" type="text" placeholder="Коротко о задаче"></div>
           </div>
+          <label class="consent"><input required type="checkbox" name="consent"> <span>Согласен на обработку персональных данных</span></label>
           <button class="btn btn-primary" style="margin-top:14px" type="submit">Отправить заявку</button>
           <p class="cart-note" id="formResult">Нажимая кнопку, вы соглашаетесь на обработку данных. Оплата — после согласования сметы.</p>
         </form>
@@ -1725,12 +1850,12 @@
     let cart = [];
     let wizardStep = 0;
     let contactInView = false;
-    const initialAnswers = () => ({ size:null, blockers:[], exists:[], external: null, resilience:[], goals:[], speed:null, contractor:null, contact:{} });
+    const initialAnswers = () => ({ size:null, blockers:[], exists:[], owner:null, speed:null });
     let answers = initialAnswers();
     const PACKAGES = [
-      { id:"max", rank:1, level:"top", name:"Максимальный контроль", badge:"Лучший выбор", price:"от 96 000 ₽/мес", bestFor:"Для бизнеса, где IT уже влияет на продажи, операции и управляемость.", pain:"IT разрослось, ответственность размазана, сбои становятся дорогими.", why:"Закрывает почти всю инфраструктуру одним управляемым контуром.", zones:["IT-аутсорсинг","рабочие места","доступы","серверы","1С","домены","почта","SSL","бэкапы","мониторинг","безопасность","документация","SLA","личный кабинет"], includes:["единая ответственность","личный кабинет","SLA и регламент","карта инфраструктуры","контроль изменений"], cta:"Обсудить пакет" },
-      { id:"office", rank:2, level:"top", name:"Офис и инфраструктура под контролем", badge:"Для SMB", price:"от 58 000 ₽/мес", bestFor:"Для офисов, где IT уже влияет на ежедневную работу команды.", pain:"Рабочие места, серверы и 1С есть, но контроль держится на людях.", why:"Даёт управляемую основу: поддержка, доступы, серверы, бэкапы и документация.", zones:["рабочие места","IT-поддержка","доступы","серверы","1С","бэкапы","документация","SLA"], includes:["поддержка пользователей","контроль доступов","бэкапы","регламент заявок","документация"], cta:"Обсудить пакет" },
-      { id:"basic", rank:3, level:"top", name:"Базовый контроль IT", badge:"Старт", price:"от 32 000 ₽/мес", bestFor:"Для малого бизнеса, где нужно убрать зависимость от одного администратора.", pain:"Нет прозрачной схемы доступов, заявок и базовой документации.", why:"Быстрый вход в управляемое обслуживание без тяжёлого внедрения.", zones:["рабочие места","доступы","поддержка","базовая документация","базовый SLA","диагностика"], includes:["диагностика инфраструктуры","регламент заявок","карта доступов","базовый SLA"], cta:"Начать с базового" },
+      { id:"max", rank:1, level:"top", name:"Максимальный контроль", badge:"Рекомендуем", price:"от 96 000 ₽/мес", priceContext:"вся IT-функция бизнеса", bestFor:"Для бизнеса, где IT уже влияет на продажи, операции и управляемость.", pain:"IT разрослось, ответственность размазана, сбои становятся дорогими.", why:"Закрывает почти всю инфраструктуру одним управляемым контуром.", zones:["IT-аутсорсинг","рабочие места","доступы","серверы","1С","домены","почта","SSL","бэкапы","мониторинг","безопасность","документация","SLA","личный кабинет"], includes:["единая ответственность","личный кабинет","SLA и регламент","карта инфраструктуры","контроль изменений"], topExtras:["Безопасность и доступы под управлением","Расширенная документация и SLA","Полный мониторинг и реагирование"], cta:"Обсудить пакет" },
+      { id:"office", rank:2, level:"top", name:"Офис и инфраструктура под контролем", badge:"Для SMB", price:"от 58 000 ₽/мес", priceContext:"офис и инфраструктура", bestFor:"Для офисов, где IT уже влияет на ежедневную работу команды.", pain:"Рабочие места, серверы и 1С есть, но контроль держится на людях.", why:"Даёт управляемую основу: поддержка, доступы, серверы, бэкапы и документация.", zones:["рабочие места","IT-поддержка","доступы","серверы","1С","бэкапы","документация","SLA"], includes:["поддержка пользователей","контроль доступов","бэкапы","регламент заявок","документация"], cta:"Обсудить пакет" },
+      { id:"basic", rank:3, level:"top", name:"Базовый контроль IT", badge:"Старт", price:"от 32 000 ₽/мес", priceContext:"стартовый контроль", bestFor:"Для малого бизнеса, где нужно убрать зависимость от одного администратора.", pain:"Нет прозрачной схемы доступов, заявок и базовой документации.", why:"Быстрый вход в управляемое обслуживание без тяжёлого внедрения.", zones:["рабочие места","доступы","поддержка","базовая документация","базовый SLA","диагностика"], includes:["диагностика инфраструктуры","регламент заявок","карта доступов","базовый SLA"], cta:"Начать с базового" },
       { id:"domain", rank:4, level:"secondary", name:"Домен, почта и SSL под контролем", badge:"Внешний контур", price:"от 12 000 ₽/мес", bestFor:"Для компаний, где домен, почта и SSL завязаны на разных людей.", pain:"Критичные входные точки живут у подрядчиков или в личных аккаунтах.", why:"Берём внешний контур под ответственность и фиксируем доступы.", zones:["домены","почта","SSL","DNS","продления"], includes:["карта доступов","контроль продлений","DNS-регламент","антиспам"], cta:"Обсудить пакет" },
       { id:"recovery", rank:5, level:"secondary", name:"Бэкапы и мониторинг", badge:"Устойчивость", price:"от 18 000 ₽/мес", bestFor:"Для бизнеса, где простой или потеря данных быстро становится дорогой.", pain:"Сбои замечают поздно, а восстановление не проверялось.", why:"Контролирует резервные копии, уведомления и готовность восстановления.", zones:["бэкапы","мониторинг","проверки","уведомления"], includes:["регламент восстановления","мониторинг состояния","проверки бэкапов","эскалация"], cta:"Обсудить пакет" },
       { id:"security", rank:6, level:"secondary", name:"Безопасный переход", badge:"Миграция", price:"от 42 000 ₽/мес", bestFor:"Для перехода от подрядчика, переезда в облако или восстановления контроля.", pain:"Есть риск потерять доступы, данные или управляемость при смене схемы.", why:"Проводит аудит, защищает доступы и переводит IT в контролируемый контур.", zones:["аудит","безопасность","миграции","доступы","SLA"], includes:["аудит рисков","план миграции","контроль доступов","регламент реакции"], cta:"Обсудить переход" },
@@ -1750,22 +1875,26 @@
       mode = m;
       q("#guidedMode").classList.toggle("hidden", m !== "guided");
       q("#fullMode").classList.toggle("hidden", m !== "full");
-      q("#guidedModeBtn").classList.toggle("active", m === "guided");
-      q("#fullModeBtn").classList.toggle("active", m === "full");
+      q("#guidedModeBtn")?.classList.toggle("active", m === "guided");
+      q("#fullModeBtn")?.classList.toggle("active", m === "full");
       if (m === "guided") renderWizard(); else renderConfigurator();
     }
     function renderLandingServices() {
-      q("#landingServices").innerHTML = CFG_SERVICES.map(s => `<article class="service-card"><span class="ico">${s.icon}</span><h3>${s.name}</h3><p>${s.hint}</p><a class="service-more" href="#config" data-service-more="${s.id}">Уточнить состав →</a></article>`).join("");
+      q("#landingServices").innerHTML = CFG_SERVICES.map(s => `<article class="service-card"><span class="ico">${s.icon}</span><h3>${s.name}</h3><p>${s.hint}</p></article>`).join("");
     }
     function renderPackages() {
       const top = q("#topPackageGrid");
       const secondary = q("#packageGrid");
-      const card = (p, extra="") => `<article class="package-card ${extra}" data-package-card="${p.id}"><div class="package-meta"><span>${p.badge}</span><strong>${p.price}</strong></div><h3>${p.name}</h3><p>${p.bestFor}</p><p class="package-pain">${p.pain}</p><div class="package-list">${p.zones.slice(0, extra ? 10 : 6).map(z=>`<span>${z}</span>`).join("")}</div><div class="package-why">${p.why}</div><a class="btn ${extra ? "btn-primary" : "btn-dark"}" href="#contact" data-package="${p.name}">${p.cta}</a><a class="package-tune" href="#config" data-route="config" data-mode="full">Уточнить состав</a></article>`;
+      const extraBlock = p => p.topExtras && p.topExtras.length ? `<div class="package-extra"><strong>Что включено сверх Top-2</strong>${p.topExtras.map(x => `<span>${x}</span>`).join("")}</div>` : "";
+      const card = (p, extra="") => {
+        const isTop = p.level === "top";
+        return `<article class="package-card ${extra}" data-package-card="${p.id}"><div class="package-meta"><span>${p.badge}</span><strong>${p.price}</strong></div>${p.priceContext ? `<div class="price-context">${p.priceContext}</div>` : ""}<h3>${p.name}</h3><p>${p.bestFor}</p>${isTop ? `<p class="package-pain">${p.pain}</p>` : ""}<div class="package-list">${p.zones.slice(0, extra ? 10 : 6).map(z=>`<span>${z}</span>`).join("")}</div>${extraBlock(p)}${isTop ? `<div class="package-why">${p.why}</div>` : ""}<a class="btn ${extra ? "btn-primary" : "btn-dark"}" href="#contact" data-package="${p.name}">${p.cta}</a></article>`;
+      };
       if (top) {
         const topTwo = PACKAGES.find(p => p.rank === 2);
         const topOne = PACKAGES.find(p => p.rank === 1);
         const topThree = PACKAGES.find(p => p.rank === 3);
-        top.innerHTML = [card(topTwo, "top-side"), card(topOne, "top-main"), card(topThree, "top-side top-compact")].join("");
+        top.innerHTML = [card(topTwo, "top-side"), `<div class="top-pick-hint">рекомендуем для вашей ситуации</div>`, card(topOne, "top-main"), card(topThree, "top-side top-compact")].join("");
       }
       if (secondary) secondary.innerHTML = PACKAGES.filter(p => p.level !== "top").map(p => card(p)).join("");
     }
@@ -1802,7 +1931,7 @@
       renderFields();
       q("#includedList").innerHTML = live.included.map(x => `<li>${x}</li>`).join("");
       q("#specList").innerHTML = [`Ориентировочная абонентка: ${fmt(live.monthly)}/мес`, `Разовые работы: ${fmt(live.setup)}`, `Срок внедрения: ${live.term}`, ...live.specs].map(x => `<li>${x}</li>`).join("");
-      q("#addServiceBtn").textContent = cart.some(i => i.serviceId === activeId) ? "Обновить в сборке" : "Добавить в сборку";
+      q("#addServiceBtn").textContent = cart.some(i => i.serviceId === activeId) ? "Обновить зону" : "Зафиксировать зону";
       q("#addServiceBtn").onclick = () => addService(activeId);
       renderCart();
     }
@@ -1821,8 +1950,8 @@
       const leadMonthly = q("#leadMonthly"), leadSetup = q("#leadSetup");
       if (leadMonthly) leadMonthly.value = monthly;
       if (leadSetup) leadSetup.value = setup;
-      const list = cart.length ? cart.map(i => `<div class="cart-item"><div class="cart-item-head"><strong>${i.icon} ${i.serviceName}</strong><button data-remove="${i.id}">×</button></div><small>${i.specs.slice(0,3).join(" · ")}</small><div class="total-row"><span>${fmt(i.monthly)}/мес</span><span>${fmt(i.setup)} разово</span></div></div>`).join("") : `<p class="muted">Конфигурация пока пуста. Соберите её в табах слева или начните с диагностики.</p>`;
-      const html = `<div class="cart-title"><h3>Ваша конфигурация</h3><button class="btn btn-text" id="clearCart" type="button">Очистить</button></div><div class="cart-list">${list}</div><div class="totals"><div class="total-row"><span>Ориентировочная абонентка</span><strong>${fmt(monthly)}/мес</strong></div><div class="total-row"><span>Разовые работы</span><strong>${fmt(setup)}</strong></div><div class="total-row"><span>Срок запуска</span><strong>${days ? `${days}-${days+3} раб. дней` : "-"}</strong></div></div><a class="btn btn-primary" style="width:100%;margin-top:14px" href="#contact">Получить смету</a><p class="cart-note">Финальная смета — после аудита. Разовые работы и переносы показаны отдельно от абонентки.</p>`;
+      const list = cart.length ? cart.map(i => `<div class="cart-item"><div class="cart-item-head"><strong>${i.icon} ${i.serviceName}</strong><button data-remove="${i.id}">×</button></div><small>${i.specs.slice(0,3).join(" · ")}</small><div class="total-row"><span>${fmt(i.monthly)}/мес</span><span>${fmt(i.setup)} разово</span></div></div>`).join("") : `<p class="muted">Зоны пока не зафиксированы. Если не уверены, начните с диагностики.</p>`;
+      const html = `<div class="cart-title"><h3>Зоны под контроль</h3><button class="btn btn-text" id="clearCart" type="button">Очистить</button></div><div class="cart-list">${list}</div><div class="totals"><div class="total-row"><span>Ориентировочная абонентка</span><strong>${fmt(monthly)}/мес</strong></div><div class="total-row"><span>Разовые работы</span><strong>${fmt(setup)}</strong></div><div class="total-row"><span>Срок запуска</span><strong>${days ? `${days}-${days+3} раб. дней` : "-"}</strong></div></div><a class="btn btn-primary" style="width:100%;margin-top:14px" href="#contact">Получить смету</a><p class="cart-note">Финальная смета — после аудита. Разовые работы и переносы показаны отдельно от абонентки.</p>`;
       q("#sideCart").innerHTML = html;
       const float = q("#floatingCart");
       float.classList.toggle("visible", cart.length > 0 && !contactInView);
@@ -1832,27 +1961,19 @@
     }
 
     const steps = [
-      { key:"size", title:"Размер компании", multi:false, opts:["1-5","6-20","21-50","51-150","150+"] },
-      { key:"blockers", title:"Что мешает или уже ломалось", multi:true, opts:["IT держится на одном человеке","Постоянные поломки","Нет контроля доступов","Медленно работает 1С","Нужны серверы / облако","Теряются звонки","Нужно видеонаблюдение","Падал сайт","Терялась почта","Истекал SSL","Не было бэкапа","Были вирусы","Переезд был хаотичным","Не знаю, хочу разобраться"] },
-      { key:"exists", title:"Какие сервисы у вас уже есть?", multi:true, opts:["1С","Серверы","IP-телефония","Видеонаблюдение","Офисные рабочие места","Ничего системно не собрано"] },
-      { key:"external", title:"Кто отвечает за домен, почту и SSL?", multi:false, opts:["Мы сами","Текущий подрядчик","Не знаем","У нас нет корпоративной почты"] },
-      { key:"goals", title:"Что нужно получить?", multi:true, opts:["Стабильность","Контроль","Поддержку","Переезд в облако","Контроль звонков","Контроль объекта","Комплексное обслуживание"] },
-      { key:"speed", title:"Что критично, если IT упадёт?", multi:false, opts:["Можно планово","Важно в рабочее время","Нужна быстрая реакция","Есть критичные процессы"] },
-      { key:"contractor", title:"Есть текущий подрядчик или администратор?", multi:false, opts:["Да, но нет прозрачности","Да, но не справляется","Нет","Есть внутренний сотрудник","Не знаю"] },
-      { key:"contact", title:"Контакты", contact:true }
+      { key:"size", title:"Какой у вас бизнес?", multi:false, opts:["1-5","6-20","21-50","51-150","150+"] },
+      { key:"blockers", title:"Что больше всего тревожит?", multi:true, opts:["IT держится на одном человеке","Нет контроля доступов","Медленно работает 1С","Нужны серверы / облако","Почта, домен или SSL не под контролем","Сбои и бэкапы тревожат"] },
+      { key:"exists", title:"Что у вас уже работает?", multi:true, opts:["1С","Серверы","IP-телефония","Видеонаблюдение","Офисные рабочие места","Ничего системно не собрано"] },
+      { key:"owner", title:"Кто отвечает за IT сейчас?", multi:false, opts:["Внутренний сотрудник","Подрядчик без прозрачности","Несколько разных подрядчиков","Не знаем"] },
+      { key:"speed", title:"Насколько критичен простой?", multi:false, opts:["Можно планово","Важно в рабочее время","Нужна быстрая реакция","Есть критичные процессы"] }
     ];
     function renderWizard() {
       const total = steps.length;
       if (wizardStep >= total) return renderRecommendations();
       const st = steps[wizardStep];
       const value = answers[st.key];
-      let body = "";
-      if (st.contact) {
-        body = `<div class="contact-grid-mini"><input id="waName" type="text" placeholder="Имя" value="${answers.contact.name||""}"><input id="waPhone" type="tel" placeholder="Телефон" value="${answers.contact.phone||""}"><input id="waCompany" type="text" placeholder="Компания" value="${answers.contact.company||""}"><input id="waComment" type="text" placeholder="Комментарий" value="${answers.contact.comment||""}"></div>`;
-      } else {
-        body = `<div class="options">${st.opts.map(o => `<button type="button" class="option ${st.multi ? value.includes(o) ? "active" : "" : value===o ? "active" : ""}" data-answer="${o}">${o}</button>`).join("")}</div>`;
-      }
-      q("#guidedMode").innerHTML = `<div class="wizard"><div class="progress"><span style="width:${(wizardStep)/(total)*100}%"></span></div><div class="panel wizard-card"><span class="eyebrow">шаг ${wizardStep+1} из ${total}</span><h2>${st.title}</h2>${body}<div class="addbar"><button class="btn btn-ghost" id="waBack" type="button">Назад</button><button class="btn btn-primary" id="waNext" type="button">${wizardStep===total-1?"Показать результат":"Дальше"}</button></div></div></div>`;
+      const body = `<div class="options">${st.opts.map(o => `<button type="button" class="option ${st.multi ? value.includes(o) ? "active" : "" : value===o ? "active" : ""}" data-answer="${o}">${o}</button>`).join("")}</div>`;
+      q("#guidedMode").innerHTML = `<div class="wizard"><div class="progress"><span style="width:${(wizardStep)/(total)*100}%"></span></div><div class="panel wizard-card"><span class="eyebrow">шаг ${wizardStep+1} из ${total}</span><h2>${st.title}</h2>${body}<div class="addbar"><button class="btn btn-ghost" id="waBack" type="button" ${wizardStep===0?"disabled":""}>Назад</button><button class="btn btn-primary" id="waNext" type="button">${wizardStep===total-1?"Показать рекомендуемый пакет":"Дальше"}</button></div></div></div>`;
       qa("[data-answer]").forEach(b => b.onclick = () => {
         const val = b.dataset.answer;
         if (st.multi) answers[st.key] = answers[st.key].includes(val) ? answers[st.key].filter(x=>x!==val) : [...answers[st.key], val];
@@ -1861,23 +1982,22 @@
       });
       q("#waBack").onclick = () => { wizardStep = Math.max(0, wizardStep-1); renderWizard(); };
       q("#waNext").onclick = () => {
-        if (st.contact) answers.contact = { name:q("#waName").value, phone:q("#waPhone").value, company:q("#waCompany").value, comment:q("#waComment").value };
         wizardStep += 1; renderWizard();
       };
     }
     function scoreRecommendations() {
-      const pool = [...answers.blockers, ...answers.exists, answers.external, ...(answers.resilience||[]), ...answers.goals, answers.contractor, answers.speed].join(" | ").toLowerCase();
+      const pool = [...answers.blockers, ...answers.exists, answers.owner, answers.speed].join(" | ").toLowerCase();
       const scores = { outsourcing:0, office:0, servers:0, onec:0, voip:0, cctv:0, domains:0, backupmon:0, security:0 };
-      if (/одном человеке|доступ|рабочие места|поддерж|прозрачности|не справляется|внутренний/.test(pool)) scores.outsourcing += 5;
+      if (/одном человеке|доступ|рабочие места|поддерж|прозрачности|подрядчик|сотрудник|внутренний/.test(pool)) scores.outsourcing += 5;
       if (/сервер|облак|ничего системно|переезд/.test(pool)) { scores.office += 4; scores.servers += 4; }
       if (/1с|медленно/.test(pool)) scores.onec += 5;
       if (/звон|телефони/.test(pool)) scores.voip += 5;
       if (/видео|объект|наблюд/.test(pool)) scores.cctv += 5;
       if (/домен|почт|ssl|dns|сайт/.test(pool)) scores.domains += 5;
-      if (/не знаем|нет корпоративной почты/i.test(pool)) scores.domains += 5;
-      if (/бэкап|восстанов|монитор|сбой|падал|файлы/.test(pool)) scores.backupmon += 5;
-      if (/вирус|безопас|миграц|переезд|уязв|хаотич/.test(pool)) scores.security += 5;
-      if (/не знаю|комплекс|стабильность|контроль/.test(pool)) { scores.outsourcing += 3; scores.office += 3; }
+      if (/не знаем/.test(pool)) scores.domains += 5;
+      if (/бэкап|восстанов|монитор|сбой|простой|критичные/.test(pool)) scores.backupmon += 5;
+      if (/безопас|доступ|переезд|подрядчик/.test(pool)) scores.security += 3;
+      if (/не знаем|ничего системно|критичные процессы/.test(pool)) { scores.outsourcing += 3; scores.office += 3; }
       return Object.entries(scores).sort((a,b)=>b[1]-a[1]).filter(x=>x[1]>0).slice(0,4).map(x=>x[0]);
     }
     function recommendPackages(recs) {
@@ -1902,7 +2022,6 @@
       let recs = scoreRecommendations();
       if (!recs.length) recs = ["outsourcing","office","servers"];
       const packs = recommendPackages(recs);
-      const pack = packs[0];
       const reasons = {
         outsourcing:["Убирает зависимость от отдельных людей.", "Закрывает поддержку, доступы, SLA и документацию."],
         office:["Собирает рабочие места и облачные сервисы в управляемую схему.", "Закрывает хранение, доступы, резервирование и поддержку."],
@@ -1914,10 +2033,8 @@
         backupmon:["Подходит, если сбои замечают поздно или восстановление не проверялось.", "Закрывает бэкапы, мониторинг, проверки и уведомления."],
         security:["Подходит при переезде, вирусах или риске потери доступов.", "Закрывает аудит, защиту, миграцию и регламент реакции."]
       };
-      q("#guidedMode").innerHTML = `<div class="panel"><span class="eyebrow">результат диагностики</span><h2 style="font-size:clamp(26px,3.8vw,42px);margin-top:10px">Рекомендуем начать с готового пакета</h2><div class="result-packages">${packs.map((p,i)=>`<article class="result-package ${i===0?"primary":""}"><div class="package-meta"><span>${i===0?"лучший старт":"альтернатива"}</span><strong>${p.price}</strong></div><h3>${p.name}</h3><p>${p.bestFor}</p><p class="package-pain">${p.pain}</p><div class="package-list">${p.zones.slice(0,8).map(z=>`<span>${z}</span>`).join("")}</div>${i===0?`<a class="btn btn-primary" href="#contact" data-package="${p.name}">Обсудить рекомендуемый пакет</a>`:`<a class="btn btn-ghost" href="#contact" data-package="${p.name}">Обсудить пакет</a>`}</article>`).join("")}</div><div class="addbar"><a class="btn btn-dark" href="#packages">Смотреть все пакеты</a><button class="btn btn-ghost" data-switch-mode="full" type="button">Конфигуратор для IT-специалиста</button><button class="btn btn-text" id="restartWizard" type="button">Пройти заново</button></div><div class="result-zones"><span class="eyebrow">зоны контроля в рекомендации</span><div class="recommendations">${recs.map(id=>{const s=CFG_SERVICES.find(x=>x.id===id);return `<article class="rec-card"><div><h3>${s.icon} ${s.name}</h3><p>${reasons[id][0]} ${reasons[id][1]}</p></div><div class="rec-actions"><button class="btn btn-ghost" data-config-rec="${id}" type="button">Уточнить состав</button></div></article>`}).join("")}</div></div></div>`;
-      qa("[data-config-rec]").forEach(b => b.onclick = () => { activeId = b.dataset.configRec; setMode("full"); });
+      q("#guidedMode").innerHTML = `<div class="panel"><span class="eyebrow">результат диагностики</span><h2 style="font-size:clamp(26px,3.8vw,42px);margin-top:10px">Рекомендуем начать с готового пакета</h2><p class="result-intro">На основе ответов мы подобрали основной пакет и две альтернативы. Это не финальная смета — состав уточняется после короткого аудита.</p><div class="result-packages">${packs.map((p,i)=>`<article class="result-package ${i===0?"primary":""}"><div class="package-meta"><span>${i===0?"Основная рекомендация":"Альтернатива"}</span><strong>${p.price}</strong></div><h3>${p.name}</h3><p>${p.bestFor}</p><p class="package-pain">${p.pain}</p><div class="package-list">${p.zones.slice(0,8).map(z=>`<span>${z}</span>`).join("")}</div>${i===0?`<a class="btn btn-primary" href="#contact" data-package="${p.name}">Обсудить рекомендуемый пакет</a>`:`<a class="btn btn-ghost" href="#contact" data-package="${p.name}">Обсудить пакет</a>`}</article>`).join("")}</div><div class="addbar result-routes"><a class="btn btn-ghost" href="#packages">Смотреть все пакеты</a><button class="btn btn-text" id="restartWizard" type="button">Пройти заново</button></div><div class="result-zones"><details><summary>Какие зоны контроля повлияли на рекомендацию</summary><div class="recommendations">${recs.map(id=>{const s=CFG_SERVICES.find(x=>x.id===id);return `<article class="rec-card"><div><h3>${s.icon} ${s.name}</h3><p>${reasons[id][0]} ${reasons[id][1]}</p></div></article>`}).join("")}</div></details></div></div>`;
       q("#restartWizard").onclick = () => { wizardStep=0; answers=initialAnswers(); renderWizard(); };
-      qa("[data-switch-mode]").forEach(b => b.onclick = () => setMode(b.dataset.switchMode));
     }
 
     document.addEventListener("click", e => {
@@ -1945,20 +2062,6 @@
         q("#mobileNav")?.classList.remove("open");
         q(".nav-toggle")?.setAttribute("aria-expanded", "false");
       }
-      const more = e.target.closest("[data-service-more]");
-      if (more) {
-        e.preventDefault();
-        activeId = more.dataset.serviceMore;
-        history.pushState(null, "", "#config");
-        route("config");
-        setMode("full");
-        renderConfigurator();
-        setTimeout(() => {
-          document.querySelector("#config")?.scrollIntoView({ block: "start" });
-        }, 0);
-        document.querySelector("#mobileNav")?.classList.remove("open");
-        document.querySelector(".nav-toggle")?.setAttribute("aria-expanded", "false");
-      }
       const pkg = e.target.closest("[data-package]");
       if (pkg) {
         const leadPackage = q("#leadPackage"), source = q("#leadSource");
@@ -1979,7 +2082,7 @@
     renderLandingServices();
     renderPackages();
     renderConfigurator();
-    setMode("guided");
+    setMode("full");
     route(location.hash==="#config" || /config/i.test(location.pathname) ? "config" : "landing");
 
     window.CFG_SERVICES = CFG_SERVICES;
