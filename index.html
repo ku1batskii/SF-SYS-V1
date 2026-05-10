@@ -918,7 +918,7 @@
       display: grid;
       grid-template-columns: minmax(0, .92fr) minmax(0, 1.18fr) minmax(0, .92fr);
       gap: 18px;
-      align-items: center;
+      align-items: start;
       margin-bottom: 26px;
     }
     .package-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -961,6 +961,72 @@
     }
     .package-card p { color: rgba(75,85,99,.78); font-size: 13px; line-height: 1.42; }
     .package-pain { color: rgba(31,41,55,.82) !important; font-weight: 650; }
+    .package-details {
+      border-top: 1px solid rgba(17,24,39,.065);
+      border-bottom: 1px solid rgba(17,24,39,.045);
+      padding: 8px 0;
+    }
+    .package-details summary {
+      cursor: pointer;
+      list-style: none;
+      color: rgba(30,64,175,.9);
+      font-size: 12.5px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+    .package-details summary::-webkit-details-marker { display: none; }
+    .package-details summary::after {
+      content: "+";
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      background: rgba(37,99,235,.08);
+      color: rgba(30,64,175,.9);
+    }
+    .package-details[open] summary::after { content: "−"; }
+    .package-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .package-detail-grid div {
+      border: 1px solid rgba(17,24,39,.055);
+      background: rgba(248,250,252,.72);
+      border-radius: 7px;
+      padding: 10px;
+    }
+    .package-detail-grid strong {
+      display: block;
+      color: #101827;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .045em;
+      margin-bottom: 6px;
+    }
+    .package-detail-grid p,
+    .package-detail-grid li,
+    .package-audit-link {
+      color: rgba(75,85,99,.8);
+      font-size: 12.5px;
+      line-height: 1.42;
+    }
+    .package-detail-grid ul {
+      margin: 0;
+      padding-left: 16px;
+      display: grid;
+      gap: 4px;
+    }
+    .package-audit-link { margin-top: 10px; }
+    .package-detail-link {
+      color: rgba(30,64,175,.9);
+      font-weight: 850;
+    }
     .package-why {
       border-top: 1px solid rgba(17,24,39,.065);
       padding-top: 10px;
@@ -1204,6 +1270,134 @@
       color: rgba(30,64,175,.92);
       font-weight: 700;
     }
+    .audit-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr .95fr;
+      gap: 10px;
+      align-items: stretch;
+    }
+    .audit-card {
+      border: 1px solid rgba(17,24,39,.075);
+      background: rgba(255,255,255,.9);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 1px 0 rgba(17,24,39,.03), 0 12px 28px rgba(17,24,39,.035);
+      display: grid;
+      gap: 10px;
+    }
+    .audit-price {
+      background: linear-gradient(135deg, rgba(16,24,39,.98), rgba(16,24,39,.92));
+      border-color: rgba(255,255,255,.1);
+      color: #fff;
+    }
+    .audit-price span {
+      color: rgba(156,194,255,.86);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .audit-card h3 {
+      color: #101827;
+      font-size: 18px;
+      line-height: 1.18;
+    }
+    .audit-price h3 { color: #fff; }
+    .audit-card p {
+      color: rgba(75,85,99,.78);
+      font-size: 14px;
+      line-height: 1.48;
+    }
+    .audit-price p { color: rgba(246,248,252,.66); }
+    .audit-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+    .audit-list li {
+      position: relative;
+      padding-left: 18px;
+      color: rgba(75,85,99,.82);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+    .audit-list li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      position: absolute;
+      left: 0;
+      top: .55em;
+      opacity: .72;
+    }
+    .audit-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 4px;
+    }
+    .audit-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .audit-steps article {
+      border: 1px solid rgba(17,24,39,.065);
+      background: rgba(255,255,255,.82);
+      border-radius: 8px;
+      padding: 14px;
+      display: grid;
+      gap: 7px;
+    }
+    .audit-steps strong {
+      color: rgba(30,64,175,.78);
+      font-size: 12px;
+      letter-spacing: .06em;
+    }
+    .audit-steps h3 {
+      color: #101827;
+      font-size: 15px;
+    }
+    .audit-steps p {
+      color: rgba(75,85,99,.76);
+      font-size: 13px;
+      line-height: 1.42;
+    }
+    .audit-faq {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .audit-faq details {
+      border: 1px solid rgba(17,24,39,.065);
+      background: rgba(255,255,255,.72);
+      border-radius: 8px;
+      padding: 0;
+      overflow: hidden;
+    }
+    .audit-faq summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 13px 14px;
+      color: #101827;
+      font-size: 14px;
+      font-weight: 780;
+    }
+    .audit-faq summary::-webkit-details-marker { display: none; }
+    .audit-faq p {
+      border-top: 1px solid rgba(17,24,39,.055);
+      padding: 11px 14px 13px;
+      color: rgba(75,85,99,.78);
+      font-size: 13px;
+      line-height: 1.45;
+    }
     .faq-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1358,6 +1552,156 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
     }
+    .site-footer {
+      background: #070a11;
+      color: rgba(246,248,252,.72);
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 34px 0 26px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.25fr .9fr 1fr 1.15fr;
+      gap: 22px;
+      align-items: start;
+    }
+    .footer-brand {
+      display: grid;
+      gap: 10px;
+    }
+    .footer-brand strong {
+      color: #fff;
+      font-size: 17px;
+    }
+    .footer-brand span {
+      color: rgba(246,248,252,.46);
+      font-size: 12px;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: .055em;
+    }
+    .footer-col h3 {
+      color: rgba(246,248,252,.92);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 10px;
+    }
+    .footer-col p,
+    .footer-col li,
+    .footer-bottom {
+      color: rgba(246,248,252,.55);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+    .footer-links,
+    .footer-legal-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .footer-links a {
+      color: rgba(246,248,252,.68);
+      font-size: 13px;
+      font-weight: 650;
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-links a[aria-disabled="true"] {
+      color: rgba(246,248,252,.38);
+      cursor: not-allowed;
+    }
+    .footer-links a[aria-disabled="true"]:hover { color: rgba(246,248,252,.38); }
+    .footer-links a[aria-disabled="true"]:focus-visible {
+      outline: 2px solid rgba(91,140,255,.55);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    .channel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .channel-card {
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.045);
+      border-radius: 8px;
+      padding: 18px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+    }
+    .channel-label {
+      color: rgba(156,194,255,.78);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+    .channel-card h3 {
+      color: rgba(246,248,252,.94);
+      font-size: 20px;
+      line-height: 1.18;
+    }
+    .channel-card p {
+      color: rgba(246,248,252,.62);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .channel-card .btn:disabled,
+    .channel-card .btn[disabled] {
+      opacity: .58;
+      cursor: not-allowed;
+      justify-self: start;
+    }
+    .channel-note {
+      margin-top: 12px;
+      color: rgba(246,248,252,.48);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+    .trust-process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .trust-process-card {
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.045);
+      border-radius: 8px;
+      padding: 16px;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+    }
+    .trust-process-card h3 {
+      color: rgba(246,248,252,.94);
+      font-size: 17px;
+      line-height: 1.2;
+    }
+    .trust-process-card p {
+      color: rgba(246,248,252,.62);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .trust-process-note {
+      margin-top: 14px;
+      max-width: 860px;
+      color: rgba(246,248,252,.52);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+    .footer-bottom {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
     @media (max-width: 1050px) {
       .hero-grid, .config-shell, .cabinet-grid { grid-template-columns: 1fr; }
       .cart-side { position: static; }
@@ -1372,6 +1716,11 @@
       .what-list { max-width: 100%; }
       .nav-links { display: none; }
       .nav-toggle { display: inline-flex; }
+    }
+    @media (max-width: 1050px) and (min-width: 681px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .channel-grid { grid-template-columns: 1fr 1fr; }
+      .trust-process-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 680px) {
       .wrap { width: min(100% - 24px, var(--wrap)); }
@@ -1402,6 +1751,8 @@
       .package-card { padding: 15px; }
       .package-card.top-main { padding: 18px; min-height: auto; }
       .package-card.top-main h3 { font-size: 23px; }
+      .package-detail-grid { grid-template-columns: 1fr; }
+      .package-details summary { min-height: 36px; }
       .package-extra { padding: 10px 0; gap: 6px; }
       .secondary-packages-head { display: block; }
       .secondary-packages-lead { margin-top: -2px; }
@@ -1416,6 +1767,12 @@
       .result-package:not(.primary) { opacity: .9; }
       .risk-list span { min-height: 30px; }
       .result-routes .btn { width: 100%; }
+      .audit-grid,
+      .audit-steps,
+      .audit-faq { grid-template-columns: 1fr; }
+      .audit-card { padding: 16px; }
+      .audit-actions { align-items: stretch; flex-direction: column; }
+      .audit-actions .btn { width: 100%; }
       .services-mobile-hint {
         display: block;
         color: rgba(75,85,99,.58);
@@ -1561,6 +1918,14 @@
       .estimate strong { font-size: 18px; }
       .mode-switch { width: 100%; }
       .mode-switch button { min-height: 34px; padding: 7px 9px; }
+      .site-footer { padding: 28px 0 22px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 18px; }
+      .footer-bottom { display: grid; gap: 8px; }
+      .channel-grid { grid-template-columns: 1fr; }
+      .channel-card { padding: 16px; }
+      .channel-card .btn { width: 100%; justify-self: stretch; }
+      .trust-process-grid { grid-template-columns: 1fr; }
+      .trust-process-card { padding: 15px; }
       .pain-list .chip { min-height: 36px; padding: 8px 12px; }
       .what-list { gap: 6px; margin-top: 16px; }
       .what-list span { min-height: 36px; padding: 0 10px; font-size: 12.5px; }
@@ -1623,8 +1988,8 @@
             <h1>IT под контролем.<br><span>Бизнес в фокусе.</span></h1>
             <p class="lead">Берём под единую ответственность рабочие места, серверы, 1С, доступы и бэкапы. Зона ответственности, регламенты обслуживания и личный кабинет фиксируются в договоре — не на словах.</p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#config" data-route="config" data-mode="guided">Пройти диагностику</a>
-              <a class="btn btn-light" href="#packages">Смотреть пакеты</a>
+              <a class="btn btn-primary" href="#config" data-route="config" data-mode="guided" data-analytics="cta_hero_diagnostics">Пройти диагностику</a>
+              <a class="btn btn-light" href="#audit" data-analytics="cta_hero_audit">Узнать про IT-аудит</a>
             </div>
           </div>
           <div class="dash" aria-label="Панель контроля инфраструктуры">
@@ -1678,6 +2043,86 @@
               <h3>Бэкапы есть, но никто не проверял восстановление</h3>
               <p>Скрипт вроде работает, файлы вроде копируются. Но в момент сбоя выясняется, что архив битый или пароль к нему — у уволившегося подрядчика.</p>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="audit">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">продукт-вход</span>
+              <h2>IT-диагностика инфраструктуры перед обслуживанием</h2>
+            </div>
+            <p class="lead">Проверяем рабочие места, серверы, 1С, доступы, домены, бэкапы и регламенты. На выходе — понятная карта рисков, предварительная смета и рекомендуемый пакет обслуживания.</p>
+          </div>
+
+          <div class="audit-grid">
+            <article class="audit-card audit-price">
+              <span>Старт перед обслуживанием</span>
+              <h3>Фиксируем объём до старта</h3>
+              <!-- REQUIRES OWNER INPUT: exact audit price, duration, deliverables, payment mechanics -->
+              <p>Стоимость аудита зависит от размера инфраструктуры. После короткого брифа назовём фиксированную цену до старта работ.</p>
+              <div class="audit-actions">
+                <a class="btn btn-primary" href="#contact" data-package="IT-диагностика инфраструктуры" data-lead-source="audit" data-analytics="cta_audit_primary">Обсудить IT-аудит</a>
+                <a class="btn btn-ghost" href="#contact" data-lead-source="audit-question" data-analytics="cta_audit_question">Задать вопрос</a>
+              </div>
+            </article>
+
+            <article class="audit-card">
+              <h3>Что проверим</h3>
+              <ul class="audit-list">
+                <li>Рабочие места и доступы</li>
+                <li>Серверы, облако и 1С</li>
+                <li>Домены, почту и SSL</li>
+                <li>Бэкапы и восстановление</li>
+                <li>Регламенты и ответственных</li>
+              </ul>
+            </article>
+
+            <article class="audit-card">
+              <h3>Что получите</h3>
+              <ul class="audit-list">
+                <li>Карту ключевых рисков</li>
+                <li>Рекомендованный пакет обслуживания</li>
+                <li>Предварительную смету</li>
+                <li>Список первых действий</li>
+                <li>Понимание, что брать под контроль первым</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="audit-steps">
+            <article>
+              <strong>01</strong>
+              <h3>Короткий бриф</h3>
+              <p>Уточняем инфраструктуру, доступы, сервисы и текущих ответственных.</p>
+            </article>
+            <article>
+              <strong>02</strong>
+              <h3>Проверка контура</h3>
+              <p>Смотрим зоны риска без лишней бюрократии и без фейковых обещаний.</p>
+            </article>
+            <article>
+              <strong>03</strong>
+              <h3>Пакет и смета</h3>
+              <p>Предлагаем понятный пакет ответственности и первые шаги внедрения.</p>
+            </article>
+          </div>
+
+          <div class="audit-faq">
+            <details open>
+              <summary>Это обязательный этап?</summary>
+              <p>Для сложной инфраструктуры аудит снижает риск ошибки в пакете, сроках и зоне ответственности.</p>
+            </details>
+            <details>
+              <summary>Можно ли сразу выбрать пакет?</summary>
+              <p>Да, если задача понятна. Аудит нужен, когда доступы, серверы, бэкапы или подрядчики уже смешались.</p>
+            </details>
+            <details>
+              <summary>Это финальная смета?</summary>
+              <p>Нет. Финальный состав и стоимость фиксируются после уточнения инфраструктуры и согласования работ.</p>
+            </details>
           </div>
         </div>
       </section>
@@ -1881,6 +2326,79 @@
         </div>
       </section>
 
+      <section class="section dark trust-process" id="trust-process">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">доверие без фейков</span>
+              <h2>Доверие строится процессом, а не логотипами</h2>
+            </div>
+            <p class="lead">Пока нет публичных кейсов и отзывов, мы не подставляем выдуманные доказательства. Вместо этого показываем, как фиксируется ответственность: договор, регламенты, документы, доступы и передача контроля.</p>
+          </div>
+
+          <div class="trust-process-grid">
+            <article class="trust-process-card">
+              <h3>Фиксируем ответственность письменно</h3>
+              <p>Зона ответственности, сроки реакции, порядок эскалации и границы работ фиксируются в договоре и регламентах обслуживания.</p>
+            </article>
+
+            <article class="trust-process-card">
+              <h3>Документируем инфраструктуру</h3>
+              <p>Карта инфраструктуры, доступов, сервисов и ответственных снижает зависимость от одного сотрудника или подрядчика.</p>
+            </article>
+
+            <article class="trust-process-card">
+              <h3>Передаём контроль, а не только задачи</h3>
+              <p>При подключении контура важно не просто выполнить работы, а сделать так, чтобы бизнес понимал, кто и за что отвечает дальше.</p>
+            </article>
+
+            <article class="trust-process-card">
+              <h3>Публикуем только реальное доказательство</h3>
+              <p>Кейсы, отзывы, логотипы и команда добавляются только после подтверждения данных и согласия участников. Без стоковых фото и выдуманных имён.</p>
+            </article>
+          </div>
+
+          <p class="trust-process-note">Публичные кейсы и отзывы появятся только после согласования с реальными клиентами. До этого доказательная база строится через документы, регламенты и прозрачную передачу контроля.</p>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           FUTURE TRUST PROOF TEMPLATE — DO NOT POPULATE UNTIL REAL DATA EXISTS
+
+           Use this anchor only after owner approval and real source data.
+
+           Cases:
+           - client name or anonymized industry;
+           - initial problem;
+           - scope of responsibility;
+           - what SF-SYS implemented;
+           - measurable result only if confirmed;
+           - permission status.
+
+           Testimonials:
+           - real client quote;
+           - name / role / company only with approval;
+           - source date;
+           - permission status.
+
+           Logos:
+           - only real client logos;
+           - only with permission;
+           - no fake partner/client badges.
+
+           Team:
+           - real name;
+           - real role;
+           - real photo or no photo;
+           - no stock images;
+           - no generated portraits.
+
+           Legal:
+           - real entity;
+           - INN / OGRN / legal address;
+           - real policy / contract / regulations links after approval.
+      ============================================================ -->
+
       <section class="section dark" id="about">
         <div class="wrap">
           <div class="section-head">
@@ -1934,8 +2452,8 @@
         <div class="wrap final-cta">
           <div><span class="eyebrow">следующий шаг</span><h2>Готовы взять IT под контроль?</h2></div>
           <div class="hero-actions">
-            <a class="btn btn-primary" style="min-height: 48px; font-size: 16px; padding: 0 20px" href="#config" data-route="config" data-mode="guided">Пройти диагностику</a>
-            <a class="btn btn-light" href="#contact">Бесплатная консультация</a>
+            <a class="btn btn-primary" style="min-height: 48px; font-size: 16px; padding: 0 20px" href="#config" data-route="config" data-mode="guided" data-analytics="cta_final_diagnostics">Пройти диагностику</a>
+            <a class="btn btn-light" href="#contact" data-analytics="cta_final_consultation">Бесплатная консультация</a>
           </div>
         </div>
       </section>
@@ -1972,8 +2490,8 @@
                   <div><h3>Сводка</h3><ul id="specList"></ul></div>
                 </div>
                 <div class="addbar">
-                  <button class="btn btn-primary" id="addServiceBtn" type="button">Зафиксировать зону</button>
-                  <a class="btn btn-ghost" href="#contact">Получить смету</a>
+                  <button class="btn btn-primary" id="addServiceBtn" type="button" data-analytics="config_add_zone">Зафиксировать зону</button>
+                  <a class="btn btn-ghost" href="#contact" data-analytics="config_get_estimate">Получить смету</a>
                 </div>
               </div>
               <aside class="panel cart-side" id="sideCart"></aside>
@@ -2001,7 +2519,7 @@
             <div><label class="muted">Комментарий</label><input name="comment" type="text" placeholder="Коротко о задаче"></div>
           </div>
           <label class="consent"><input required type="checkbox" name="consent"> <span>Согласен на обработку персональных данных</span></label>
-          <button class="btn btn-primary" style="margin-top:14px" type="submit">Получить расчёт</button>
+          <button class="btn btn-primary" style="margin-top:14px" type="submit" data-analytics="cta_form_submit">Получить расчёт</button>
           <p class="cart-note" id="formResult">Финальная стоимость формируется после короткого аудита. Мы не начинаем работы без согласования пакета, сроков и зоны ответственности.</p>
           <div class="form-next-steps">
             <strong>Что будет после заявки</strong>
@@ -2014,11 +2532,183 @@
         </form>
       </div>
     </section>
+
+    <section class="section dark contact-channels" id="channels">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">каналы связи</span>
+            <h2>Связаться удобным способом</h2>
+          </div>
+          <p class="lead">Форма остаётся основным способом получить расчёт. Мессенджеры и календарь подключаются после утверждения рабочих контактов.</p>
+        </div>
+
+        <div class="channel-grid">
+          <article class="channel-card">
+            <span class="channel-label">мессенджер</span>
+            <h3>Telegram</h3>
+            <p>Быстрый канал для уточнений, первичного брифа и передачи вводных по инфраструктуре.</p>
+            <button class="btn btn-ghost" type="button" data-channel="telegram" data-analytics="channel_click_telegram" disabled>Скоро будет доступно</button>
+          </article>
+
+          <article class="channel-card">
+            <span class="channel-label">мессенджер</span>
+            <h3>WhatsApp</h3>
+            <p>Подойдёт для коротких вопросов, согласования времени созвона и отправки контактов ответственного.</p>
+            <button class="btn btn-ghost" type="button" data-channel="whatsapp" data-analytics="channel_click_whatsapp" disabled>Скоро будет доступно</button>
+          </article>
+
+          <article class="channel-card">
+            <span class="channel-label">календарь</span>
+            <h3>Календарь созвона</h3>
+            <p>После утверждения календаря здесь появится ссылка для выбора времени консультации или IT-аудита.</p>
+            <button class="btn btn-ghost" type="button" data-channel="calendar" data-analytics="channel_click_calendar" disabled>Ссылка появится позже</button>
+          </article>
+        </div>
+
+        <p class="channel-note">Рабочие ссылки на Telegram, WhatsApp и календарь будут добавлены после утверждения контактных каналов. Пока основной маршрут — форма заявки.</p>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer" id="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <strong>Безопасные системы</strong>
+          <span>SF-SYS · managed IT responsibility</span>
+          <p>Берём под контроль рабочие места, серверы, 1С, доступы, бэкапы, документы и регламенты обслуживания.</p>
+          <p>Конфигуратор — для горячих клиентов. Если не уверены, начните с диагностики или IT-аудита.</p>
+        </div>
+
+        <nav class="footer-col" aria-label="Навигация в подвале">
+          <h3>Навигация</h3>
+          <div class="footer-links">
+            <a href="#config" data-route="config" data-mode="guided" data-analytics="nav_footer_diagnostics">Диагностика</a>
+            <a href="#audit" data-analytics="nav_footer_audit">IT-аудит</a>
+            <a href="#packages" data-analytics="nav_footer_packages">Пакеты</a>
+            <a href="#cabinet" data-analytics="nav_footer_cabinet">Личный кабинет</a>
+            <a href="#faq" data-analytics="nav_footer_faq">FAQ</a>
+            <a href="#about" data-analytics="nav_footer_about">О компании</a>
+            <a href="#contact" data-analytics="nav_footer_contact">Контакты</a>
+          </div>
+        </nav>
+
+        <div class="footer-col">
+          <h3>Документы</h3>
+          <div class="footer-links">
+            <a role="button" tabindex="0" aria-disabled="true" data-doc-placeholder="privacy" data-analytics="doc_placeholder_privacy">Политика обработки персональных данных</a>
+            <a role="button" tabindex="0" aria-disabled="true" data-doc-placeholder="offer" data-analytics="doc_placeholder_offer">Договор / оферта обслуживания</a>
+            <a role="button" tabindex="0" aria-disabled="true" data-doc-placeholder="edo" data-analytics="doc_placeholder_edo">ЭДО и закрывающие документы</a>
+            <a role="button" tabindex="0" aria-disabled="true" data-doc-placeholder="regulations" data-analytics="doc_placeholder_regulations">Регламенты обслуживания</a>
+          </div>
+          <p>Документы публикуются после юридического утверждения. До старта обслуживания условия фиксируются в договоре.</p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Legal / requisites</h3>
+          <p><strong>Юридические данные:</strong><br>Реквизиты предоставляются по запросу и указываются в договоре перед стартом обслуживания.</p>
+          <ul class="footer-legal-list">
+            <li>Юрлицо: предоставляется по запросу</li>
+            <li>ИНН: указывается в договоре</li>
+            <li>ОГРН/ОГРНИП: указывается в договоре</li>
+            <li>ЭДО: Диадок / СБИС по согласованию</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>Информация на сайте не является публичной офертой.</span>
+        <span>Финальные условия, стоимость и зона ответственности фиксируются после аудита и согласования договора.</span>
+      </div>
+    </div>
+  </footer>
 
   <div class="floating-cart" id="floatingCart"></div>
 
   <script>
+    /*
+      SF-SYS FUTURE ANALYTICS / CRM / PAYMENT PLAN
+      Stage 6 is planning-only. No real analytics, CRM or payment integration is active.
+
+      STRICTLY NOT IMPLEMENTED YET:
+      - Yandex Metrica / Google Analytics / GTM / pixels / heatmaps;
+      - CRM integrations: amoCRM, Bitrix24, webhooks;
+      - payment integrations: ЮKassa, CloudPayments, Tinkoff, checkout;
+      - external POST from the contact form.
+
+      Future analytics integration idea:
+      - after owner chooses analytics provider and provides IDs;
+      - one listener can read [data-analytics];
+      - event name = element.dataset.analytics;
+      - category can be resolved from the taxonomy below;
+      - then push to GTM/dataLayer or provider SDK.
+
+      IMPORTANT:
+      Do not add dataLayer, gtag, ym, fetch, POST, CRM or payment code until approved.
+
+      EVENT TAXONOMY:
+
+      CTA:
+      - cta_hero_diagnostics: hero primary CTA opens diagnostics
+      - cta_hero_audit: hero secondary CTA scrolls to audit block
+      - cta_audit_primary: audit primary CTA goes to contact
+      - cta_audit_question: audit secondary CTA goes to contact
+      - cta_package_<id>: package card CTA goes to contact
+      - cta_package_detail_audit: package details link to audit block
+      - cta_wizard_recommended_package: recommended package CTA from wizard result
+      - cta_wizard_alternative_package: alternative package CTA from wizard result
+      - cta_wizard_all_packages: wizard result link to all packages
+      - cta_form_submit: contact form submit button
+      - cta_final_diagnostics: final CTA section primary button
+      - cta_final_consultation: final CTA section secondary button
+
+      FORM:
+      - cta_form_submit: form submit attempt; currently frontend-only, no POST
+
+      WIZARD:
+      - wizard_next: wizard next step
+      - wizard_back: wizard previous step
+      - wizard_restart: restart diagnostics wizard
+
+      CONFIGURATOR:
+      - config_add_zone: add/update service zone in cart
+      - config_get_estimate: config panel estimate CTA
+      - config_side_cart_get_estimate: side cart estimate CTA
+      - config_floating_cart_submit: floating cart submit CTA
+      - config_clear_cart: clear all zones from cart
+
+      CHANNELS:
+      - channel_click_telegram: disabled Telegram placeholder
+      - channel_click_whatsapp: disabled WhatsApp placeholder
+      - channel_click_calendar: disabled calendar placeholder
+
+      DOCUMENTS:
+      - doc_placeholder_privacy: disabled privacy policy placeholder
+      - doc_placeholder_offer: disabled contract/offer placeholder
+      - doc_placeholder_edo: disabled EDO documents placeholder
+      - doc_placeholder_regulations: disabled regulations placeholder
+
+      NAV:
+      - nav_footer_diagnostics
+      - nav_footer_audit
+      - nav_footer_packages
+      - nav_footer_cabinet
+      - nav_footer_faq
+      - nav_footer_about
+      - nav_footer_contact
+
+      FUTURE CRM PLAN:
+      - only after backend/API is approved;
+      - form fields may map to lead payload:
+        name, phone, company, comment, source, package, monthly, setup;
+      - UTM fields can be added later only after approval;
+      - current submit handler must remain frontend-only.
+
+      FUTURE PAYMENT PLAN:
+      - no payment until audit product, price, provider and legal docs are approved;
+      - no payment links/widgets in current single-file stage.
+    */
     const fmt = n => Math.round(n).toLocaleString("ru-RU") + " ₽";
     const q = s => document.querySelector(s);
     const qa = s => [...document.querySelectorAll(s)];
@@ -2254,16 +2944,22 @@
     let contactInView = false;
     const initialAnswers = () => ({ size:null, blockers:[], exists:[], owner:null, speed:null });
     let answers = initialAnswers();
+    const SECONDARY_PACKAGE_DETAILS = {
+      responsibility:"Точечный контур ответственности, который подключается к основному пакету при необходимости.",
+      forWhom:["Есть отдельная зона риска","Нужно усилить основной пакет","Нужна понятная ответственность за конкретный контур"],
+      excluded:["Работы вне выбранной зоны","Инфраструктура, не описанная в согласованном контуре","Закупки и сторонние сервисы без согласования"],
+      auditRole:"Аудит помогает понять, нужен ли этот модуль как часть основного пакета или достаточно базового контроля."
+    };
     const PACKAGES = [
-      { id:"max", rank:1, level:"top", name:"Максимальный контроль", badge:"Рекомендуем", price:"от 96 000 ₽/мес", priceContext:"вся IT-функция бизнеса", bestFor:"Для бизнеса, где IT уже влияет на продажи, операции и управляемость.", pain:"IT разрослось, ответственность размазана, сбои становятся дорогими.", why:"Закрывает почти всю инфраструктуру одним управляемым контуром.", zones:["IT-аутсорсинг","рабочие места","доступы","серверы","1С","домены","почта","SSL","бэкапы","мониторинг","безопасность","документация","регламенты","личный кабинет"], includes:["единая ответственность","личный кабинет","регламенты обслуживания","карта инфраструктуры","контроль изменений"], topExtras:["Безопасность и доступы под управлением","Расширенная документация и регламенты","Полный мониторинг и реагирование"], cta:"Обсудить пакет" },
-      { id:"office", rank:2, level:"top", name:"Офис и инфраструктура под контролем", badge:"Для SMB", price:"от 58 000 ₽/мес", priceContext:"офис и инфраструктура", bestFor:"Для офисов, где IT уже влияет на ежедневную работу команды.", pain:"Рабочие места, серверы и 1С есть, но контроль держится на людях.", why:"Даёт управляемую основу: поддержка, доступы, серверы, бэкапы и документация.", zones:["рабочие места","IT-поддержка","доступы","серверы","1С","бэкапы","документация","регламенты"], includes:["поддержка пользователей","контроль доступов","бэкапы","регламент заявок","документация"], cta:"Обсудить пакет" },
-      { id:"basic", rank:3, level:"top", name:"Базовый контроль IT", badge:"Старт", price:"от 32 000 ₽/мес", priceContext:"стартовый контроль", bestFor:"Для малого бизнеса, где нужно убрать зависимость от одного администратора.", pain:"Нет прозрачной схемы доступов, заявок и базовой документации.", why:"Быстрый вход в управляемое обслуживание без тяжёлого внедрения.", zones:["рабочие места","доступы","поддержка","базовая документация","базовый регламент","диагностика"], includes:["диагностика инфраструктуры","регламент заявок","карта доступов","базовый регламент"], cta:"Начать с базового" },
-      { id:"domain", rank:4, level:"secondary", name:"Домен, почта и SSL под контролем", badge:"Внешний контур", price:"от 12 000 ₽/мес", bestFor:"Для компаний, где домен, почта и SSL завязаны на разных людей.", pain:"Критичные входные точки живут у подрядчиков или в личных аккаунтах.", why:"Берём внешний контур под ответственность и фиксируем доступы.", zones:["домены","почта","SSL","DNS","продления"], includes:["карта доступов","контроль продлений","DNS-регламент","антиспам"], cta:"Обсудить пакет" },
-      { id:"recovery", rank:5, level:"secondary", name:"Бэкапы и мониторинг", badge:"Устойчивость", price:"от 18 000 ₽/мес", bestFor:"Для бизнеса, где простой или потеря данных быстро становится дорогой.", pain:"Сбои замечают поздно, а восстановление не проверялось.", why:"Контролирует резервные копии, уведомления и готовность восстановления.", zones:["бэкапы","мониторинг","проверки","уведомления"], includes:["регламент восстановления","мониторинг состояния","проверки бэкапов","эскалация"], cta:"Обсудить пакет" },
-      { id:"security", rank:6, level:"secondary", name:"Безопасный переход", badge:"Миграция", price:"от 42 000 ₽/мес", bestFor:"Для перехода от подрядчика, переезда в облако или восстановления контроля.", pain:"Есть риск потерять доступы, данные или управляемость при смене схемы.", why:"Проводит аудит, защищает доступы и переводит IT в контролируемый контур.", zones:["аудит","безопасность","миграции","доступы","регламенты"], includes:["аудит рисков","план миграции","контроль доступов","регламент реакции"], cta:"Обсудить переход" },
-      { id:"cloud", rank:7, level:"secondary", name:"Переезд в управляемое облако", badge:"Облако", price:"от 46 000 ₽/мес", bestFor:"Для компаний, которым нужны серверы, 1С и понятное резервирование.", pain:"Серверы и 1С работают, но нет прозрачности по ресурсам и восстановлению.", why:"Переводит серверную среду и 1С в управляемый облачный контур.", zones:["серверы","1С","бэкапы","мониторинг"], includes:["облачные ресурсы","удалённый доступ","резервирование","контроль ресурсов"], cta:"Обсудить переезд" },
-      { id:"cctv", rank:8, level:"secondary", name:"Видеонаблюдение под контролем", badge:"Объект", price:"от 16 000 ₽/мес", bestFor:"Для офисов, складов и точек, где важны архив, доступы и стабильность камер.", pain:"Камеры есть, но архив, доступ и ответственность не закреплены.", why:"Фиксирует права, архив, мониторинг и регламент работы наблюдения.", zones:["камеры","архив","доступы","мониторинг"], includes:["права доступа","архив событий","удалённый доступ","документация"], cta:"Обсудить наблюдение" },
-      { id:"voip", rank:9, level:"secondary", name:"Телефония под контролем", badge:"Коммуникации", price:"от 14 000 ₽/мес", bestFor:"Для компаний, где звонки влияют на продажи и качество обслуживания.", pain:"Теряются обращения, записи и маршрутизация не находятся под контролем.", why:"Берёт телефонию, записи, маршрутизацию и пропущенные звонки в единый контур.", zones:["АТС","линии","записи","маршрутизация"], includes:["виртуальная АТС","запись разговоров","контроль пропущенных","CRM-интеграция"], cta:"Обсудить телефонию" }
+      { id:"max", rank:1, level:"top", name:"Максимальный контроль", badge:"Рекомендуем", price:"от 96 000 ₽/мес", priceContext:"вся IT-функция бизнеса", bestFor:"Для бизнеса, где IT уже влияет на продажи, операции и управляемость.", pain:"IT разрослось, ответственность размазана, сбои становятся дорогими.", why:"Закрывает почти всю инфраструктуру одним управляемым контуром.", zones:["IT-аутсорсинг","рабочие места","доступы","серверы","1С","домены","почта","SSL","бэкапы","мониторинг","безопасность","документация","регламенты","личный кабинет"], includes:["единая ответственность","личный кабинет","регламенты обслуживания","карта инфраструктуры","контроль изменений"], details:{ responsibility:"Единый контур ответственности за офис, серверы, доступы, бэкапы, внешние сервисы, документацию и регламенты обслуживания.", forWhom:["Бизнес зависит от IT каждый день","Есть несколько подрядчиков или внутренних ответственных","Нужен единый контроль вместо разрозненных задач"], excluded:["Покупка оборудования и лицензий без согласования","Разработка внутренних систем","Работы вне согласованной зоны ответственности"], auditRole:"Аудит уточняет фактический объём инфраструктуры, риски и границы ответственности перед запуском максимального пакета." }, topExtras:["Безопасность и доступы под управлением","Расширенная документация и регламенты","Полный мониторинг и реагирование"], cta:"Обсудить пакет" },
+      { id:"office", rank:2, level:"top", name:"Офис и инфраструктура под контролем", badge:"Для SMB", price:"от 58 000 ₽/мес", priceContext:"офис и инфраструктура", bestFor:"Для офисов, где IT уже влияет на ежедневную работу команды.", pain:"Рабочие места, серверы и 1С есть, но контроль держится на людях.", why:"Даёт управляемую основу: поддержка, доступы, серверы, бэкапы и документация.", zones:["рабочие места","IT-поддержка","доступы","серверы","1С","бэкапы","документация","регламенты"], includes:["поддержка пользователей","контроль доступов","бэкапы","регламент заявок","документация"], details:{ responsibility:"Контроль офисной IT-инфраструктуры: рабочие места, доступы, поддержка, серверы, 1С, бэкапы и документация.", forWhom:["Офис 5–50 сотрудников","IT держится на одном сотруднике или подрядчике","Нужен понятный регламент поддержки"], excluded:["Сложные миграции без отдельного плана","Новые закупки оборудования","Разработка и доработка 1С"], auditRole:"Аудит помогает понять, какие зоны офиса уже готовы к обслуживанию, а где сначала нужно восстановить контроль." }, cta:"Обсудить пакет" },
+      { id:"basic", rank:3, level:"top", name:"Базовый контроль IT", badge:"Старт", price:"от 32 000 ₽/мес", priceContext:"стартовый контроль", bestFor:"Для малого бизнеса, где нужно убрать зависимость от одного администратора.", pain:"Нет прозрачной схемы доступов, заявок и базовой документации.", why:"Быстрый вход в управляемое обслуживание без тяжёлого внедрения.", zones:["рабочие места","доступы","поддержка","базовая документация","базовый регламент","диагностика"], includes:["диагностика инфраструктуры","регламент заявок","карта доступов","базовый регламент"], details:{ responsibility:"Стартовый контроль IT: диагностика, базовая документация, доступы, заявки и первые регламенты.", forWhom:["Малый бизнес","Нет карты доступов","Нужно начать без тяжёлого внедрения"], excluded:["Полный мониторинг всех систем","Глубокая миграция инфраструктуры","Расширенная безопасность"], auditRole:"Аудит показывает, достаточно ли базового пакета или безопаснее сразу подключать офисный контур." }, cta:"Начать с базового" },
+      { id:"domain", rank:4, level:"secondary", name:"Домен, почта и SSL под контролем", badge:"Внешний контур", price:"от 12 000 ₽/мес", bestFor:"Для компаний, где домен, почта и SSL завязаны на разных людей.", pain:"Критичные входные точки живут у подрядчиков или в личных аккаунтах.", why:"Берём внешний контур под ответственность и фиксируем доступы.", zones:["домены","почта","SSL","DNS","продления"], includes:["карта доступов","контроль продлений","DNS-регламент","антиспам"], details:SECONDARY_PACKAGE_DETAILS, cta:"Обсудить пакет" },
+      { id:"recovery", rank:5, level:"secondary", name:"Бэкапы и мониторинг", badge:"Устойчивость", price:"от 18 000 ₽/мес", bestFor:"Для бизнеса, где простой или потеря данных быстро становится дорогой.", pain:"Сбои замечают поздно, а восстановление не проверялось.", why:"Контролирует резервные копии, уведомления и готовность восстановления.", zones:["бэкапы","мониторинг","проверки","уведомления"], includes:["регламент восстановления","мониторинг состояния","проверки бэкапов","эскалация"], details:SECONDARY_PACKAGE_DETAILS, cta:"Обсудить пакет" },
+      { id:"security", rank:6, level:"secondary", name:"Безопасный переход", badge:"Миграция", price:"от 42 000 ₽/мес", bestFor:"Для перехода от подрядчика, переезда в облако или восстановления контроля.", pain:"Есть риск потерять доступы, данные или управляемость при смене схемы.", why:"Проводит аудит, защищает доступы и переводит IT в контролируемый контур.", zones:["аудит","безопасность","миграции","доступы","регламенты"], includes:["аудит рисков","план миграции","контроль доступов","регламент реакции"], details:SECONDARY_PACKAGE_DETAILS, cta:"Обсудить переход" },
+      { id:"cloud", rank:7, level:"secondary", name:"Переезд в управляемое облако", badge:"Облако", price:"от 46 000 ₽/мес", bestFor:"Для компаний, которым нужны серверы, 1С и понятное резервирование.", pain:"Серверы и 1С работают, но нет прозрачности по ресурсам и восстановлению.", why:"Переводит серверную среду и 1С в управляемый облачный контур.", zones:["серверы","1С","бэкапы","мониторинг"], includes:["облачные ресурсы","удалённый доступ","резервирование","контроль ресурсов"], details:SECONDARY_PACKAGE_DETAILS, cta:"Обсудить переезд" },
+      { id:"cctv", rank:8, level:"secondary", name:"Видеонаблюдение под контролем", badge:"Объект", price:"от 16 000 ₽/мес", bestFor:"Для офисов, складов и точек, где важны архив, доступы и стабильность камер.", pain:"Камеры есть, но архив, доступ и ответственность не закреплены.", why:"Фиксирует права, архив, мониторинг и регламент работы наблюдения.", zones:["камеры","архив","доступы","мониторинг"], includes:["права доступа","архив событий","удалённый доступ","документация"], details:SECONDARY_PACKAGE_DETAILS, cta:"Обсудить наблюдение" },
+      { id:"voip", rank:9, level:"secondary", name:"Телефония под контролем", badge:"Коммуникации", price:"от 14 000 ₽/мес", bestFor:"Для компаний, где звонки влияют на продажи и качество обслуживания.", pain:"Теряются обращения, записи и маршрутизация не находятся под контролем.", why:"Берёт телефонию, записи, маршрутизацию и пропущенные звонки в единый контур.", zones:["АТС","линии","записи","маршрутизация"], includes:["виртуальная АТС","запись разговоров","контроль пропущенных","CRM-интеграция"], details:SECONDARY_PACKAGE_DETAILS, cta:"Обсудить телефонию" }
     ];
 
     function route(to, nextMode) {
@@ -2288,10 +2984,12 @@
       const top = q("#topPackageGrid");
       const secondary = q("#packageGrid");
       const extraBlock = p => p.topExtras && p.topExtras.length ? `<div class="package-extra"><strong>Что включено сверх Top-2</strong>${p.topExtras.map(x => `<span>${x}</span>`).join("")}</div>` : "";
+      const detailList = arr => `<ul>${arr.map(x => `<li>${x}</li>`).join("")}</ul>`;
+      const packageDetails = p => p.details ? `<details class="package-details"><summary>Что внутри пакета</summary><div class="package-detail-grid"><div><strong>Зона ответственности</strong><p>${p.details.responsibility}</p></div><div><strong>Для кого</strong>${detailList(p.details.forWhom)}</div><div><strong>Что входит</strong>${detailList(p.includes)}</div><div><strong>Что не входит</strong>${detailList(p.details.excluded)}</div></div><p class="package-audit-link">${p.details.auditRole} <a class="package-detail-link" href="#audit" data-analytics="cta_package_detail_audit">Посмотреть IT-диагностику</a></p></details>` : "";
       const card = (p, extra="") => {
         const isTop = p.level === "top";
         const cta = isTop ? p.cta : "Обсудить как часть пакета";
-        return `<article class="package-card ${extra}" data-package-card="${p.id}"><div class="package-meta"><span>${p.badge}</span><strong>${p.price}</strong></div>${p.priceContext ? `<div class="price-context">${p.priceContext}</div>` : ""}<h3>${p.name}</h3><p>${p.bestFor}</p>${isTop ? `<p class="package-pain">${p.pain}</p>` : ""}<div class="package-list">${p.zones.slice(0, extra ? 10 : 6).map(z=>`<span>${z}</span>`).join("")}</div>${extraBlock(p)}${isTop ? `<div class="package-why">${p.why}</div>` : ""}<a class="btn ${extra ? "btn-primary" : "btn-dark"}" href="#contact" data-package="${p.name}">${cta}</a></article>`;
+        return `<article class="package-card ${extra}" data-package-card="${p.id}"><div class="package-meta"><span>${p.badge}</span><strong>${p.price}</strong></div>${p.priceContext ? `<div class="price-context">${p.priceContext}</div>` : ""}<h3>${p.name}</h3><p>${p.bestFor}</p>${isTop ? `<p class="package-pain">${p.pain}</p>` : ""}<div class="package-list">${p.zones.slice(0, extra ? 10 : 6).map(z=>`<span>${z}</span>`).join("")}</div>${packageDetails(p)}${extraBlock(p)}${isTop ? `<div class="package-why">${p.why}</div>` : ""}<a class="btn ${extra ? "btn-primary" : "btn-dark"}" href="#contact" data-package="${p.name}" data-analytics="cta_package_${p.id}">${cta}</a></article>`;
       };
       if (top) {
         const topTwo = PACKAGES.find(p => p.rank === 2);
@@ -2354,11 +3052,11 @@
       if (leadMonthly) leadMonthly.value = monthly;
       if (leadSetup) leadSetup.value = setup;
       const list = cart.length ? cart.map(i => `<div class="cart-item"><div class="cart-item-head"><strong>${i.icon} ${i.serviceName}</strong><button data-remove="${i.id}">×</button></div><small>${i.specs.slice(0,3).join(" · ")}</small><div class="total-row"><span>${fmt(i.monthly)}/мес</span><span>${fmt(i.setup)} разово</span></div></div>`).join("") : `<p class="muted">Зоны пока не зафиксированы. Если не уверены, начните с диагностики.</p>`;
-      const html = `<div class="cart-title"><h3>Зоны под контроль</h3><button class="btn btn-text" id="clearCart" type="button">Очистить</button></div><div class="cart-list">${list}</div><div class="totals"><div class="total-row"><span>Ориентировочная абонентка</span><strong>${fmt(monthly)}/мес</strong></div><div class="total-row"><span>Разовые работы</span><strong>${fmt(setup)}</strong></div><div class="total-row"><span>Срок запуска</span><strong>${days ? `${days}-${days+3} раб. дней` : "-"}</strong></div></div><a class="btn btn-primary" style="width:100%;margin-top:14px" href="#contact">Получить смету</a><p class="cart-note">Финальная смета — после аудита. Разовые работы и переносы показаны отдельно от абонентки.</p>`;
+      const html = `<div class="cart-title"><h3>Зоны под контроль</h3><button class="btn btn-text" id="clearCart" type="button" data-analytics="config_clear_cart">Очистить</button></div><div class="cart-list">${list}</div><div class="totals"><div class="total-row"><span>Ориентировочная абонентка</span><strong>${fmt(monthly)}/мес</strong></div><div class="total-row"><span>Разовые работы</span><strong>${fmt(setup)}</strong></div><div class="total-row"><span>Срок запуска</span><strong>${days ? `${days}-${days+3} раб. дней` : "-"}</strong></div></div><a class="btn btn-primary" style="width:100%;margin-top:14px" href="#contact" data-analytics="config_side_cart_get_estimate">Получить смету</a><p class="cart-note">Финальная смета — после аудита. Разовые работы и переносы показаны отдельно от абонентки.</p>`;
       q("#sideCart").innerHTML = html;
       const float = q("#floatingCart");
       float.classList.toggle("visible", cart.length > 0 && !contactInView);
-      float.innerHTML = `<div class="float-inner"><div><strong>Под контролем: ${cart.length} ${cart.length === 1 ? "зона" : cart.length < 5 ? "зоны" : "зон"}</strong><span>${cart.map(i=>i.serviceName).slice(0,3).join(" · ")}</span></div><div><strong>${fmt(monthly)}/мес</strong><span>предварительно · разово ${fmt(setup)}</span></div><a class="btn btn-primary" href="#contact">Отправить</a></div>`;
+      float.innerHTML = `<div class="float-inner"><div><strong>Под контролем: ${cart.length} ${cart.length === 1 ? "зона" : cart.length < 5 ? "зоны" : "зон"}</strong><span>${cart.map(i=>i.serviceName).slice(0,3).join(" · ")}</span></div><div><strong>${fmt(monthly)}/мес</strong><span>предварительно · разово ${fmt(setup)}</span></div><a class="btn btn-primary" href="#contact" data-analytics="config_floating_cart_submit">Отправить</a></div>`;
       qa("[data-remove]").forEach(b => b.onclick = () => { cart = cart.filter(i=>i.id!==b.dataset.remove); renderCart(); renderConfigurator(false); });
       const clear = q("#clearCart"); if (clear) clear.onclick = () => { cart=[]; renderCart(); renderConfigurator(false); };
     }
@@ -2376,7 +3074,7 @@
       const st = steps[wizardStep];
       const value = answers[st.key];
       const body = `<div class="options">${st.opts.map(o => `<button type="button" class="option ${st.multi ? value.includes(o) ? "active" : "" : value===o ? "active" : ""}" data-answer="${o}">${o}</button>`).join("")}</div>`;
-      q("#guidedMode").innerHTML = `<div class="wizard"><div class="progress"><span style="width:${(wizardStep)/(total)*100}%"></span></div><div class="panel wizard-card"><span class="eyebrow">шаг ${wizardStep+1} из ${total}</span><h2>${st.title}</h2>${body}<div class="addbar"><button class="btn btn-ghost" id="waBack" type="button" ${wizardStep===0?"disabled":""}>Назад</button><button class="btn btn-primary" id="waNext" type="button">${wizardStep===total-1?"Показать рекомендуемый пакет":"Дальше"}</button></div></div></div>`;
+      q("#guidedMode").innerHTML = `<div class="wizard"><div class="progress"><span style="width:${(wizardStep)/(total)*100}%"></span></div><div class="panel wizard-card"><span class="eyebrow">шаг ${wizardStep+1} из ${total}</span><h2>${st.title}</h2>${body}<div class="addbar"><button class="btn btn-ghost" id="waBack" type="button" data-analytics="wizard_back" ${wizardStep===0?"disabled":""}>Назад</button><button class="btn btn-primary" id="waNext" type="button" data-analytics="wizard_next">${wizardStep===total-1?"Показать рекомендуемый пакет":"Дальше"}</button></div></div></div>`;
       qa("[data-answer]").forEach(b => b.onclick = () => {
         const val = b.dataset.answer;
         if (st.multi) answers[st.key] = answers[st.key].includes(val) ? answers[st.key].filter(x=>x!==val) : [...answers[st.key], val];
@@ -2451,11 +3149,16 @@
         backupmon:["Подходит, если сбои замечают поздно или восстановление не проверялось.", "Закрывает бэкапы, мониторинг, проверки и уведомления."],
         security:["Подходит при переезде, вирусах или риске потери доступов.", "Закрывает аудит, защиту, миграцию и регламент реакции."]
       };
-      q("#guidedMode").innerHTML = `<div class="panel"><span class="eyebrow">результат диагностики</span><h2 style="font-size:clamp(26px,3.8vw,42px);margin-top:10px">Рекомендуем начать с готового пакета</h2><p class="result-intro">На основе ответов мы подобрали основной пакет и две альтернативы. Это не финальная смета — состав уточняется после короткого аудита.</p><div class="detected-risks"><strong>Что видно по ответам</strong><div class="risk-list">${risks.map(r=>`<span>${r}</span>`).join("")}</div></div><div class="result-packages">${packs.map((p,i)=>`<article class="result-package ${i===0?"primary":""}"><div class="package-meta"><span>${i===0?"Основная рекомендация":"Альтернатива"}</span><strong>${p.price}</strong></div><h3>${p.name}</h3><p>${p.bestFor}</p><p class="package-pain">${p.pain}</p><div class="package-list">${p.zones.slice(0,8).map(z=>`<span>${z}</span>`).join("")}</div>${i===0?`<a class="btn btn-primary" href="#contact" data-package="${p.name}">Обсудить рекомендуемый пакет</a>`:`<a class="btn btn-ghost" href="#contact" data-package="${p.name}">Обсудить пакет</a>`}</article>`).join("")}</div><div class="addbar result-routes"><a class="btn btn-ghost" href="#packages">Смотреть все пакеты</a><button class="btn btn-text" id="restartWizard" type="button">Пройти заново</button></div><div class="result-zones"><details><summary>Какие зоны контроля повлияли на рекомендацию</summary><div class="recommendations">${recs.map(id=>{const s=CFG_SERVICES.find(x=>x.id===id);return `<article class="rec-card"><div><h3>${s.icon} ${s.name}</h3><p>${reasons[id][0]} ${reasons[id][1]}</p></div></article>`}).join("")}</div></details></div></div>`;
+      q("#guidedMode").innerHTML = `<div class="panel"><span class="eyebrow">результат диагностики</span><h2 style="font-size:clamp(26px,3.8vw,42px);margin-top:10px">Рекомендуем начать с готового пакета</h2><p class="result-intro">На основе ответов мы подобрали основной пакет и две альтернативы. Это не финальная смета — состав уточняется после короткого аудита.</p><div class="detected-risks"><strong>Что видно по ответам</strong><div class="risk-list">${risks.map(r=>`<span>${r}</span>`).join("")}</div></div><div class="result-packages">${packs.map((p,i)=>`<article class="result-package ${i===0?"primary":""}"><div class="package-meta"><span>${i===0?"Основная рекомендация":"Альтернатива"}</span><strong>${p.price}</strong></div><h3>${p.name}</h3><p>${p.bestFor}</p><p class="package-pain">${p.pain}</p><div class="package-list">${p.zones.slice(0,8).map(z=>`<span>${z}</span>`).join("")}</div>${i===0?`<a class="btn btn-primary" href="#contact" data-package="${p.name}" data-analytics="cta_wizard_recommended_package">Обсудить рекомендуемый пакет</a>`:`<a class="btn btn-ghost" href="#contact" data-package="${p.name}" data-analytics="cta_wizard_alternative_package">Обсудить пакет</a>`}</article>`).join("")}</div><div class="addbar result-routes"><a class="btn btn-ghost" href="#packages" data-analytics="cta_wizard_all_packages">Смотреть все пакеты</a><button class="btn btn-text" id="restartWizard" type="button" data-analytics="wizard_restart">Пройти заново</button></div><div class="result-zones"><details><summary>Какие зоны контроля повлияли на рекомендацию</summary><div class="recommendations">${recs.map(id=>{const s=CFG_SERVICES.find(x=>x.id===id);return `<article class="rec-card"><div><h3>${s.icon} ${s.name}</h3><p>${reasons[id][0]} ${reasons[id][1]}</p></div></article>`}).join("")}</div></details></div></div>`;
       q("#restartWizard").onclick = () => { wizardStep=0; answers=initialAnswers(); renderWizard(); };
     }
 
     document.addEventListener("click", e => {
+      const doc = e.target.closest("[data-doc-placeholder]");
+      if (doc) {
+        e.preventDefault();
+        return;
+      }
       const r = e.target.closest("[data-route]");
       if (r) {
         e.preventDefault();
@@ -2484,7 +3187,17 @@
       if (pkg) {
         const leadPackage = q("#leadPackage"), source = q("#leadSource");
         if (leadPackage) leadPackage.value = pkg.dataset.package;
-        if (source) source.value = "package";
+        if (source && !pkg.dataset.leadSource) source.value = "package";
+      }
+      const ls = e.target.closest("[data-lead-source]");
+      if (ls) {
+        const source = q("#leadSource");
+        if (source) source.value = ls.dataset.leadSource;
+      }
+    });
+    document.addEventListener("keydown", e => {
+      if ((e.key === "Enter" || e.key === " ") && e.target.closest("[data-doc-placeholder]")) {
+        e.preventDefault();
       }
     });
     window.addEventListener("popstate", () => route(location.hash==="#config" ? "config" : "landing"));
